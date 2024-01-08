@@ -43,16 +43,22 @@ gem "tzinfo-data"
 gem "bootsnap", require: false
 
 # Use Sass to process CSS
-# gem "sassc-rails"
+gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
+
+# jQuery
+gem 'jquery-rails'
 
 # Support for additional languages
 gem 'rails-i18n'
 
 # Authentication
 gem "devise", "~> 4.9"
+
+# Styles
+gem 'bootstrap', '~> 5.3.2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
