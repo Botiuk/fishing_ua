@@ -56,6 +56,7 @@ gem 'rails-i18n'
 
 # Authentication
 gem "devise", "~> 4.9"
+gem 'devise-i18n'
 
 # Styles
 gem 'bootstrap', '~> 5.3.2'
