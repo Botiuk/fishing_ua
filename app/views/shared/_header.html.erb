@@ -1,0 +1,10 @@
+<div>
+    <% if user_signed_in? %>
+        <div> <%= current_user.email %> </div>
+        <%= link_to t('button.authorization.edit'), edit_user_registration_path %>
+        <%= button_to t('button.authorization.login'), destroy_user_session_path, method: :delete %>
+    <% else %>
+        <%= link_to t('button.authorization.login'), new_user_session_path %>
+        <%= link_to t('button.authorization.new'), new_user_registration_path %>
+    <% end %>
+</div>

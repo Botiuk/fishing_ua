@@ -5,3 +5,10 @@ uk:
   main:
     index:
       welcome: "Вітаємо на стартовій сторінці!"
+
+  button:
+    authorization:
+      new: "Зареєструватись"
+      edit: "Редагувати профіль"
+      login: "Ввійти"
+      logout: "Вийти"
