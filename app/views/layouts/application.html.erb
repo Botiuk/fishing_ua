@@ -15,12 +15,14 @@
       <%= render 'shared/header' %>
     </header>
 
-    <main>
-      <%= render 'shared/flash_messages' %>
-      <%= yield %>
+    <main class="flex-shrink-0">
+      <div class="container mt-5 pt-5">
+        <%= render 'shared/flash_messages' %>
+        <%= yield %>
+        </div>
     </main>
 
-    <footer>
+    <footer class="footer fixed-bottom mt-auto py-3 bg-body-tertiary">
       <%= render 'shared/footer' %>
     </footer>
   </body>
