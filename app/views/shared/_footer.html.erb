@@ -1,5 +1,16 @@
-<div class="container">
-    <%= "\u00A9"%> <%= Date.today.year %> <%= link_to "https://github.com/Botiuk" do %>
-        <%= t('author') %>
-    <% end %>
+<div class="container text-center">
+    <div class="pb-2 font-monospace">
+        <%= link_to t('fishing_law'), "https://zakon.rada.gov.ua/laws/show/z1412-22#Text", target: :_blank, class: "text-body-secondary" %>
+    </div>
+    <div>
+        <%= "\u00A9"%> 
+        <% if Date.today.year == 2024 %>
+            2024
+        <% else %>
+            2024-<%= Date.today.year %>
+        <% end %> 
+        <%= link_to "https://github.com/Botiuk" do %>
+            <%= t('author') %>
+        <% end %>
+    </div>
 </div>

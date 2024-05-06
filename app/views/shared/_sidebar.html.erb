@@ -1,0 +1,43 @@
+<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 mt-2 pt-5 align-items-center align-items-sm-start" id="menu">
+            <li class="nav-item">
+                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
+                    <i class="bi bi-calendar3"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.fishing_sessions') %></span>
+                <% end %>
+            </li>
+            <li class="nav-item">
+                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
+                    <i class="bi bi-bucket"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.catches') %></span>
+                <% end %>
+            </li>
+            <li class="nav-item">
+                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
+                    <i class="bi bi-geo-alt"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.fishing_places') %></span>
+                <% end %>
+            </li>
+            <li class="nav-item">
+                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
+                    <i class="bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.equipments') %></span>
+                <% end %>
+            </li>
+            <li class="nav-item">
+                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
+                    <i class="bi bi-magic"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.baits') %></span>
+                <% end %>
+            </li>
+
+            <hr>
+            <li class="nav-item">
+                <%= link_to edit_user_registration_path, class: "nav-link align-middle px-0" do %>
+                    <i class="bi bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.edit_profile') %></span>
+                <% end %>
+            </li>
+            <li class="nav-item">
+                <%= button_to destroy_user_session_path, method: :delete, class: "nav-link align-middle px-0" do %>
+                    <i class="bi bi-door-open"></i> <span class="ms-1 d-none d-sm-inline"><%= t('button.authorization.logout') %></span>
+                <% end %>
+            </li>
+        </ul>
+    </div>
+</div>
