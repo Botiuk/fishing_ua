@@ -1,8 +1,8 @@
 uk:
-  appname: "Риболовля.ua"
+  appname: "Рибалка.ua"
   author: "Svitlana Botiuk"
   fishing_law: "Згідно наказу № 700 від 19.09.2022 'Про затвердження Правил любительського рибальства' "
-  
+
   main:
     index:
       welcome: "Вітаємо на стартовій сторінці!"
@@ -12,8 +12,9 @@ uk:
       new: "Зареєструватись"
       login: "Ввійти"
       logout: "Вийти"
-  
+
   navbar:
+    news: "Новини"
     catch_rates: "Норми вилову"
 
   sidebar:
@@ -22,4 +23,5 @@ uk:
     fishing_places: "Локації"
     equipments: "Снасті"
     baits: "Приманки"
-    edit_profile: "Профіль"
+    profile: "Профіль"
+    edit_profile: "Редагувати"

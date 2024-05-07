@@ -1,41 +1,61 @@
-<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 mt-2 pt-5 align-items-center align-items-sm-start" id="menu">
-            <li class="nav-item">
-                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
-                    <i class="bi bi-calendar3"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.fishing_sessions') %></span>
-                <% end %>
-            </li>
-            <li class="nav-item">
-                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
-                    <i class="bi bi-bucket"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.catches') %></span>
-                <% end %>
-            </li>
-            <li class="nav-item">
-                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
-                    <i class="bi bi-geo-alt"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.fishing_places') %></span>
-                <% end %>
-            </li>
-            <li class="nav-item">
-                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
-                    <i class="bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.equipments') %></span>
-                <% end %>
-            </li>
-            <li class="nav-item">
-                <%= link_to root_path, class: "nav-link align-middle px-0" do %>
-                    <i class="bi bi-magic"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.baits') %></span>
-                <% end %>
-            </li>
+<div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
+    <%= link_to root_path, class: "d-flex align-items-center pb-sm-3 mb-md-0 me-md-auto text-info text-decoration-none" do %>
+        <span><i class="bi bi-p-square"></i> <span class="d-none d-sm-inline"><%= t('appname') %></span></span>
+    <% end %>
+    <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
+        <li class="nav-item">
+            <%= link_to root_path, class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-calendar3"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.fishing_sessions') %></span>
+            <% end %>
+        </li>
+        <li class="nav-item">
+            <%= link_to root_path, class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-bucket"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.catches') %></span>
+            <% end %>
+        </li>
+        <li class="nav-item">
+            <%= link_to root_path, class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-geo-alt"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.fishing_places') %></span>
+            <% end %>
+        </li>
+        <li class="nav-item">
+            <%= link_to root_path, class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.equipments') %></span>
+            <% end %>
+        </li>
+        <li class="nav-item">
+            <%= link_to root_path, class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-stars"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.baits') %></span>
+            <% end %>
+        </li>
+        <hr>
+        <li class="nav-item">
+            <%= link_to root_path, class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-newspaper"></i> <span class="ms-1 d-none d-sm-inline"><%= t('navbar.news') %></span>
+            <% end %>
+        </li>
+        <li class="nav-item">
+            <%= link_to root_path, class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-exclamation-triangle"></i> <span class="ms-1 d-none d-sm-inline"><%= t('navbar.catch_rates') %></span>
+            <% end %>
+        </li>
+    </ul>
 
-            <hr>
-            <li class="nav-item">
-                <%= link_to edit_user_registration_path, class: "nav-link align-middle px-0" do %>
-                    <i class="bi bi-person-circle"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.edit_profile') %></span>
+    <div class="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+        <a href="#" class="d-flex align-items-center text-info text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle"></i> <span class="d-none d-sm-inline mx-1"><%= t('sidebar.profile') %></span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <li>
+                <%= link_to edit_user_registration_path, class: "dropdown-item text-info" do %>
+                    <i class="bi bi-gear"></i> <%= t('sidebar.edit_profile') %>
                 <% end %>
+            <li>
+                <hr class="dropdown-divider">
             </li>
-            <li class="nav-item">
-                <%= button_to destroy_user_session_path, method: :delete, class: "nav-link align-middle px-0" do %>
-                    <i class="bi bi-door-open"></i> <span class="ms-1 d-none d-sm-inline"><%= t('button.authorization.logout') %></span>
+            <li>
+                <%= button_to destroy_user_session_path, method: :delete, class: "dropdown-item text-info" do %>
+                    <i class="bi bi-door-open"></i> <%= t('button.authorization.logout') %>
                 <% end %>
             </li>
         </ul>

@@ -1,25 +1,31 @@
 <nav class="navbar navbar-expand-md fixed-top bg-primary-subtle text-primary-emphasis">
     <div class="container-fluid">
-        <%= link_to t('appname'), root_path, class: "navbar-brand" %>
+        <%= link_to root_path, class: "navbar-brand" do %>
+            <i class="bi bi-p-square"></i> <%= t('appname') %>
+        <% end %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <%= link_to t('navbar.catch_rates'), root_path, class: "nav-link" %>
+                    <%= link_to root_path, class: "nav-link" do %>
+                        <i class="bi bi-newspaper"></i> <%= t('navbar.news') %>
+                    <% end %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to root_path, class: "nav-link" do %>
+                        <i class="bi bi-exclamation-triangle"></i> <%= t('navbar.catch_rates') %>
+                    <% end %>
                 </li>
             </ul>
 
             <ul class="navbar-nav ms-auto mb-lg-0">
-                <% unless user_signed_in? %>
-                    <li class="nav-item my-1 me-1">
-                        <%= link_to t('button.authorization.new'), new_user_registration_path, class: "btn btn-outline-dark btn-sm" %>
-                    </li>
-                    <li class="nav-item my-1 me-1">
-                        <%= link_to t('button.authorization.login'), new_user_session_path, class: "btn btn-outline-dark btn-sm" %>
-                    </li>                    
-                <% end %>
+                <li class="nav-item my-1">
+                    <%= link_to new_user_session_path, class: "btn btn-outline-dark btn-sm" do %>
+                        <i class="bi bi-door-open"></i> <%= t('button.authorization.login') %>
+                    <% end %>
+                </li>
             </ul>
         </div>
     </div>
