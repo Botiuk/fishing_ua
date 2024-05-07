@@ -24,7 +24,7 @@ module FishingUa
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.i18n.available_locales = [:uk]
+    config.i18n.available_locales = [:uk, :en]
     config.i18n.default_locale = :uk
   end
 end

@@ -3,6 +3,24 @@ uk:
   author: "Svitlana Botiuk"
   fishing_law: "Згідно наказу № 700 від 19.09.2022 'Про затвердження Правил любительського рибальства' "
 
+  forms:
+    messages:
+      errors:
+        one: "Одна помилка не дає зберегти цей запис:"
+        few: "%{count} помилки не дають зберегти цей запис:"
+        many: "%{count} помилок не дають зберегти цей запис:"
+        other: "%{count} помилка:"
+
+  errors:
+    messages:
+      first_letter: "має починатися з великої літери"
+
+  activerecord:
+    attributes:
+      water_bioresource:
+        name: "Поле 'Назва'"
+        latin_name: "Поле 'Латинська назва'"
+
   main:
     index:
       welcome: "Вітаємо на стартовій сторінці!"
