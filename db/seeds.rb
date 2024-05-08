@@ -26,12 +26,19 @@ when "development"
         byte_size: 46781,
         checksum: 'G7dBbX7Vyz3m80g71HdxQQ=='
     )
-    (1..20).each do |water_bioresource_id|
+    (1..19).each do |water_bioresource_id|
         ActiveStorage::Attachment.create!(
             record_type: 'WaterBioresource',
             record_id: water_bioresource_id,
             name: 'bioresource_photo',
             blob_id: 1
+        )
+    end
+
+    15.times do
+        RatePenalty.create(
+            water_bioresource_id: Faker::Number.unique.between(from: 1, to: 20),
+            money: Faker::Number.between(from: 1000, to: 5000)
         )
     end
 

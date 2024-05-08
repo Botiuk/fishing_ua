@@ -20,10 +20,14 @@ uk:
       water_bioresource:
         name: "Поле 'Назва'"
         latin_name: "Поле 'Латинська назва'"
+      rate_penalty:
+        money: "Поле 'Штраф (грн)'"
 
-  main:
-    index:
-      welcome: "Вітаємо на стартовій сторінці!"
+  notice:
+    create:
+      water_bioresource: "Водний біоресурс створено"
+    update:
+      water_bioresource: "Водний біоресурс оновлено"
 
   button:
     authorization:
@@ -49,11 +53,9 @@ uk:
     profile: "Профіль"
     edit_profile: "Редагувати"
 
-  notice:
-    create:
-      water_bioresource: "Водний біоресурс створено"
-    update:
-      water_bioresource: "Водний біоресурс оновлено"
+  main:
+    index:
+      welcome: "Вітаємо на стартовій сторінці!"
 
   water_bioresources:
     index:
@@ -62,7 +64,7 @@ uk:
       latin_name: "Латинська назва"
       bioresource_photo: "Фото"
       water_bioresources_empty: "Не має записів"
-    water_bioresource:      
+    water_bioresource:
       photo_absent: "фото відсутнє"
     new:
       title: "Новий водний біоресурс"
