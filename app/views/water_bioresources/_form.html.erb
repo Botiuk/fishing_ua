@@ -1,0 +1,32 @@
+<%= form_with(model: water_bioresource) do |form| %>
+    <%= render 'shared/form_errors_messages', object: form.object %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <%= form.label :name, t('.name'), style: "display: block" %>
+                <%= form.text_field :name, class: "form-control" %>
+            </div>
+
+            <div class="col-md-7">
+                <%= form.label :latin_name, t('.latin_name'), style: "display: block" %>
+                <%= form.text_field :latin_name, class: "form-control" %>
+            </div>
+
+            <div class="col-md-7">
+                <%= form.label :bioresource_photo, t('.bioresource_photo'), style: "display: block" %>
+                <%= cl_image_tag(water_bioresource.bioresource_photo.key, height: 100, crop: :scale) if water_bioresource.bioresource_photo.present? %>
+                <%= form.file_field :bioresource_photo, direct_upload: true, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div>
+                <%= form.button nil, class: "btn btn-success" do %>
+                    <%= t('button.submit') %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+<% end %>

@@ -1,0 +1,15 @@
+<tr id="<%= dom_id water_bioresource %>" class="text-center">
+    <td style="width: 25%;"><%= water_bioresource.name %></td>
+    <td style="width: 25%;"><%= water_bioresource.latin_name %></td>
+    <td style="width: 25%;">
+        <% if water_bioresource.bioresource_photo.present? %>
+            <img class="mw-100" src="<%= cloudinary_url(water_bioresource.bioresource_photo.key, height: 100, crop: :scale) %>" >
+        <% else %>
+            <%= t('.photo_absent') %>
+        <% end %>
+    </td>
+    <td style="width: 25%;">
+        <%= link_to t('button.edit'), edit_water_bioresource_path(water_bioresource), class: "btn btn-warning btn-sm" %>
+    </td>
+
+</tr>

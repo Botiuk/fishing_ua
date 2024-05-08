@@ -27,9 +27,14 @@ uk:
 
   button:
     authorization:
-      new: "Зареєструватись"
       login: "Ввійти"
       logout: "Вийти"
+    add:
+      water_bioresource: "Додати водний біоресурс"
+    edit: "Редагувати"
+    show: "Детальніше"
+    delete: "Видалити"
+    submit: "Підтвердити"
 
   navbar:
     news: "Новини"
@@ -43,3 +48,27 @@ uk:
     baits: "Приманки"
     profile: "Профіль"
     edit_profile: "Редагувати"
+
+  notice:
+    create:
+      water_bioresource: "Водний біоресурс створено"
+    update:
+      water_bioresource: "Водний біоресурс оновлено"
+
+  water_bioresources:
+    index:
+      title: "Водні біоресурси"
+      name: "Назва"
+      latin_name: "Латинська назва"
+      bioresource_photo: "Фото"
+      water_bioresources_empty: "Не має записів"
+    water_bioresource:      
+      photo_absent: "фото відсутнє"
+    new:
+      title: "Новий водний біоресурс"
+    form:
+      name: "Назва:"
+      latin_name: "Латинська назва:"
+      bioresource_photo: "Фото:"
+    edit:
+      title: "Редагувати водний біоресурс"
