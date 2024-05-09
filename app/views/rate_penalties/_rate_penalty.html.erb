@@ -1,0 +1,12 @@
+<tr id="<%= dom_id rate_penalty %>" class="text-center">
+    <td style="width: 25%;"><%= rate_penalty.water_bioresource.name %></td>
+    <td style="width: 25%;"><%= rate_penalty.money %></td>
+    <td style="width: 25%;">
+        <%= link_to t('button.edit'), edit_rate_penalty_path(rate_penalty), class: "btn btn-warning btn-sm" %>
+    </td>
+    <td style="width: 25%;">
+        <%= button_to t('button.delete'), rate_penalty, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm"%>
+        
+    </td>
+
+</tr>

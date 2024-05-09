@@ -1,0 +1,30 @@
+<div class="row mb-2">
+    <div class="col"><h4><%= t('.title') %></h4></div>
+    <div class="col text-end">
+        <%= link_to t('button.add.rate_penalty'), new_rate_penalty_path, :method => :post, class: "btn btn-dark text-info" %>
+    </div>
+</div>
+
+<% if @rate_penalties.present? %>
+    <div class="table-responsive">
+        <table class="table align-middle table-primary table-striped">
+            <tr class="text-center">
+                <th style="width: 25%;"><%= t('.water_bioresource') %></th>
+                <th style="width: 25%;"><%= t('.money') %></th>
+                <th style="width: 25%;"></th>
+                <th style="width: 25%;"></th>
+            </tr>
+            <% @rate_penalties.each do |rate_penalty| %>
+                <%= render rate_penalty %>
+            <% end %>
+        </table>
+    </div>
+<% else %>
+    <p class="fw-semibold text-danger text-center"><%= t('.rate_penalties_empty') %></p>
+<% end %>
+
+<% if @pagy.pages > 1 %>
+    <div class="d-flex justify-content-center">
+        <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+<% end %>

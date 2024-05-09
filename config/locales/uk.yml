@@ -21,13 +21,18 @@ uk:
         name: "Поле 'Назва'"
         latin_name: "Поле 'Латинська назва'"
       rate_penalty:
+        water_bioresource: "Поле 'Водний біоресурс'"
         money: "Поле 'Штраф (грн)'"
 
   notice:
     create:
       water_bioresource: "Водний біоресурс створено"
+      rate_penalty: "Штраф створено"
     update:
       water_bioresource: "Водний біоресурс оновлено"
+      rate_penalty: "Штраф оновлено"
+    destroy: 
+      rate_penalty: "Штраф видалено"
 
   button:
     authorization:
@@ -35,9 +40,11 @@ uk:
       logout: "Вийти"
     add:
       water_bioresource: "Додати водний біоресурс"
+      rate_penalty: "Додати штраф"
     edit: "Редагувати"
     show: "Детальніше"
     delete: "Видалити"
+    delete_confirm: "Точно видалити?"
     submit: "Підтвердити"
 
   navbar:
@@ -74,3 +81,18 @@ uk:
       bioresource_photo: "Фото:"
     edit:
       title: "Редагувати водний біоресурс"
+
+  rate_penalties:
+    index:
+      title: "Штрафи за кожен 1 екземпляр, що не відповідає нормі вилову"
+      water_bioresource: "Водний біоресурс"
+      money: "Штраф (грн)"
+      rate_penalties_empty: "Не має штрафів"
+    new:
+      title: "Новий штраф"
+    form:
+      water_bioresource: "Водний біоресурс:"
+      prompt: "-- виберіть зі списку --"
+      money: "Штраф (грн):"
+    edit:
+      title: "Редагувати штраф"

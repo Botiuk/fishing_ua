@@ -1,0 +1,26 @@
+<%= form_with(model: rate_penalty) do |form| %>
+    <%= render 'shared/form_errors_messages', object: form.object %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <%= form.label :water_bioresource_id, t('.water_bioresource'), style: "display: block" %>
+                    <%= select(:rate_penalty, :water_bioresource_id, options_for_select(@water_bioresources, :selected => form.object.water_bioresource_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
+            </div>
+
+            <div class="col-md-7">
+                <%= form.label :money, t('.money'), style: "display: block" %>
+                <%= form.number_field :money, value: form.object.money || 1, min: 1, step: 1, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div>
+                <%= form.button nil, class: "btn btn-success" do %>
+                    <%= t('button.submit') %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+<% end %>
