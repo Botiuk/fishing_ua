@@ -1,4 +1,6 @@
 class WaterBioresource < ApplicationRecord
+    has_one :rate_penalty
+    
     has_one_attached :bioresource_photo
 
     validates :name, :latin_name, presence: true, uniqueness: { case_sensitive: false }
