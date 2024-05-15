@@ -18,13 +18,13 @@ when "development"
     end
 
     ActiveStorage::Blob.create!(
-        key: 'lrcfgmxre392x4ly19youxz9ru0q',
-        filename: '01-goldfish-nationalgeographic.avif',
-        content_type: 'image/avif',
-        metadata: '{"identified":true,"width":3072,"height":1728,"analyzed":true}',
+        key: 'w7zijcg8xc4kit0d0y051nxdygen',
+        filename: 'fish_for_seeds.jpg',
+        content_type: 'image/jpeg',
+        metadata: '{"identified":true,"width":540,"height":360,"analyzed":true}',
         service_name: 'cloudinary',
-        byte_size: 46781,
-        checksum: 'G7dBbX7Vyz3m80g71HdxQQ=='
+        byte_size: 27909,
+        checksum: '/1UkXdyBz4cr1bGPz36aLQ=='
     )
     (1..19).each do |water_bioresource_id|
         ActiveStorage::Attachment.create!(
@@ -39,6 +39,21 @@ when "development"
         RatePenalty.create(
             water_bioresource_id: Faker::Number.unique.between(from: 1, to: 20),
             money: Faker::Number.between(from: 1000, to: 5000)
+        )
+    end
+
+    (1..15).each do |water_bioresource_id|
+        (1..3).each do |where_catch|
+            CatchRate.create(
+                water_bioresource_id: water_bioresource_id,
+                where_catch: where_catch,
+                length: Faker::Number.decimal(l_digits: 2, r_digits: 1)
+            )
+        end
+        CatchRate.create(
+            water_bioresource_id: water_bioresource_id,
+            where_catch: 0,
+            length: 0.0
         )
     end
 
