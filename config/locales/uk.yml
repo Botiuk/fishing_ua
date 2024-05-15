@@ -22,7 +22,15 @@ uk:
         latin_name: "Поле 'Латинська назва'"
       rate_penalty:
         water_bioresource: "Поле 'Водний біоресурс'"
-        money: "Поле 'Штраф (грн)'"
+        money: "Поле 'Штраф, грн'"
+      catch_rate:
+        water_bioresource: "Поле 'Водний біоресурс'"
+        length: "Поле 'Довжина, см'"
+        where_catches:
+          dnipro: "Дніпровські водосховища"
+          other: "Інші внутрішні водогосподарські об'єкти"
+          black: "Чорноморський регіон"
+          azov: "Азовський регіон"
 
   notice:
     create:
@@ -93,6 +101,6 @@ uk:
     form:
       water_bioresource: "Водний біоресурс:"
       prompt: "-- виберіть зі списку --"
-      money: "Штраф (грн):"
+      money: "Штраф, грн:"
     edit:
       title: "Редагувати штраф"
