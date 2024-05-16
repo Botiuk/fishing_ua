@@ -1,0 +1,57 @@
+<div class="row mb-2">
+    <div class="col">
+        <h4><%= t('.title') %>
+            <% if @where_catch.present? %>
+                (<%= CatchRate.human_enum_name(:where_catch, @where_catch) %>)
+            <% end %>
+        </h4>
+    </div>
+    <div class="col text-end">
+        <%= link_to t('button.add.catch_rate'), new_catch_rate_path, :method => :post, class: "btn btn-dark text-info" %>
+    </div>
+</div>
+
+<div class="text-center">
+    <%= link_to t('.all'), catch_rates_path, class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
+    <%= link_to t('.dnipro'), catch_rates_path(where_catch: "dnipro"), class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
+    <%= link_to t('.other'), catch_rates_path(where_catch: "other"), class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
+    <%= link_to t('.black'), catch_rates_path(where_catch: "black"), class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
+    <%= link_to t('.azov'), catch_rates_path(where_catch: "azov"), class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
+</div>
+
+<% if @catch_rates.present? %>
+    <div class="table-responsive">
+        <table class="table align-middle table-primary table-striped">
+            <tr class="text-center">
+                <th style="width: 30%;"><%= t('.water_bioresource') %></th>
+                <th style="width: 15%;"><%= t('.where_catch') %></th>
+                <th style="width: 15%;"><%= t('.length') %></th>
+                <th style="width: 15%;"></th>
+                <th style="width: 15%;"></th>
+            </tr>
+            <% @catch_rates.each do |catch_rate| %>
+                <%= render catch_rate %>
+            <% end %>
+        </table>
+    </div>
+<% elsif @where_catch_rates.present? %>
+    <table class="table align-middle table-primary table-striped">
+            <tr class="text-center">
+                <th style="width: 45%;"><%= t('.water_bioresource') %></th>
+                <th style="width: 25%;"><%= t('.length') %></th>
+                <th style="width: 15%;"></th>
+                <th style="width: 15%;"></th>
+            </tr>
+            <% @where_catch_rates.each do |where_catch_rate| %>
+                <%= render 'catch_rates/where_catch', catch_rate: where_catch_rate  %>
+            <% end %>
+        </table>
+<% else %>
+    <p class="fw-semibold text-danger text-center"><%= t('.catch_rates_empty') %></p>
+<% end %>
+
+<% if @pagy.pages > 1 %>
+    <div class="d-flex justify-content-center">
+        <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+<% end %>

@@ -1,0 +1,16 @@
+<tr id="<%= dom_id catch_rate %>" class="text-center">
+    <td style="width: 45%;"><%= catch_rate.water_bioresource.name %> (<%= catch_rate.water_bioresource.latin_name %>)</td>
+    <td style="width: 25%;">
+        <% if catch_rate.length == 0 %>
+            -
+        <% else %>
+            <%= catch_rate.length %>
+        <% end %>
+    </td>    
+    <td style="width: 15%;">
+        <%= link_to t('button.edit'), edit_catch_rate_path(catch_rate), class: "btn btn-warning btn-sm" %>
+    </td>
+    <td style="width: 15%;">
+        <%= button_to t('button.delete'), catch_rate, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm"%>
+    </td>
+</tr>

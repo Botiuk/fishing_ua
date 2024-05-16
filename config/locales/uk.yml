@@ -26,9 +26,10 @@ uk:
       catch_rate:
         water_bioresource: "Поле 'Водний біоресурс'"
         length: "Поле 'Довжина, см'"
+        where_catch: "Поле 'Де зловлено'"
         where_catches:
           dnipro: "Дніпровські водосховища"
-          other: "Інші внутрішні водогосподарські об'єкти"
+          other: "Інші внутрішні об'єкти"
           black: "Чорноморський регіон"
           azov: "Азовський регіон"
 
@@ -36,11 +37,14 @@ uk:
     create:
       water_bioresource: "Водний біоресурс створено"
       rate_penalty: "Штраф створено"
+      catch_rate: "Норму вилову створено"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
+      catch_rate: "Норму вилову оновлено"
     destroy: 
       rate_penalty: "Штраф видалено"
+      catch_rate: "Норму вилову видалено"
 
   button:
     authorization:
@@ -49,6 +53,7 @@ uk:
     add:
       water_bioresource: "Додати водний біоресурс"
       rate_penalty: "Додати штраф"
+      catch_rate: "Додати норму"
     edit: "Редагувати"
     show: "Детальніше"
     delete: "Видалити"
@@ -104,3 +109,25 @@ uk:
       money: "Штраф, грн:"
     edit:
       title: "Редагувати штраф"
+
+  catch_rates:
+    index:
+      title: "Норми вилову"
+      all: "Всі"
+      dnipro: "Дніпровські водосховища"
+      other: "Інші внутрішні об'єкти"
+      black: "Чорноморський регіон"
+      azov: "Азовський регіон"
+      water_bioresource: "Водний біоресурс"
+      where_catch: "Де зловлено"
+      length: "Довжина, см"
+      catch_rates_empty: "Не має норм"
+    new:
+      title: "Нова норма вилову"
+    form:
+      water_bioresource: "Водний біоресурс:"
+      where_catch: "Де зловлено:"
+      length: "Довжина, см:"
+      prompt: "-- виберіть зі списку --"
+    edit:
+      title: "Редагувати норму вилову"
