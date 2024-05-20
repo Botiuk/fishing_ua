@@ -46,6 +46,9 @@ uk:
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
 
+  alert:
+    access_denied: "Ви не маєте прав для доступу до цієї сторінки"
+
   button:
     authorization:
       login: "Ввійти"
@@ -72,6 +75,8 @@ uk:
     baits: "Приманки"
     profile: "Профіль"
     edit_profile: "Редагувати"
+    water_bioresources: "Водні біоресурси"
+    rate_penalties: "Штрафи"
 
   main:
     index:

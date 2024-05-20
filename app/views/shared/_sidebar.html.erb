@@ -39,6 +39,20 @@
                 <i class="bi bi-exclamation-triangle"></i> <span class="ms-1 d-none d-sm-inline"><%= t('navbar.catch_rates') %></span>
             <% end %>
         </li>
+        <% if can? :read, WaterBioresource %>
+            <li class="nav-item">
+                <%= link_to water_bioresources_path, class: "nav-link px-sm-0 px-2" do %>
+                    <i class="bi bi-water"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.water_bioresources') %></span>
+                <% end %>
+            </li>
+        <% end %>
+        <% if can? :read, RatePenalty %>
+            <li class="nav-item">
+                <%= link_to rate_penalties_path, class: "nav-link px-sm-0 px-2" do %>
+                    <i class="bi bi-coin"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.rate_penalties') %></span>
+                <% end %>
+            </li>
+        <% end %>
     </ul>
 
     <div class="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
