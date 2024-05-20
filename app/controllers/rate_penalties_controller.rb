@@ -1,7 +1,7 @@
 class RatePenaltiesController < ApplicationController
     before_action :set_rate_penalty, only: %i[ edit update destroy ]
     before_action :water_bioresources_formhelper, only: %i[ new create edit ]
-    #load_and_authorize_resource
+    authorize_resource
 
     def index
         @pagy, @rate_penalties = pagy(RatePenalty.all, items: 10)

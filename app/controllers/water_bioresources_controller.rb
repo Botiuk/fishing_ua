@@ -1,6 +1,6 @@
 class WaterBioresourcesController < ApplicationController
     before_action :set_water_bioresource, only: %i[ edit update ]
-    #load_and_authorize_resource
+    authorize_resource
 
     def index
         @pagy, @water_bioresources = pagy(WaterBioresource.all.order(:name), items: 10)
