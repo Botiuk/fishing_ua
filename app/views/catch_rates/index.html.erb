@@ -12,11 +12,31 @@
 </div>
 
 <div class="text-center">
-    <%= link_to t('.all'), catch_rates_path, class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
-    <%= link_to t('.dnipro'), catch_rates_path(where_catch: "dnipro"), class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
-    <%= link_to t('.other'), catch_rates_path(where_catch: "other"), class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
-    <%= link_to t('.black'), catch_rates_path(where_catch: "black"), class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
-    <%= link_to t('.azov'), catch_rates_path(where_catch: "azov"), class: "btn btn-outline-dark btn-sm mx-auto my-1" %>
+    <% if @where_catch.blank? %>
+        <%= link_to t('.all'), catch_rates_path, class: "btn btn-secondary btn-sm mx-auto my-1" %>
+    <% else %>
+        <%= link_to t('.all'), catch_rates_path, class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
+    <% end %>
+    <% if @where_catch == "dnipro" %>
+        <%= link_to t('.dnipro'), catch_rates_path(where_catch: "dnipro"), class: "btn btn-secondary btn-sm mx-auto my-1" %>
+    <% else %>
+        <%= link_to t('.dnipro'), catch_rates_path(where_catch: "dnipro"), class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
+    <% end %>
+    <% if @where_catch == "other" %>
+        <%= link_to t('.other'), catch_rates_path(where_catch: "other"), class: "btn btn-secondary btn-sm mx-auto my-1" %>
+    <% else %>
+        <%= link_to t('.other'), catch_rates_path(where_catch: "other"), class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
+    <% end %>
+    <% if @where_catch == "black" %>
+        <%= link_to t('.black'), catch_rates_path(where_catch: "black"), class: "btn btn-secondary btn-sm mx-auto my-1" %>
+    <% else %>
+        <%= link_to t('.black'), catch_rates_path(where_catch: "black"), class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
+    <% end %>
+    <% if @where_catch == "azov" %>
+        <%= link_to t('.azov'), catch_rates_path(where_catch: "azov"), class: "btn btn-secondary btn-sm mx-auto my-1" %>
+    <% else %>
+        <%= link_to t('.azov'), catch_rates_path(where_catch: "azov"), class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
+    <% end %>
 </div>
 
 <% if @catch_rates.present? %>
