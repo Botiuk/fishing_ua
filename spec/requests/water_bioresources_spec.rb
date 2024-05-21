@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "WaterBioresources", type: :request do
   describe "non registered user management" do
-    it "can GET index" do
+    it "cannot GET index" do
       get water_bioresources_path
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
@@ -28,21 +28,21 @@ RSpec.describe "WaterBioresources", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "can GET index" do
-      get rate_penalties_path
+    it "cannot GET index" do
+      get water_bioresources_path
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
 
     it "cannot GET new and redirects to the root page" do
-      get new_rate_penalty_path
+      get new_water_bioresource_path
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
 
     it "cannot GET edit and redirects to the root page" do
-      rate_penalty = create(:rate_penalty)
-      get edit_rate_penalty_path(rate_penalty)
+      water_bioresource = create(:water_bioresource)
+      get edit_water_bioresource_path(water_bioresource)
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
@@ -54,21 +54,21 @@ RSpec.describe "WaterBioresources", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "can GET index" do
-      get rate_penalties_path
+    it "cannot GET index" do
+      get water_bioresources_path
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
 
     it "cannot GET new and redirects to the root page" do
-      get new_rate_penalty_path
+      get new_water_bioresource_path
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
 
     it "cannot GET edit and redirects to the root page" do
-      rate_penalty = create(:rate_penalty)
-      get edit_rate_penalty_path(rate_penalty)
+      water_bioresource = create(:water_bioresource)
+      get edit_water_bioresource_path(water_bioresource)
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end

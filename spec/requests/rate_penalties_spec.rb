@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "RatePenalties", type: :request do
   describe "non registered user management" do
-    it "can GET index" do
+    it "cannot GET index" do
       get rate_penalties_path
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
@@ -35,7 +35,7 @@ RSpec.describe "RatePenalties", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "can GET index" do
+    it "cannot GET index" do
       get rate_penalties_path
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
@@ -68,7 +68,7 @@ RSpec.describe "RatePenalties", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "can GET index" do
+    it "cannot GET index" do
       get rate_penalties_path
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
