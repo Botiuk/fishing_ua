@@ -10,6 +10,38 @@ when "development"
         role: "admin"
     )
 
+    User.create(
+        email: "staff@gmail.com",
+        password: ENV['SEEDS_PASS'],
+        password_confirmation: ENV['SEEDS_PASS'],
+        role: "staff"
+    )
+
+    3.times do
+        password = Faker::Internet.password(min_length: 6)
+        User.create(
+        email: Faker::Internet.unique.email(domain: 'mail.ua'),
+        password: password,
+        password_confirmation: password,
+        role: "staff"
+    )
+    end
+
+    User.create(
+        email: "user@gmail.com",
+        password: ENV['SEEDS_PASS'],
+        password_confirmation: ENV['SEEDS_PASS'],
+    )
+
+    24.times do
+        password = Faker::Internet.password(min_length: 6)
+        User.create(
+            email: Faker::Internet.unique.email(domain: 'mail.com'),
+            password: password,
+            password_confirmation: password
+        )
+    end
+
     20.times do
         WaterBioresource.create(
             name: Faker::Creature::Animal.unique.name.capitalize,
@@ -55,6 +87,19 @@ when "development"
             where_catch: 0,
             length: 0.0
         )
+    end
+
+    user_ids = User.pluck(:id)
+    user_ids.each do |user_id|
+        10.times do
+            FishingPlace.create(
+                name: Faker::Lorem.unique.word.capitalize,
+                description: Faker::Lorem.paragraph,
+                where_catch: CatchRate.where_catches.keys.sample,
+                user_id: user_id
+            )            
+        end
+        Faker::Lorem.unique.clear
     end
 
 when "production"

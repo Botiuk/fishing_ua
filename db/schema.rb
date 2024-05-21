@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_14_094150) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_074736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_094150) do
     t.index ["water_bioresource_id"], name: "index_catch_rates_on_water_bioresource_id"
   end
 
+  create_table "fishing_places", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "where_catch"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_fishing_places_on_user_id"
+  end
+
   create_table "rate_penalties", force: :cascade do |t|
     t.bigint "water_bioresource_id", null: false
     t.integer "money"
@@ -82,5 +92,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_094150) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "catch_rates", "water_bioresources"
+  add_foreign_key "fishing_places", "users"
   add_foreign_key "rate_penalties", "water_bioresources"
 end
