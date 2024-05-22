@@ -1,0 +1,2 @@
+module FishingPlacesHelper
+end

@@ -9,7 +9,7 @@ class Ability
     can :read, CatchRate
 
     if user.present?
-    #   can [:read, :create, :update], FishingPlace, user_id: user.id
+      can [:read, :create, :update], FishingPlace, user_id: user.id
     #   can :manage, FishingSession, user_id: user.id
 
     #   if user.staff?

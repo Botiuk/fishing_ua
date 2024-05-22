@@ -14,12 +14,13 @@ uk:
   errors:
     messages:
       first_letter: "має починатися з великої літери"
+      taken: "має бути унікальна. Така вже використовується"
 
   activerecord:
     attributes:
       water_bioresource:
-        name: "Поле 'Назва'"
-        latin_name: "Поле 'Латинська назва'"
+        name: "'Назва'"
+        latin_name: "'Латинська назва'"
       rate_penalty:
         water_bioresource: "Поле 'Водний біоресурс'"
         money: "Поле 'Штраф, грн'"
@@ -33,24 +34,26 @@ uk:
           black: "Чорноморський регіон"
           azov: "Азовський регіон"
       fishing_place:
-        name: "Поле 'Назва локації'"
+        name: "'Назва локації'"
         description: "Поле 'Опис'"
         where_catch: "Поле 'До якого регіону відноситься'"
         where_catches:
           dnipro: "Дніпровські водосховища"
           other: "Інші внутрішні об'єкти"
-          black: "Чорноморський регіон"
-          azov: "Азовський регіон"
+          black: "Чорноморський"
+          azov: "Азовський"
 
   notice:
     create:
       water_bioresource: "Водний біоресурс створено"
       rate_penalty: "Штраф створено"
       catch_rate: "Норму вилову створено"
+      fishing_place: "Локацію риболовлі створено"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
       catch_rate: "Норму вилову оновлено"
+      fishing_place: "Локацію риболовлі оновлено"
     destroy: 
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
@@ -66,6 +69,7 @@ uk:
       water_bioresource: "Додати водний біоресурс"
       rate_penalty: "Додати штраф"
       catch_rate: "Додати норму"
+      fishing_place: "Додати локацію"
     edit: "Редагувати"
     show: "Детальніше"
     delete: "Видалити"
@@ -145,3 +149,21 @@ uk:
       prompt: "-- виберіть зі списку --"
     edit:
       title: "Редагувати норму вилову для"
+
+  fishing_places:
+    index:
+      title: "Мої локації рибалки"
+      name: "Назва"
+      where_catch: "Регіон"
+      description: "Опис"
+      fishing_places_empty: "Не має локацій"
+    new:
+      title: "Нова локація рибалки"
+    form:
+      name: "Назва локації:"
+      description: "Опис:"
+      description-placeholder: "можна залишити пустим"
+      where_catch: "До якого регіону відноситься:"
+      prompt: "-- виберіть зі списку --"
+    edit:
+      title: "Редагувати локацію рибалки"
