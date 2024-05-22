@@ -100,7 +100,7 @@ when "development"
             )            
         end
         20.times do
-            Equipment.create(
+            Tool.create(
                 name: Faker::Coin.unique.name.capitalize,
                 description: Faker::Quote.yoda,
                 user_id: user_id
