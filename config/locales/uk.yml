@@ -42,6 +42,8 @@ uk:
           other: "Інші внутрішні об'єкти"
           black: "Чорноморський"
           azov: "Азовський"
+      equipment:
+        name: "'Назва снасті'"
 
   notice:
     create:

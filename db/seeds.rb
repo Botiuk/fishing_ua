@@ -99,7 +99,14 @@ when "development"
                 user_id: user_id
             )            
         end
-        Faker::Lorem.unique.clear
+        20.times do
+            Equipment.create(
+                name: Faker::Coin.unique.name.capitalize,
+                description: Faker::Quote.yoda,
+                user_id: user_id
+            )            
+        end
+        Faker::UniqueGenerator.clear
     end
 
 when "production"
