@@ -3,7 +3,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <% unless form.object.water_bioresource_id.present? %>
+            <% unless @where_catch.present? %>
                 <div class="col-md-7">
                     <%= form.label :water_bioresource_id, t('.water_bioresource'), style: "display: block" %>
                     <%= select(:catch_rate, :water_bioresource_id, options_for_select(@water_bioresources, :selected => form.object.water_bioresource_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>

@@ -1,7 +1,7 @@
 class CatchRatesController < ApplicationController
     skip_before_action :authenticate_user!, only: :index
     before_action :set_catch_rate, only: %i[ edit update destroy ]
-    before_action :water_bioresources_formhelper, only: %i[ new create edit ]
+    before_action :water_bioresources_formhelper, only: %i[ new create ]
     authorize_resource
 
     def index
@@ -29,6 +29,7 @@ class CatchRatesController < ApplicationController
     end
 
     def edit
+        @where_catch = @catch_rate.where_catch
     end
 
     def update
