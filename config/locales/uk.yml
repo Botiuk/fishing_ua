@@ -42,7 +42,7 @@ uk:
           other: "Інші внутрішні об'єкти"
           black: "Чорноморський"
           azov: "Азовський"
-      equipment:
+      tool:
         name: "'Назва снасті'"
 
   notice:
@@ -51,14 +51,17 @@ uk:
       rate_penalty: "Штраф створено"
       catch_rate: "Норму вилову створено"
       fishing_place: "Локацію риболовлі створено"
+      tool: "Снасть створено"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
       catch_rate: "Норму вилову оновлено"
       fishing_place: "Локацію риболовлі оновлено"
+      tool: "Снасть онволено"
     destroy: 
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
+      tool: "Снасть видалено"
 
   alert:
     access_denied: "Ви не маєте прав для доступу до цієї сторінки"
@@ -72,10 +75,12 @@ uk:
       rate_penalty: "Додати штраф"
       catch_rate: "Додати норму"
       fishing_place: "Додати локацію"
+      tool: "Додати снасть"
     edit: "Редагувати"
     show: "Детальніше"
     delete: "Видалити"
     delete_confirm: "Точно видалити?"
+    delete_confirm_dependent: "Точно видалити? Буде видалено все, що пов'зано"
     submit: "Підтвердити"
 
   navbar:
@@ -86,7 +91,7 @@ uk:
     fishing_sessions: "Риболовлі"
     catches: "Улов"
     fishing_places: "Локації"
-    equipments: "Снасті"
+    tools: "Снасті"
     baits: "Приманки"
     profile: "Профіль"
     edit_profile: "Редагувати"
@@ -169,3 +174,18 @@ uk:
       prompt: "-- виберіть зі списку --"
     edit:
       title: "Редагувати локацію рибалки"
+
+  tools:
+    index:
+      title: "Мої снасті"
+      name: "Назва"
+      description: "Опис"
+      tools_empty: "Не має снастей"
+    new:
+      title: "Нова снасть"
+    form:
+      name: "Назва снасті:"
+      description: "Опис:"
+      description-placeholder: "можна залишити пустим"
+    edit:
+      title: "Редагувати снасть"
