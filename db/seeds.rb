@@ -103,6 +103,7 @@ when "development"
             Tool.create(
                 name: Faker::Coin.unique.name.capitalize,
                 description: Faker::Quote.yoda,
+                tool_type: Tool.tool_types.keys.sample,
                 user_id: user_id
             )            
         end
