@@ -43,7 +43,8 @@ uk:
           black: "Чорноморський"
           azov: "Азовський"
       tool:
-        name: "'Назва снасті'"
+        name: "Поле 'Назва'"
+        tool_type: "Поле 'Тип'"
 
   notice:
     create:
@@ -51,17 +52,20 @@ uk:
       rate_penalty: "Штраф створено"
       catch_rate: "Норму вилову створено"
       fishing_place: "Локацію риболовлі створено"
-      tool: "Снасть створено"
+      equipment: "Снасть створено"
+      bait: "Приманку створено"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
       catch_rate: "Норму вилову оновлено"
       fishing_place: "Локацію риболовлі оновлено"
-      tool: "Снасть онволено"
+      equipment: "Снасть оновлено"
+      bait: "Приманку оновлено"
     destroy: 
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
-      tool: "Снасть видалено"
+      equipment: "Снасть видалено"
+      bait: "Приманку видалено"
 
   alert:
     access_denied: "Ви не маєте прав для доступу до цієї сторінки"
@@ -75,7 +79,8 @@ uk:
       rate_penalty: "Додати штраф"
       catch_rate: "Додати норму"
       fishing_place: "Додати локацію"
-      tool: "Додати снасть"
+      equipment: "Додати снасть"
+      bait: "Додати приманку"
     edit: "Редагувати"
     show: "Детальніше"
     delete: "Видалити"
@@ -91,7 +96,7 @@ uk:
     fishing_sessions: "Риболовлі"
     catches: "Улов"
     fishing_places: "Локації"
-    tools: "Снасті"
+    equipments: "Снасті"
     baits: "Приманки"
     profile: "Профіль"
     edit_profile: "Редагувати"
@@ -177,15 +182,19 @@ uk:
 
   tools:
     index:
-      title: "Мої снасті"
+      title_equipments: "Мої снасті"
+      title_baits: "Мої приманки"
       name: "Назва"
       description: "Опис"
-      tools_empty: "Не має снастей"
+      equipments_empty: "Не має снастей"
+      baits_empty: "Не має приманок"
     new:
-      title: "Нова снасть"
+      title_equipment: "Нова снасть"
+      title_bait: "Нова приманка"
     form:
-      name: "Назва снасті:"
+      name: "Назва:"
       description: "Опис:"
       description-placeholder: "можна залишити пустим"
     edit:
-      title: "Редагувати снасть"
+      title_equipment: "Редагувати снасть"
+      title_bait: "Редагувати приманку"

@@ -19,12 +19,12 @@
             <% end %>
         </li>
         <li class="nav-item">
-            <%= link_to tools_path, class: "nav-link px-sm-0 px-2" do %>
-                <i class="bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.tools') %></span>
+            <%= link_to tools_path(tool_type: "equipment"), class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.equipments') %></span>
             <% end %>
         </li>
         <li class="nav-item">
-            <%= link_to root_path, class: "nav-link px-sm-0 px-2" do %>
+            <%= link_to tools_path(tool_type: "bait"), class: "nav-link px-sm-0 px-2" do %>
                 <i class="bi bi-stars"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.baits') %></span>
             <% end %>
         </li>

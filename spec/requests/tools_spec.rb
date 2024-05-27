@@ -38,11 +38,18 @@ RSpec.describe "Tools", type: :request do
       expect(response).to be_successful
     end
 
-    it "can POST create" do
-      post tools_path, params: { tool: attributes_for(:tool) }
+    it "can POST create, tool_type equipment" do
+      post tools_path, params: { tool: attributes_for(:tool, tool_type: "equipment") }
       expect(response).to be_redirect
       follow_redirect!
-      expect(flash[:notice]).to include(I18n.t('notice.create.tool'))
+      expect(flash[:notice]).to include(I18n.t('notice.create.equipment'))
+    end
+
+    it "can POST create, tool_type bait" do
+      post tools_path, params: { tool: attributes_for(:tool, tool_type: "bait") }
+      expect(response).to be_redirect
+      follow_redirect!
+      expect(flash[:notice]).to include(I18n.t('notice.create.bait'))
     end
 
     it "can GET edit" do
@@ -58,19 +65,34 @@ RSpec.describe "Tools", type: :request do
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
 
-    it "can PUT update" do
-      tool = create(:tool, user_id: @user.id, name: "My rod")
+    it "can PUT update, tool_type equipment" do
+      tool = create(:tool, user_id: @user.id, name: "My rod", tool_type: "equipment")
       put tool_path(tool), params: { tool: {name: "My pod"} }
       expect(tool.reload.name).to eq("My pod")
-      expect(response).to redirect_to(tools_url)
-      expect(flash[:notice]).to include(I18n.t('notice.update.tool'))
+      expect(response).to redirect_to(tools_url(tool_type: "equipment"))
+      expect(flash[:notice]).to include(I18n.t('notice.update.equipment'))
     end
 
-    it "can DELETE destroy" do
-      tool = create(:tool, user_id: @user.id)
+    it "can PUT update, tool_type bait" do
+      tool = create(:tool, user_id: @user.id, name: "My rod", tool_type: "bait")
+      put tool_path(tool), params: { tool: {name: "My pod"} }
+      expect(tool.reload.name).to eq("My pod")
+      expect(response).to redirect_to(tools_url(tool_type: "bait"))
+      expect(flash[:notice]).to include(I18n.t('notice.update.bait'))
+    end
+
+    it "can DELETE destroy, tool_type equipment" do
+      tool = create(:tool, user_id: @user.id, tool_type: "equipment")
       delete tool_path(tool)
-      expect(response).to redirect_to(tools_url)
-      expect(flash[:notice]).to include(I18n.t('notice.destroy.tool'))
+      expect(response).to redirect_to(tools_url(tool_type: "equipment"))
+      expect(flash[:notice]).to include(I18n.t('notice.destroy.equipment'))
+    end
+
+    it "can DELETE destroy, tool_type bait" do
+      tool = create(:tool, user_id: @user.id, tool_type: "bait")
+      delete tool_path(tool)
+      expect(response).to redirect_to(tools_url(tool_type: "bait"))
+      expect(flash[:notice]).to include(I18n.t('notice.destroy.bait'))
     end
 
     it "cannot DELETE destroy tool with other user_id" do
@@ -97,11 +119,18 @@ RSpec.describe "Tools", type: :request do
       expect(response).to be_successful
     end
 
-    it "can POST create" do
-      post tools_path, params: { tool: attributes_for(:tool) }
+    it "can POST create, tool_type equipment" do
+      post tools_path, params: { tool: attributes_for(:tool, tool_type: "equipment") }
       expect(response).to be_redirect
       follow_redirect!
-      expect(flash[:notice]).to include(I18n.t('notice.create.tool'))
+      expect(flash[:notice]).to include(I18n.t('notice.create.equipment'))
+    end
+
+    it "can POST create, tool_type bait" do
+      post tools_path, params: { tool: attributes_for(:tool, tool_type: "bait") }
+      expect(response).to be_redirect
+      follow_redirect!
+      expect(flash[:notice]).to include(I18n.t('notice.create.bait'))
     end
 
     it "can GET edit" do
@@ -117,19 +146,34 @@ RSpec.describe "Tools", type: :request do
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
 
-    it "can PUT update" do
-      tool = create(:tool, user_id: @user.id, name: "My rod")
+    it "can PUT update, tool_type equipment" do
+      tool = create(:tool, user_id: @user.id, name: "My rod", tool_type: "equipment")
       put tool_path(tool), params: { tool: {name: "My pod"} }
       expect(tool.reload.name).to eq("My pod")
-      expect(response).to redirect_to(tools_url)
-      expect(flash[:notice]).to include(I18n.t('notice.update.tool'))
+      expect(response).to redirect_to(tools_url(tool_type: "equipment"))
+      expect(flash[:notice]).to include(I18n.t('notice.update.equipment'))
     end
 
-    it "can DELETE destroy" do
-      tool = create(:tool, user_id: @user.id)
+    it "can PUT update, tool_type bait" do
+      tool = create(:tool, user_id: @user.id, name: "My rod", tool_type: "bait")
+      put tool_path(tool), params: { tool: {name: "My pod"} }
+      expect(tool.reload.name).to eq("My pod")
+      expect(response).to redirect_to(tools_url(tool_type: "bait"))
+      expect(flash[:notice]).to include(I18n.t('notice.update.bait'))
+    end
+
+    it "can DELETE destroy, tool_type equipment" do
+      tool = create(:tool, user_id: @user.id, tool_type: "equipment")
       delete tool_path(tool)
-      expect(response).to redirect_to(tools_url)
-      expect(flash[:notice]).to include(I18n.t('notice.destroy.tool'))
+      expect(response).to redirect_to(tools_url(tool_type: "equipment"))
+      expect(flash[:notice]).to include(I18n.t('notice.destroy.equipment'))
+    end
+
+    it "can DELETE destroy, tool_type bait" do
+      tool = create(:tool, user_id: @user.id, tool_type: "bait")
+      delete tool_path(tool)
+      expect(response).to redirect_to(tools_url(tool_type: "bait"))
+      expect(flash[:notice]).to include(I18n.t('notice.destroy.bait'))
     end
 
     it "cannot DELETE destroy tool with other user_id" do
@@ -156,11 +200,18 @@ RSpec.describe "Tools", type: :request do
       expect(response).to be_successful
     end
 
-    it "can POST create" do
-      post tools_path, params: { tool: attributes_for(:tool) }
+    it "can POST create, tool_type equipment" do
+      post tools_path, params: { tool: attributes_for(:tool, tool_type: "equipment") }
       expect(response).to be_redirect
       follow_redirect!
-      expect(flash[:notice]).to include(I18n.t('notice.create.tool'))
+      expect(flash[:notice]).to include(I18n.t('notice.create.equipment'))
+    end
+
+    it "can POST create, tool_type bait" do
+      post tools_path, params: { tool: attributes_for(:tool, tool_type: "bait") }
+      expect(response).to be_redirect
+      follow_redirect!
+      expect(flash[:notice]).to include(I18n.t('notice.create.bait'))
     end
 
     it "can GET edit" do
@@ -176,19 +227,34 @@ RSpec.describe "Tools", type: :request do
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
 
-    it "can PUT update" do
-      tool = create(:tool, user_id: @user.id, name: "My rod")
+    it "can PUT update, tool_type equipment" do
+      tool = create(:tool, user_id: @user.id, name: "My rod", tool_type: "equipment")
       put tool_path(tool), params: { tool: {name: "My pod"} }
       expect(tool.reload.name).to eq("My pod")
-      expect(response).to redirect_to(tools_url)
-      expect(flash[:notice]).to include(I18n.t('notice.update.tool'))
+      expect(response).to redirect_to(tools_url(tool_type: "equipment"))
+      expect(flash[:notice]).to include(I18n.t('notice.update.equipment'))
     end
 
-    it "can DELETE destroy" do
-      tool = create(:tool, user_id: @user.id)
+    it "can PUT update, tool_type bait" do
+      tool = create(:tool, user_id: @user.id, name: "My rod", tool_type: "bait")
+      put tool_path(tool), params: { tool: {name: "My pod"} }
+      expect(tool.reload.name).to eq("My pod")
+      expect(response).to redirect_to(tools_url(tool_type: "bait"))
+      expect(flash[:notice]).to include(I18n.t('notice.update.bait'))
+    end
+
+    it "can DELETE destroy, tool_type equipment" do
+      tool = create(:tool, user_id: @user.id, tool_type: "equipment")
       delete tool_path(tool)
-      expect(response).to redirect_to(tools_url)
-      expect(flash[:notice]).to include(I18n.t('notice.destroy.tool'))
+      expect(response).to redirect_to(tools_url(tool_type: "equipment"))
+      expect(flash[:notice]).to include(I18n.t('notice.destroy.equipment'))
+    end
+
+    it "can DELETE destroy, tool_type bait" do
+      tool = create(:tool, user_id: @user.id, tool_type: "bait")
+      delete tool_path(tool)
+      expect(response).to redirect_to(tools_url(tool_type: "bait"))
+      expect(flash[:notice]).to include(I18n.t('notice.destroy.bait'))
     end
 
     it "cannot DELETE destroy tool with other user_id" do

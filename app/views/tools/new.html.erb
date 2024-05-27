@@ -1,3 +1,9 @@
-<h4><%= t('.title') %></h4>
+<h4>
+    <% if @tool.tool_type == "equipment" %>
+        <%= t('.title_equipment') %>
+    <% else %>
+        <%= t('.title_bait') %>
+    <% end %>
+</h4>
 
 <%= render "form", tool: @tool %>

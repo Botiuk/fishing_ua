@@ -11,7 +11,11 @@
             <div class="col-md-12">
                 <%= form.label :description, t('.description'), style: "display: block" %>
                 <%= form.text_area :description, size: "30x5", placeholder: t('.description-placeholder'), class: "form-control" %>
-            </div>            
+            </div>
+
+            <div>
+                <%= form.hidden_field :tool_type %>
+            </div>
         </div>
 
         <div class="row mt-2">

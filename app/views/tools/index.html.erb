@@ -1,8 +1,15 @@
-<div class="row mb-2">
-    <div class="col"><h4><%= t('.title') %></h4></div>
-    <div class="col text-end">
-        <%= link_to t('button.add.tool'), new_tool_path, :method => :post, class: "btn btn-dark text-info" %>
-    </div>
+<div class="row mb-2">    
+    <% if @tool_type == "equipment" %>
+        <div class="col"><h4><%= t('.title_equipments') %></h4></div>
+        <div class="col text-end">
+            <%= link_to t('button.add.equipment'), new_tool_path(tool_type: "equipment"), :method => :post, class: "btn btn-dark text-info" %>
+        </div>
+    <% else %>
+        <div class="col"><h4><%= t('.title_baits') %></h4></div>
+        <div class="col text-end">
+            <%= link_to t('button.add.bait'), new_tool_path(tool_type: "bait"), :method => :post, class: "btn btn-dark text-info" %>
+        </div>
+    <% end %>    
 </div>
 
 <% if @tools.present? %>
@@ -20,7 +27,11 @@
         </table>
     </div>
 <% else %>
-    <p class="fw-semibold text-danger text-center"><%= t('.tools_empty') %></p>
+    <% if @tool_type == "equipment" %>
+        <p class="fw-semibold text-danger text-center"><%= t('.equipments_empty') %></p>
+    <% else %>
+        <p class="fw-semibold text-danger text-center"><%= t('.baits_empty') %></p>
+    <% end %>
 <% end %>
 
 <% if @pagy.pages > 1 %>
