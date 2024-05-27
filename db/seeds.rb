@@ -108,6 +108,17 @@ when "development"
             )            
         end
         Faker::UniqueGenerator.clear
+
+        user_fishing_places_ids = FishingPlace.where(user_id: user_id).pluck(:id)
+        15.times do
+            start_time = Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now - 2.days)
+            FishingSession.create(
+                start_at: start_time,
+                end_at:  start_time + rand(1..36).hours,
+                user_id: user_id,
+                fishing_place_id: user_fishing_places_ids.sample
+            )
+        end
     end
 
 when "production"

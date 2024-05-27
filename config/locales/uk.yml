@@ -45,6 +45,10 @@ uk:
       tool:
         name: "Поле 'Назва'"
         tool_type: "Поле 'Тип'"
+      fishing_sessions:
+        start_at: "Поле 'Початок рибалки'"
+        end_at: "Поле 'Завершення рибалки'"
+        fishing_place_id: " Поле 'Локація рибалки'"
 
   notice:
     create:
