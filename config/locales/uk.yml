@@ -3,6 +3,12 @@ uk:
   author: "Svitlana Botiuk"
   fishing_law: "Згідно наказу № 700 від 19.09.2022 'Про затвердження Правил любительського рибальства' "
 
+  time:
+    formats:
+      default: "%a %d.%m.%Y, %H:%M"
+      long: "%H:%M, %e.%m.%Y"
+      short: "%e %b, %H:%M"
+
   forms:
     messages:
       errors:
@@ -45,10 +51,10 @@ uk:
       tool:
         name: "Поле 'Назва'"
         tool_type: "Поле 'Тип'"
-      fishing_sessions:
-        start_at: "Поле 'Початок рибалки'"
-        end_at: "Поле 'Завершення рибалки'"
-        fishing_place_id: " Поле 'Локація рибалки'"
+      fishing_session:
+        start_at: "Поле 'Початок риболовлі'"
+        end_at: "Поле 'Завершення риболовлі'"
+        fishing_place: "Поле 'Локація'"
 
   notice:
     create:
@@ -58,6 +64,7 @@ uk:
       fishing_place: "Локацію риболовлі створено"
       equipment: "Снасть створено"
       bait: "Приманку створено"
+      fishing_session: "Риболовлю розпочато"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
@@ -65,7 +72,9 @@ uk:
       fishing_place: "Локацію риболовлі оновлено"
       equipment: "Снасть оновлено"
       bait: "Приманку оновлено"
-    destroy: 
+      fishing_session: "Риболовлю оновлено"
+      fishing_session_close: "Риболовлю завершено"
+    destroy:
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
       equipment: "Снасть видалено"
@@ -73,6 +82,9 @@ uk:
 
   alert:
     access_denied: "Ви не маєте прав для доступу до цієї сторінки"
+    fishing_session_close: "Риболовлю завершено"
+    new:
+      fishing_session: "Перед тим як почати нову риболовлю, завершіть попередню!"
 
   button:
     authorization:
@@ -85,12 +97,18 @@ uk:
       fishing_place: "Додати локацію"
       equipment: "Додати снасть"
       bait: "Додати приманку"
+      fishing_session: "Почати риболовлю"
+      catch: "Додати улов"
+    close_fishing_session: "Завершити риболовлю"
+    close_fishing_session_confirm: "Точно завершити риболовлю?"
     edit: "Редагувати"
     show: "Детальніше"
     delete: "Видалити"
     delete_confirm: "Точно видалити?"
     delete_confirm_dependent: "Точно видалити? Буде видалено все, що пов'зано"
     submit: "Підтвердити"
+    all:
+      fishing_sessions: "Всі риболовлі"
 
   navbar:
     news: "Новини"
@@ -202,3 +220,29 @@ uk:
     edit:
       title_equipment: "Редагувати снасть"
       title_bait: "Редагувати приманку"
+
+  fishing_sessions:
+    index:
+      title: "Мої риболовлі"
+      start_at: "Почато"
+      end_at: "Завершено"
+      fishing_place: "Локація"
+      fishing_sessions_empty: "Не має риболовель"
+    fishing_session:
+      end_at_empty: "активна"
+    new:
+      title: "Нова риболовля"
+    form:
+      start_at: "Початок риболовлі:"
+      end_at: "Завершення риболовлі:"
+      fishing_place: "Локація:"
+      prompt: "-- виберіть зі списку --"
+    edit:
+      title: "Редагувати риболовлю"
+    show:
+      title: "Детальніше про рибалку"
+      start_at: "Почато:"
+      end_at: "Завершено:"
+      fishing_place: "Локація:"
+      end_at_empty: "активна"
+      catches: "Зловлено"

@@ -11,7 +11,7 @@ class Ability
     if user.present?
       can [:read, :create, :update], FishingPlace, user_id: user.id
       can :manage, Tool, user_id: user.id
-    #   can :manage, FishingSession, user_id: user.id
+      can [:read, :create, :update], FishingSession, user_id: user.id
 
     #   if user.staff?
     #     can [:read, :create, :update], News

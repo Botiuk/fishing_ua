@@ -1,0 +1,20 @@
+<tr id="<%= dom_id fishing_session %>" class="text-center">
+    <td style="width: 20%;"><%= I18n.l(fishing_session.start_at, format: :short) %></td>
+    <td style="width: 20%;">
+        <% if fishing_session.end_at.present? %>
+            <%= I18n.l(fishing_session.end_at, format: :short) %>
+        <% else %>
+            <b class="text-danger"><%= t('.end_at_empty') %></b>
+        <% end %>
+    </td>
+    <td style="width: 30%;"><%= fishing_session.fishing_place.name %></td>
+    <td style="width: 15%;">
+        <%= link_to t('button.show'), fishing_session_path(fishing_session), class: "btn btn-info btn-sm" %>
+    </td>
+    <td style="width: 25%;">
+        <% if fishing_session.end_at.blank? %>
+            <%= link_to t('button.edit'), edit_fishing_session_path(fishing_session), class: "btn btn-warning btn-sm" %>
+        <% end %>
+    </td>
+
+</tr>

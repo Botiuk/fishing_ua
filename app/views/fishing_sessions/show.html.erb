@@ -1,0 +1,49 @@
+<div class="row mb-2">
+    <div class="col"><h4><%= t('.title') %></h4></div>
+</div>
+
+<% if @fishing_session.end_at.blank? %>
+<div class="row justify-content-between mb-2">
+    <div class="col">
+        <%= link_to t('button.add.catch'), fishing_session_path(@fishing_session), class: "btn btn-success" %>
+    </div>
+
+    <div class="col text-end">
+        <%= button_to t('button.close_fishing_session'), @fishing_session, method: :patch, params: { fishing_session: {end_at: (DateTime.now + 3.hours)} }, data: { turbo_confirm: t('button.close_fishing_session_confirm') }, class: "btn btn-danger" %>
+    </div>
+</div>
+<% end %>
+
+
+<div class="row">
+    <div class="col-12 fs-5">
+        <b><%= t('.fishing_place') %></b> "<%= @fishing_session.fishing_place.name %>" <br>
+        <b><%= t('.start_at') %></b> <%= I18n.l(@fishing_session.start_at) %> <br>
+        <b><%= t('.end_at') %></b>
+        <% if @fishing_session.end_at.present? %>
+            <%= I18n.l(@fishing_session.end_at) %><br>
+        <% else %>
+            <%= t('.end_at_empty') %> <br>
+        <% end %>
+    </div>
+</div>
+
+<div class="my-2">
+<h5><%= t('.catches') %></h5>
+    <div class="table-responsive">
+        <table class="table align-middle table-secondary table-striped">
+            <tr class="text-center">
+                <th></th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col md-6">
+        <%= link_to t('button.all.fishing_sessions'), fishing_sessions_path, class: "btn btn-primary" %>
+        <% if @fishing_session.end_at.blank? %>
+            <%= link_to t('button.edit'), edit_fishing_session_path(@fishing_session), class: "btn btn-warning" %>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="row mb-2">
+    <div class="col"><h4><%= t('.title') %></h4></div>
+    <div class="col text-end">
+        <%= link_to t('button.add.fishing_session'), new_fishing_session_path, :method => :post, class: "btn btn-dark text-info" %>
+    </div>
+</div>
+
+<% if @fishing_sessions.present? %>
+    <div class="table-responsive">
+        <table class="table align-middle table-primary table-striped">
+            <tr class="text-center">
+                <th style="width: 20%;"><%= t('.start_at') %></th>
+                <th style="width: 20%;"><%= t('.end_at') %></th>
+                <th style="width: 30%;"><%= t('.fishing_place') %></th>
+                <th style="width: 15%;"></th>
+                <th style="width: 15%;"></th>
+            </tr>
+            <% @fishing_sessions.each do |fishing_session| %>
+                <%= render fishing_session %>
+            <% end %>
+        </table>
+    </div>
+<% else %>
+    <p class="fw-semibold text-danger text-center"><%= t('.fishing_sessions_empty') %></p>
+<% end %>
+
+<% if @pagy.pages > 1 %>
+    <div class="d-flex justify-content-center">
+        <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+<% end %>
