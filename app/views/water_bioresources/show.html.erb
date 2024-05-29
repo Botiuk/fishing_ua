@@ -1,0 +1,28 @@
+<h4><%= @water_bioresource.name %> <em>(<%= @water_bioresource.latin_name %>)</em></h4>
+<div class="row pb-2 mx-1">
+    <% if @water_bioresource.bioresource_photo.present? %>
+        <div class="col-12">
+            <img class="mw-100" src="<%= cloudinary_url(@water_bioresource.bioresource_photo.key, height: 200, crop: :scale) %>" >
+        </div>
+    <% else %>
+        <div class="col-3 text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
+    <% end %>
+    <div class="col mt-2">
+        <% if @water_bioresource.bioresource_description.present? %>
+            <div style="text-align: justify; text-indent: 15px;">
+                <%= @water_bioresource.bioresource_description %>
+            </div>
+        <% else %>
+            <%= t('.description_absent') %>
+        <% end %>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col md-6">
+        <%= link_to t('button.all.water_bioresources'), water_bioresources_path, class: "btn btn-primary" %>
+        <% if can? :update, WaterBioresource %>
+            <%= link_to t('button.edit'), edit_water_bioresource_path(@water_bioresource), class: "btn btn-warning" %>
+        <% end %>
+    </div>
+</div>

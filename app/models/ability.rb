@@ -7,6 +7,7 @@ class Ability
     
     can :read, :main
     can :read, CatchRate
+    can :read, WaterBioresource
 
     if user.present?
       can [:read, :create, :update], FishingPlace, user_id: user.id
@@ -18,7 +19,7 @@ class Ability
     #   end
 
       if user.role == "admin"
-        can [:read, :create, :update], WaterBioresource
+        can [:create, :update], WaterBioresource
         can :manage, RatePenalty
         can :manage, CatchRate
         # can :manage, News

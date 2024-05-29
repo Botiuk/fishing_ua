@@ -108,11 +108,13 @@ uk:
     delete_confirm_dependent: "Точно видалити? Буде видалено все, що пов'зано"
     submit: "Підтвердити"
     all:
+      water_bioresources: "Всі водні біоресурси"
       fishing_sessions: "Всі риболовлі"
 
   navbar:
     news: "Новини"
-    catch_rates: "Норми вилову"
+    water_bioresources: "Водні біоресурси"
+    catch_rates: "Норми вилову"    
 
   sidebar:
     fishing_sessions: "Риболовлі"
@@ -121,8 +123,7 @@ uk:
     equipments: "Снасті"
     baits: "Приманки"
     profile: "Профіль"
-    edit_profile: "Редагувати"
-    water_bioresources: "Водні біоресурси"
+    edit_profile: "Редагувати"    
     rate_penalties: "Штрафи"
 
   main:
@@ -132,9 +133,6 @@ uk:
   water_bioresources:
     index:
       title: "Водні біоресурси"
-      name: "Назва"
-      latin_name: "Латинська назва"
-      bioresource_photo: "Фото"
       water_bioresources_empty: "Не має записів"
     water_bioresource:
       photo_absent: "фото відсутнє"
@@ -144,8 +142,12 @@ uk:
       name: "Назва:"
       latin_name: "Латинська назва:"
       bioresource_photo: "Фото:"
+      bioresource_description: "Опис:"
     edit:
       title: "Редагувати водний біоресурс"
+    show:
+      photo_absent: "фото відсутнє"
+      description_absent: "Опис відсутній"
 
   rate_penalties:
     index:

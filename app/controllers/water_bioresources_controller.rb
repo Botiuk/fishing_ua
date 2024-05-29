@@ -1,5 +1,6 @@
 class WaterBioresourcesController < ApplicationController
-    before_action :set_water_bioresource, only: %i[ edit update ]
+    skip_before_action :authenticate_user!, only: %i[ index show]
+    before_action :set_water_bioresource, only: %i[ show edit update ]
     authorize_resource
 
     def index
@@ -15,10 +16,13 @@ class WaterBioresourcesController < ApplicationController
     def create
         @water_bioresource = WaterBioresource.new(water_bioresource_params)
         if @water_bioresource.save
-            redirect_to water_bioresources_url, notice: t('notice.create.water_bioresource')
+            redirect_to water_bioresource_url(@water_bioresource), notice: t('notice.create.water_bioresource')
         else
             render :new, status: :unprocessable_entity
         end
+    end
+
+    def show
     end
 
     def edit
@@ -26,7 +30,7 @@ class WaterBioresourcesController < ApplicationController
 
     def update
         if @water_bioresource.update(water_bioresource_params)
-            redirect_to water_bioresources_url, notice: t('notice.update.water_bioresource')
+            redirect_to water_bioresource_url(@water_bioresource), notice: t('notice.update.water_bioresource')
         else
             render :edit, status: :unprocessable_entity
         end

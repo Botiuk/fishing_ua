@@ -2,10 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "WaterBioresources", type: :request do
   describe "non registered user management" do
-    it "cannot GET index" do
+    it "can GET index" do
       get water_bioresources_path
-      expect(response).to redirect_to(new_user_session_path)
-      expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
+      expect(response).to be_successful
+    end
+
+    it "can GET show" do
+      water_bioresource = create(:water_bioresource)
+      get water_bioresource_path(water_bioresource)
+      expect(response).to be_successful
     end
 
     it "cannot GET new and redirects to the sign_in page" do
@@ -28,10 +33,15 @@ RSpec.describe "WaterBioresources", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "cannot GET index" do
+    it "can GET index" do
       get water_bioresources_path
-      expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+      expect(response).to be_successful
+    end
+
+    it "can GET show" do
+      water_bioresource = create(:water_bioresource)
+      get water_bioresource_path(water_bioresource)
+      expect(response).to be_successful
     end
 
     it "cannot GET new and redirects to the root page" do
@@ -54,10 +64,15 @@ RSpec.describe "WaterBioresources", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "cannot GET index" do
+    it "can GET index" do
       get water_bioresources_path
-      expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+      expect(response).to be_successful
+    end
+
+    it "can GET show" do
+      water_bioresource = create(:water_bioresource)
+      get water_bioresource_path(water_bioresource)
+      expect(response).to be_successful
     end
 
     it "cannot GET new and redirects to the root page" do
@@ -80,34 +95,40 @@ RSpec.describe "WaterBioresources", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "GET index" do
+    it "can GET index" do
       get water_bioresources_path
       expect(response).to be_successful
     end
 
-    it "GET new" do
+    it "can GET new" do
       get new_water_bioresource_path
       expect(response).to be_successful
     end
 
-    it "POST create" do
+    it "can POST create" do
       post water_bioresources_path, params: { water_bioresource: attributes_for(:water_bioresource) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.water_bioresource'))
     end
 
-    it "GET edit" do
+    it "can GET show" do
+      water_bioresource = create(:water_bioresource)
+      get water_bioresource_path(water_bioresource)
+      expect(response).to be_successful
+    end
+
+    it "can GET edit" do
       water_bioresource = create(:water_bioresource)
       get edit_water_bioresource_path(water_bioresource)
       expect(response).to be_successful
     end
 
-    it "PUT update" do
+    it "can PUT update" do
       water_bioresource = create(:water_bioresource, name: "Abcd")
       put water_bioresource_path(water_bioresource), params: { water_bioresource: {name: "Dbca"} }
       expect(water_bioresource.reload.name).to eq("Dbca")
-      expect(response).to redirect_to(water_bioresources_url)
+      expect(response).to redirect_to(water_bioresource_path(water_bioresource))
       expect(flash[:notice]).to include(I18n.t('notice.update.water_bioresource'))
     end
   end

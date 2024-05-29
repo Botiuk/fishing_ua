@@ -14,6 +14,11 @@
                     <% end %>
                 </li>
                 <li class="nav-item">
+                    <%= link_to water_bioresources_path, class: "nav-link" do %>
+                        <i class="bi bi-water"></i> <%= t('navbar.water_bioresources') %>
+                    <% end %>
+                </li>
+                <li class="nav-item">
                     <%= link_to catch_rates_path, class: "nav-link" do %>
                         <i class="bi bi-exclamation-triangle"></i> <%= t('navbar.catch_rates') %>
                     <% end %>
