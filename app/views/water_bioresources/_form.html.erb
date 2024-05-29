@@ -18,6 +18,11 @@
                 <%= cl_image_tag(water_bioresource.bioresource_photo.key, height: 100, crop: :scale) if water_bioresource.bioresource_photo.present? %>
                 <%= form.file_field :bioresource_photo, direct_upload: true, class: "form-control" %>
             </div>
+
+            <div class="field">
+                <%= form.label :bioresource_description, t('.bioresource_description'), style: "display: block" %>
+                <%= form.rich_text_area :bioresource_description %>
+            </div>
         </div>
 
         <div class="row mt-2">

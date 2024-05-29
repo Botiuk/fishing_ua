@@ -65,6 +65,12 @@ when "development"
             name: 'bioresource_photo',
             blob_id: 1
         )
+        ActionText::RichText.create!(
+            record_type: 'WaterBioresource', 
+            record_id: water_bioresource_id, 
+            name: 'bioresource_description',            
+            body: Faker::Lorem.paragraph_by_chars
+        )
     end
 
     15.times do

@@ -3,6 +3,7 @@ class WaterBioresource < ApplicationRecord
     has_many :catch_rates
     
     has_one_attached :bioresource_photo
+    has_rich_text :bioresource_description
 
     validates :name, :latin_name, presence: true, uniqueness: { case_sensitive: false }
 

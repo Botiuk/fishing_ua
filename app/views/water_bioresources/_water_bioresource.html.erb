@@ -1,15 +1,26 @@
-<tr id="<%= dom_id water_bioresource %>" class="text-center">
-    <td style="width: 25%;"><%= water_bioresource.name %></td>
-    <td style="width: 25%;"><%= water_bioresource.latin_name %></td>
-    <td style="width: 25%;">
-        <% if water_bioresource.bioresource_photo.present? %>
-            <img class="mw-100" src="<%= cloudinary_url(water_bioresource.bioresource_photo.key, height: 100, crop: :scale) %>" >
-        <% else %>
-            <%= t('.photo_absent') %>
-        <% end %>
-    </td>
-    <td style="width: 25%;">
-        <%= link_to t('button.edit'), edit_water_bioresource_path(water_bioresource), class: "btn btn-warning btn-sm" %>
-    </td>
-
-</tr>
+<div class="col-sm-4">
+    <div id="<%= dom_id water_bioresource %>">
+        <div class="card text-bg-light mt-2 mb-3">
+            <div class="card-body">
+                <h5 class="card-title mb-1 pb-1">
+                    <%= water_bioresource.name %><br>
+                    <em class="fs-6 fw-normal">(<%= water_bioresource.latin_name %>)</em>
+                </h5>
+                <p class="card-text m-0 p-0 text-center">
+                    <% if water_bioresource.bioresource_photo.present? %>
+                        <img class="mw-100" src="<%= cloudinary_url(water_bioresource.bioresource_photo.key, height: 200, crop: :scale) %>" >
+                    <% else %>
+                        <div class="text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
+                    <% end %>
+                </p>
+                <div class="row mt-2">
+                    <div class="col md-6 text-center">                        
+                        <% if can? :update, WaterBioresource %>
+                            <%= link_to t('button.edit'), edit_water_bioresource_path(water_bioresource), class: "btn btn-warning btn-sm" %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,7 @@ class WaterBioresourcesController < ApplicationController
     authorize_resource
 
     def index
-        @pagy, @water_bioresources = pagy(WaterBioresource.all.order(:name), items: 10)
+        @pagy, @water_bioresources = pagy(WaterBioresource.all.order(:name), items: 12)
     rescue Pagy::OverflowError
         redirect_to water_bioresources_url(page: 1)
     end
@@ -41,6 +41,6 @@ class WaterBioresourcesController < ApplicationController
     end
 
     def water_bioresource_params
-        params.require(:water_bioresource).permit(:name, :latin_name, :bioresource_photo)
+        params.require(:water_bioresource).permit(:name, :latin_name, :bioresource_photo, :bioresource_description)
     end
 end

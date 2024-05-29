@@ -1,23 +1,17 @@
 <div class="row mb-2">
     <div class="col"><h4><%= t('.title') %></h4></div>
-    <div class="col text-end">
-        <%= link_to t('button.add.water_bioresource'), new_water_bioresource_path, :method => :post, class: "btn btn-dark text-info" %>
-    </div>
+    <% if can? :create, WaterBioresource %>
+        <div class="col text-end">
+            <%= link_to t('button.add.water_bioresource'), new_water_bioresource_path, :method => :post, class: "btn btn-dark text-info" %>
+        </div>
+    <% end %>
 </div>
 
 <% if @water_bioresources.present? %>
-    <div class="table-responsive">
-        <table class="table align-middle table-primary table-striped">
-            <tr class="text-center">
-                <th style="width: 25%;"><%= t('.name') %></th>
-                <th style="width: 25%;"><%= t('.latin_name') %></th>
-                <th style="width: 25%;"><%= t('.bioresource_photo') %></th>
-                <th style="width: 25%;"></th>
-            </tr>
-            <% @water_bioresources.each do |water_bioresource| %>
-                <%= render water_bioresource %>
-            <% end %>
-        </table>
+    <div class="row">
+        <% @water_bioresources.each do |water_bioresource| %>
+            <%= render water_bioresource %>
+        <% end %>
     </div>
 <% else %>
     <p class="fw-semibold text-danger text-center"><%= t('.water_bioresources_empty') %></p>
