@@ -10,8 +10,8 @@ class FishingSessionsController < ApplicationController
     end
 
     def new
-        last_fishing_session = FishingSession.order(:start_at).last
-        if last_fishing_session.end_at.present?
+        last_fishing_session = FishingSession.where(end_at: nil).last
+        if last_fishing_session.blank?
             @fishing_session = FishingSession.new
         else
             redirect_to fishing_sessions_url, alert: t('alert.new.fishing_session')
