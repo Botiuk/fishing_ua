@@ -1,4 +1,5 @@
 class RatePenaltiesController < ApplicationController
+    skip_before_action :authenticate_user!, only: :index
     before_action :set_rate_penalty, only: %i[ edit update destroy ]
     before_action :water_bioresources_formhelper, only: %i[ new create edit ]
     authorize_resource

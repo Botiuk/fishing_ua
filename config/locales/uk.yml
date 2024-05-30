@@ -114,7 +114,8 @@ uk:
   navbar:
     news: "Новини"
     water_bioresources: "Водні біоресурси"
-    catch_rates: "Норми вилову"    
+    catch_rates: "Норми вилову"
+    rate_penalties: "Штрафи"
 
   sidebar:
     fishing_sessions: "Риболовлі"
@@ -123,8 +124,7 @@ uk:
     equipments: "Снасті"
     baits: "Приманки"
     profile: "Профіль"
-    edit_profile: "Редагувати"    
-    rate_penalties: "Штрафи"
+    edit_profile: "Редагувати"
 
   main:
     index:
@@ -151,9 +151,10 @@ uk:
 
   rate_penalties:
     index:
-      title: "Штрафи за кожен 1 екземпляр, що не відповідає нормі вилову"
+      title: "Штрафи"
+      subtitle: "* за кожен 1 екземпляр, що не відповідає нормі вилову"
       water_bioresource: "Водний біоресурс"
-      money: "Штраф (грн)"
+      money: "Штраф (грн)*"
       rate_penalties_empty: "Не має штрафів"
     new:
       title: "Новий штраф"

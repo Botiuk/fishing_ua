@@ -6,8 +6,9 @@ class Ability
   def initialize(user)
     
     can :read, :main
-    can :read, CatchRate
     can :read, WaterBioresource
+    can :read, CatchRate
+    can :read, RatePenalty
 
     if user.present?
       can [:read, :create, :update], FishingPlace, user_id: user.id
@@ -19,9 +20,9 @@ class Ability
     #   end
 
       if user.role == "admin"
-        can [:create, :update], WaterBioresource
-        can :manage, RatePenalty
+        can [:create, :update], WaterBioresource        
         can :manage, CatchRate
+        can :manage, RatePenalty
         # can :manage, News
       end
     end

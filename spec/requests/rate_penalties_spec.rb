@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "RatePenalties", type: :request do
   describe "non registered user management" do
-    it "cannot GET index" do
+    it "can GET index" do
       get rate_penalties_path
-      expect(response).to redirect_to(new_user_session_path)
-      expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
+      expect(response).to be_successful
     end
 
     it "cannot GET new and redirects to the sign_in page" do
@@ -35,10 +34,9 @@ RSpec.describe "RatePenalties", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "cannot GET index" do
+    it "can GET index" do
       get rate_penalties_path
-      expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+      expect(response).to be_successful
     end
 
     it "cannot GET new and redirects to the root page" do
@@ -68,10 +66,9 @@ RSpec.describe "RatePenalties", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "cannot GET index" do
+    it "can GET index" do
       get rate_penalties_path
-      expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+      expect(response).to be_successful
     end
 
     it "cannot GET new and redirects to the root page" do
@@ -101,17 +98,17 @@ RSpec.describe "RatePenalties", type: :request do
       login_as(user, :scope => :user)
     end
 
-    it "GET index" do
+    it "can GET index" do
       get rate_penalties_path
       expect(response).to be_successful
     end
 
-    it "GET new" do
+    it "can GET new" do
       get new_rate_penalty_path
       expect(response).to be_successful
     end
 
-    it "POST create" do
+    it "can POST create" do
       water_bioresource = create(:water_bioresource)
       post rate_penalties_path, params: { rate_penalty: attributes_for(:rate_penalty, water_bioresource_id: water_bioresource.id) }
       expect(response).to be_redirect
@@ -119,13 +116,13 @@ RSpec.describe "RatePenalties", type: :request do
       expect(flash[:notice]).to include(I18n.t('notice.create.rate_penalty'))
     end
 
-    it "GET edit" do
+    it "can GET edit" do
       rate_penalty = create(:rate_penalty)
       get edit_rate_penalty_path(rate_penalty)
       expect(response).to be_successful
     end
 
-    it "PUT update" do
+    it "can PUT update" do
       rate_penalty = create(:rate_penalty, money: 12345)
       put rate_penalty_path(rate_penalty), params: { rate_penalty: {money: 54321} }
       expect(rate_penalty.reload.money).to eq(54321)
@@ -133,7 +130,7 @@ RSpec.describe "RatePenalties", type: :request do
       expect(flash[:notice]).to include(I18n.t('notice.update.rate_penalty'))
     end
 
-    it "DELETE destroy" do
+    it "can DELETE destroy" do
       rate_penalty = create(:rate_penalty)
       delete rate_penalty_path(rate_penalty)
       expect(response).to redirect_to(rate_penalties_url)
