@@ -148,11 +148,15 @@ uk:
     show:
       photo_absent: "фото відсутнє"
       description_absent: "Опис відсутній"
+      catch_rates: "Норми вилову"
+      santimetr: " см"
+      rate_penalty: "Штраф "
+      money: " грн"
 
   rate_penalties:
     index:
       title: "Штрафи"
-      subtitle: "* за кожен 1 екземпляр, що не відповідає нормі вилову"
+      subtitle: "* за кожен 1 екземпляр, що не відповідає нормі вилову, як по довжині так і по загальній вазі або кількості"
       water_bioresource: "Водний біоресурс"
       money: "Штраф (грн)*"
       rate_penalties_empty: "Не має штрафів"
