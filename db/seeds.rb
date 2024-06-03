@@ -125,6 +125,30 @@ when "development"
                 fishing_place_id: user_fishing_places_ids.sample
             )
         end
+
+        water_bioresource_ids = WaterBioresource.pluck(:id)
+        user_fishing_sessions_ids = FishingSession.where(user_id: user_id).pluck(:id)
+        50.times do
+            Catch.create(
+                catch_time: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now),
+                catch_length:  Faker::Number.decimal(l_digits: 2, r_digits: 1),
+                catch_weight: Faker::Number.decimal(l_digits: 1, r_digits: 3),
+                catch_result: "set_free",
+                fishing_session_id: user_fishing_sessions_ids.sample,
+                water_bioresource_id: water_bioresource_ids.sample
+            )
+        end
+
+        user_catch_ids = Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).pluck(:id)
+        user_catch_ids.delete_at(0)
+        user_catch_ids.each do |user_catch_id|            
+            ActiveStorage::Attachment.create!(
+                record_type: 'Catch',
+                record_id: user_catch_id,
+                name: 'catch_photos',
+                blob_id: 1
+            )
+        end
     end
 
 when "production"

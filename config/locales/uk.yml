@@ -55,6 +55,15 @@ uk:
         start_at: "Поле 'Початок риболовлі'"
         end_at: "Поле 'Завершення риболовлі'"
         fishing_place: "Поле 'Локація'"
+      catch:
+        catch_time: "Поле 'Коли зловлено'"
+        catch_length: "Поле 'Довжина улову, см'"
+        catch_weight: "Поле 'Вага улову, кг'"
+        water_bioresource: "Поле 'Водний біоресурс'"
+        catch_result: "Поле 'Куди улов?'"
+        catch_results:
+          set_free: "В воду"
+          pick_up: "В садок"
 
   notice:
     create:

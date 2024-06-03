@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_091526) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_03_063911) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +59,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_091526) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["water_bioresource_id"], name: "index_catch_rates_on_water_bioresource_id"
+  end
+
+  create_table "catches", force: :cascade do |t|
+    t.datetime "catch_time"
+    t.decimal "catch_length", precision: 4, scale: 1, default: "0.0"
+    t.decimal "catch_weight", precision: 5, scale: 3, default: "0.0"
+    t.integer "catch_result"
+    t.bigint "fishing_session_id", null: false
+    t.bigint "water_bioresource_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fishing_session_id"], name: "index_catches_on_fishing_session_id"
+    t.index ["water_bioresource_id"], name: "index_catches_on_water_bioresource_id"
   end
 
   create_table "fishing_places", force: :cascade do |t|
@@ -123,6 +136,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_091526) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "catch_rates", "water_bioresources"
+  add_foreign_key "catches", "fishing_sessions"
+  add_foreign_key "catches", "water_bioresources"
   add_foreign_key "fishing_places", "users"
   add_foreign_key "fishing_sessions", "fishing_places"
   add_foreign_key "fishing_sessions", "users"
