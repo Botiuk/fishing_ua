@@ -38,8 +38,8 @@ RSpec.describe "FishingSessions", type: :request do
       expect(response).to be_successful
     end
 
-    it "cannot GET new if previous session did not end" do
-      fishing_session = create(:fishing_session, start_at: DateTime.now, end_at: nil)
+    it "cannot GET new if his previous session did not end" do
+      fishing_session = create(:fishing_session, user_id: @user.id, start_at: DateTime.now, end_at: nil)
       get new_fishing_session_path
       expect(response).to redirect_to(fishing_sessions_path)
       expect(flash[:alert]).to include I18n.t('alert.new.fishing_session')

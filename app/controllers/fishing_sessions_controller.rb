@@ -10,7 +10,7 @@ class FishingSessionsController < ApplicationController
     end
 
     def new
-        last_fishing_session = FishingSession.where(end_at: nil).last
+        last_fishing_session = FishingSession.where(user_id: current_user.id, end_at: nil).last
         if last_fishing_session.blank?
             @fishing_session = FishingSession.new
         else
