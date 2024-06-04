@@ -1,0 +1,23 @@
+<tr id="<%= dom_id catch %>" class="text-center">
+    <td style="width: 15%;"><%= I18n.l(catch.catch_time, format: :short) %></td>
+    <td style="width: 20%;"><%= catch.water_bioresource.name %></td>
+    <td style="width: 15%;"><%= catch.catch_length %></td>
+    <td style="width: 15%;"><%= catch.catch_weight %></td>
+    <td style="width: 15%;">
+        <% if catch.catch_result == "set_free" %>
+            <div class="text-success">
+        <% else %>
+            <div class="text-danger">
+        <% end %>
+                <%= Catch.human_enum_name(:catch_result, catch.catch_result) %>
+            </div>
+    </td>
+    <td style="width: 10%;">
+        <%= link_to t('button.show'), catch_path(catch), class: "btn btn-info btn-sm" %>
+    </td>
+    <td style="width: 10%;">
+        <% if catch.fishing_session.end_at.blank? %>
+            <%= link_to t('button.edit'), edit_catch_path(catch), class: "btn btn-warning btn-sm" %>
+        <% end %>
+    </td>
+</tr>
