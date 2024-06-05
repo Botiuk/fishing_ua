@@ -17,6 +17,11 @@ RSpec.describe WaterBioresource, type: :model do
       expect(water_bioresource).to_not be_valid
     end
 
+    it "is not valid without a resource_type" do
+      water_bioresource = build(:water_bioresource, resource_type: nil)
+      expect(water_bioresource).to_not be_valid
+    end
+
     it "is not valid with not unique name" do
       water_bioresource_one = create(:water_bioresource)
       water_bioresource_two = build(:water_bioresource, name: water_bioresource_one.name)

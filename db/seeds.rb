@@ -45,7 +45,8 @@ when "development"
     20.times do
         WaterBioresource.create(
             name: Faker::Creature::Animal.unique.name.capitalize,
-            latin_name: Faker::Artist.unique.name.capitalize
+            latin_name: Faker::Artist.unique.name.capitalize,
+            resource_type: WaterBioresource.resource_types.keys.sample
         )
     end
 

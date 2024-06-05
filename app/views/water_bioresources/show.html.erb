@@ -7,12 +7,12 @@
     <% else %>
         <div class="col-3 text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
     <% end %>
-    
+
     <div class="col-md-6">
         <% if @catch_rates.present? %>
             <h5 class="mb-0"><%= t('.catch_rates') %></h5>
             <% @catch_rates.each_pair do |key_where_catch, value_length| %>
-                <b><%= CatchRate.human_enum_name(:where_catch, key_where_catch) %>: </b> 
+                <b><%= CatchRate.human_enum_name(:where_catch, key_where_catch) %>: </b>
                 <% if value_length == 0 %>
                     -
                 <% else %>
@@ -21,10 +21,13 @@
                 <br>
             <% end %>
         <% end %>
-        <% if @rate_penalty.present? %>
-            <h5><%= t('.rate_penalty') %> <%= @rate_penalty %> <%= t('.money') %></h5>            
+        <% if can? :update, WaterBioresource %>
+            <b class="mb-0"><%= t('.resource_type') %></b> <%= WaterBioresource.human_enum_name(:resource_type, @water_bioresource.resource_type) %>
         <% end %>
-    </div>    
+        <% if @rate_penalty.present? %>
+            <h5><%= t('.rate_penalty') %> <%= @rate_penalty %> <%= t('.money') %></h5>
+        <% end %>        
+    </div>
 </div>
 <div class="row mx-1">
     <div class="col mt-1">

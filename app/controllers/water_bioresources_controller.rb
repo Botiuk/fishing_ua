@@ -47,6 +47,6 @@ class WaterBioresourcesController < ApplicationController
     end
 
     def water_bioresource_params
-        params.require(:water_bioresource).permit(:name, :latin_name, :bioresource_photo, :bioresource_description)
+        params.require(:water_bioresource).permit(:name, :latin_name, :resource_type, :bioresource_photo, :bioresource_description)
     end
 end

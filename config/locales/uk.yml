@@ -27,6 +27,11 @@ uk:
       water_bioresource:
         name: "'Назва'"
         latin_name: "'Латинська назва'"
+        resource_type: "Поле 'Тип ресурсу'"
+        resource_types:
+          small_fish: "Дрібна, масова риба"
+          other_fish: "Інший вид риб"
+          invertebrate: "Водний безхребетний"
       rate_penalty:
         water_bioresource: "Поле 'Водний біоресурс'"
         money: "Поле 'Штраф, грн'"
@@ -62,8 +67,8 @@ uk:
         water_bioresource: "Поле 'Водний біоресурс'"
         catch_result: "Поле 'Куди улов?'"
         catch_results:
-          set_free: "В воду"
-          pick_up: "В садок"
+          set_free: "в воду"
+          pick_up: "в садок"
 
   notice:
     create:
@@ -74,6 +79,8 @@ uk:
       equipment: "Снасть створено"
       bait: "Приманку створено"
       fishing_session: "Риболовлю розпочато"
+      catch_pick: "Оце-так улов! Вітаю! Кидай до садка!"
+      catch_free: "Улов збережено, а тепер відпускай у воду!"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
@@ -82,7 +89,8 @@ uk:
       equipment: "Снасть оновлено"
       bait: "Приманку оновлено"
       fishing_session: "Риболовлю оновлено"
-      fishing_session_close: "Риболовлю завершено"
+      fishing_session_close: "Риболовлю завершено. Поприбирай за собою!"
+      catch: "Улов оновлено"
     destroy:
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
@@ -94,6 +102,13 @@ uk:
     fishing_session_close: "Риболовлю завершено"
     new:
       fishing_session: "Перед тим як почати нову риболовлю, завершіть попередню!"
+      session_catch: "Немає активної риболовлі. Перед тим як додати улов, розпочніть її!"
+    create:
+      catch:
+        forbiden: "Вилов такого водного ресурсу заборонено! Випускай!"
+        length_rate: "Ой-йо-йой! Довжина менша за норму "
+        length: " Бігом випускай цю малечу назад в воду, хай вертається з батьками або коли сама підросте."
+        day_weight: "Добовий улов більше 3 кілограм плюс трофей. В садок класти не можна. Випускай!"
 
   button:
     authorization:
@@ -119,6 +134,7 @@ uk:
     all:
       water_bioresources: "Всі водні біоресурси"
       fishing_sessions: "Всі риболовлі"
+      catches: "Всі улови"
 
   navbar:
     news: "Новини"
@@ -150,6 +166,8 @@ uk:
     form:
       name: "Назва:"
       latin_name: "Латинська назва:"
+      resource_type: "Тип ресурсу:"
+      prompt: "-- виберіть зі списку --"
       bioresource_photo: "Фото:"
       bioresource_description: "Опис:"
     edit:
@@ -161,6 +179,7 @@ uk:
       santimetr: " см"
       rate_penalty: "Штраф "
       money: " грн"
+      resource_type: "Тип ресурсу:"
 
   rate_penalties:
     index:
@@ -256,9 +275,49 @@ uk:
     edit:
       title: "Редагувати риболовлю"
     show:
-      title: "Детальніше про рибалку"
+      title: "Детальніше про риболовлю"
       start_at: "Почато:"
       end_at: "Завершено:"
       fishing_place: "Локація:"
       end_at_empty: "активна"
-      catches: "Зловлено"
+      catches_empty: "Щоб клювало, треба намочити сак!"
+      catch_time: "Коли зловлено"
+      water_bioresource: "Що зловлено"
+      catch_length: "Довжина, см"
+      catch_weight: "Вага, кг"
+      catch_result: "Куди кинуто"
+
+  catches:
+    index:
+      title: "Мої улови"
+      catches_empty: "Поки не має улову"
+      catch_time: "Коли зловлено"
+      water_bioresource: "Що зловлено"
+      catch_length: "Довжина, см"
+      catch_weight: "Вага, кг"
+      catch_result: "Куди кинуто"
+    new:
+      title: "Новий улов"      
+    form:
+      catch_time: "Коли зловлено:"
+      catch_length: "Довжина улову, см:"
+      catch_weight: "Вага улову, кг:"
+      water_bioresource: "Водний біоресурс:"
+      catch_photos: "Фотографії улову:"
+      prompt: "-- виберіть зі списку --"
+      catch_result: 
+        label: "Куди улов?"
+        set_free: "в воду"
+        pick_up: "в садок"
+    edit:
+      title: "Редагувати улов"
+    show: 
+      title: "Детальніше про улов"
+      catch_time: "Коли зловлено:"
+      fishing_session: "Риболовля:"
+      end_at_empty: "..."
+      fishing_place: "Де зловлено:"
+      water_bioresource: "Що зловлено:"
+      catch_length: "Довжина, см:"
+      catch_weight: "Вага, кг:"
+      catch_result: "Куди кинуто:"
