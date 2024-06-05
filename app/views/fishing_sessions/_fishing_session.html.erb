@@ -11,7 +11,7 @@
     <td style="width: 15%;">
         <%= link_to t('button.show'), fishing_session_path(fishing_session), class: "btn btn-info btn-sm" %>
     </td>
-    <td style="width: 25%;">
+    <td style="width: 15%;">
         <% if fishing_session.end_at.blank? %>
             <%= link_to t('button.edit'), edit_fishing_session_path(fishing_session), class: "btn btn-warning btn-sm" %>
         <% end %>

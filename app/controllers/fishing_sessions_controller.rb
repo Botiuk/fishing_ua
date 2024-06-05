@@ -29,6 +29,7 @@ class FishingSessionsController < ApplicationController
     end
 
     def show
+        @session_catches = Catch.where(fishing_session_id: @fishing_session.id).order(:catch_time, :id).reverse_order
     end
 
     def edit

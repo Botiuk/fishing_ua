@@ -5,7 +5,7 @@
 <% if @fishing_session.end_at.blank? %>
 <div class="row justify-content-between mb-2">
     <div class="col">
-        <%= link_to t('button.add.catch'), fishing_session_path(@fishing_session), class: "btn btn-success" %>
+        <%= link_to t('button.add.catch'), new_catch_path(fishing_session_id: @fishing_session.id), class: "btn btn-success" %>
     </div>
 
     <div class="col text-end">
@@ -29,12 +29,24 @@
 </div>
 
 <div class="my-2">
-<h5><%= t('.catches') %></h5>
     <div class="table-responsive">
-        <table class="table align-middle table-secondary table-striped">
+        <table class="table align-middle table-primary table-striped">
             <tr class="text-center">
-                <th></th>
+                <th style="width: 15%;"><%= t('.catch_time') %></th>
+                <th style="width: 20%;"><%= t('.water_bioresource') %></th>
+                <th style="width: 15%;"><%= t('.catch_length') %></th>
+                <th style="width: 15%;"><%= t('.catch_weight') %></th>
+                <th style="width: 15%;"><%= t('.catch_result') %></th>
+                <th style="width: 10%;"></th>
+                <th style="width: 10%;"></th>
             </tr>
+            <% if @session_catches.present? %>
+                <% @session_catches.each do |session_catch| %>
+                    <%= render 'catches/catch', catch: session_catch %>
+                <% end %>
+            <% else %>
+                <tr class="text-center"><td colspan="7"><%= t('.catches_empty') %></td></tr>
+            <% end %>
         </table>
     </div>
 </div>
