@@ -50,6 +50,15 @@ when "development"
         )
     end
 
+    water_bioresource_ids = WaterBioresource.where(resource_type: [ "small_fish", "invertebrate"]).pluck(:id)
+    water_bioresource_ids.each do |water_bioresource_id|
+        DayRate.create(
+            water_bioresource_id: water_bioresource_id,
+            catch_amount: Faker::Number.between(from: 1, to: 30),
+            amount_type: DayRate.amount_types.keys.sample
+        )
+    end
+
     ActiveStorage::Blob.create!(
         key: 'w7zijcg8xc4kit0d0y051nxdygen',
         filename: 'fish_for_seeds.jpg',
@@ -67,9 +76,9 @@ when "development"
             blob_id: 1
         )
         ActionText::RichText.create!(
-            record_type: 'WaterBioresource', 
-            record_id: water_bioresource_id, 
-            name: 'bioresource_description',            
+            record_type: 'WaterBioresource',
+            record_id: water_bioresource_id,
+            name: 'bioresource_description',
             body: Faker::Lorem.paragraph_by_chars
         )
     end
@@ -104,7 +113,7 @@ when "development"
                 description: Faker::Lorem.paragraph,
                 where_catch: CatchRate.where_catches.keys.sample,
                 user_id: user_id
-            )            
+            )
         end
         20.times do
             Tool.create(
@@ -112,7 +121,7 @@ when "development"
                 description: Faker::Quote.yoda,
                 tool_type: Tool.tool_types.keys.sample,
                 user_id: user_id
-            )            
+            )
         end
         Faker::UniqueGenerator.clear
 
@@ -142,7 +151,7 @@ when "development"
 
         user_catch_ids = Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).pluck(:id)
         user_catch_ids.delete_at(0)
-        user_catch_ids.each do |user_catch_id|            
+        user_catch_ids.each do |user_catch_id|
             ActiveStorage::Attachment.create!(
                 record_type: 'Catch',
                 record_id: user_catch_id,

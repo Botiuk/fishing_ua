@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_05_073344) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_05_085428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_073344) do
     t.datetime "updated_at", null: false
     t.index ["fishing_session_id"], name: "index_catches_on_fishing_session_id"
     t.index ["water_bioresource_id"], name: "index_catches_on_water_bioresource_id"
+  end
+
+  create_table "day_rates", force: :cascade do |t|
+    t.decimal "catch_amount", precision: 3, scale: 1, default: "0.0"
+    t.integer "amount_type"
+    t.bigint "water_bioresource_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["water_bioresource_id"], name: "index_day_rates_on_water_bioresource_id"
   end
 
   create_table "fishing_places", force: :cascade do |t|
@@ -139,6 +148,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_073344) do
   add_foreign_key "catch_rates", "water_bioresources"
   add_foreign_key "catches", "fishing_sessions"
   add_foreign_key "catches", "water_bioresources"
+  add_foreign_key "day_rates", "water_bioresources"
   add_foreign_key "fishing_places", "users"
   add_foreign_key "fishing_sessions", "fishing_places"
   add_foreign_key "fishing_sessions", "users"

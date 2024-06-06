@@ -69,6 +69,13 @@ uk:
         catch_results:
           set_free: "в воду"
           pick_up: "в садок"
+      day_rate:
+        water_bioresource: "Поле 'Водний біоресурс'"
+        catch_amount: "Поле 'Добова норма'"
+        amount_type: "Поле 'Одиниці виміру'"
+        amount_types:
+          weight: "кг"
+          quantity: "шт."
 
   notice:
     create:
