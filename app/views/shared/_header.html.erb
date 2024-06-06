@@ -17,10 +17,15 @@
                     <%= link_to water_bioresources_path, class: "nav-link" do %>
                         <i class="bi bi-water"></i> <%= t('navbar.water_bioresources') %>
                     <% end %>
-                </li>
+                </li>                
                 <li class="nav-item">
                     <%= link_to catch_rates_path, class: "nav-link" do %>
-                        <i class="bi bi-exclamation-triangle"></i> <%= t('navbar.catch_rates') %>
+                        <i class="bi bi-calendar-day"></i> <%= t('navbar.catch_rates') %>
+                    <% end %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to day_rates_path, class: "nav-link" do %>
+                        <i class="bi bi-exclamation-triangle"></i> <%= t('navbar.day_rates') %>
                     <% end %>
                 </li>
                 <li class="nav-item">

@@ -45,6 +45,11 @@
             <% end %>
         </li>
         <li class="nav-item">
+            <%= link_to day_rates_path, class: "nav-link px-sm-0 px-2" do %>
+                <i class="bi bi-calendar-day"></i> <span class="ms-1 d-none d-sm-inline"><%= t('navbar.day_rates') %></span>
+            <% end %>
+        </li>
+        <li class="nav-item">
             <%= link_to rate_penalties_path, class: "nav-link px-sm-0 px-2" do %>
                 <i class="bi bi-coin"></i> <span class="ms-1 d-none d-sm-inline"><%= t('navbar.rate_penalties') %></span>
             <% end %>

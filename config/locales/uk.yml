@@ -21,6 +21,7 @@ uk:
     messages:
       first_letter: "має починатися з великої літери"
       taken: "має бути унікальна. Така вже використовується"
+    day_rate_validations: "Для одиниці виміру 'шт.', добова норма має бути цілим числом (нуль після коми)"
 
   activerecord:
     attributes:
@@ -88,6 +89,7 @@ uk:
       fishing_session: "Риболовлю розпочато"
       catch_pick: "Оце-так улов! Вітаю! Кидай до садка!"
       catch_free: "Улов збережено, а тепер відпускай у воду!"
+      day_rate: "Добову норму створено"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
@@ -98,11 +100,13 @@ uk:
       fishing_session: "Риболовлю оновлено"
       fishing_session_close: "Риболовлю завершено. Поприбирай за собою!"
       catch: "Улов оновлено"
+      day_rate: "Добову норму оновлено"
     destroy:
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
       equipment: "Снасть видалено"
       bait: "Приманку видалено"
+      day_rate: "Добову норму видалено"
 
   alert:
     access_denied: "Ви не маєте прав для доступу до цієї сторінки"
@@ -130,6 +134,7 @@ uk:
       bait: "Додати приманку"
       fishing_session: "Почати риболовлю"
       catch: "Додати улов"
+      day_rate: "Додати добову норму"
     close_fishing_session: "Завершити риболовлю"
     close_fishing_session_confirm: "Точно завершити риболовлю?"
     edit: "Редагувати"
@@ -147,6 +152,7 @@ uk:
     news: "Новини"
     water_bioresources: "Водні біоресурси"
     catch_rates: "Норми вилову"
+    day_rates: "Добові норми"
     rate_penalties: "Штрафи"
 
   sidebar:
@@ -187,7 +193,7 @@ uk:
       rate_penalty: "Штраф "
       money: " грн"
       resource_type: "Тип ресурсу:"
-
+      
   rate_penalties:
     index:
       title: "Штрафи"
@@ -304,7 +310,7 @@ uk:
       catch_weight: "Вага, кг"
       catch_result: "Куди кинуто"
     new:
-      title: "Новий улов"      
+      title: "Новий улов"
     form:
       catch_time: "Коли зловлено:"
       catch_length: "Довжина улову, см:"
@@ -312,13 +318,13 @@ uk:
       water_bioresource: "Водний біоресурс:"
       catch_photos: "Фотографії улову:"
       prompt: "-- виберіть зі списку --"
-      catch_result: 
+      catch_result:
         label: "Куди улов?"
         set_free: "в воду"
         pick_up: "в садок"
     edit:
       title: "Редагувати улов"
-    show: 
+    show:
       title: "Детальніше про улов"
       catch_time: "Коли зловлено:"
       fishing_session: "Риболовля:"
@@ -328,3 +334,20 @@ uk:
       catch_length: "Довжина, см:"
       catch_weight: "Вага, кг:"
       catch_result: "Куди кинуто:"
+
+  day_rates:
+    index:
+      title: "Добові норми вилову"
+      water_bioresource: "Водний біоресурс *"
+      catch_amount: "Добова норма"
+      day_rates_empty: "Не має норм"
+      subtitle: "* Для інших видів риб, дозволених до вилову, добова норма 3 кг та трофей. Трофей - особина, будь-якої маси у мінімально дозволених для добування (вилову) розмірах"
+    new:
+      title: "Нова добова норма вилову"
+    form:
+      water_bioresource: "Водний біоресурс:"
+      catch_amount: "Добова норма:"
+      amount_type: "Одиниця виміру:"
+      prompt: "-- виберіть зі списку --"
+    edit:
+      title: "Редагувати добову норму вилову"

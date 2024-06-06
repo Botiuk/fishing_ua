@@ -9,6 +9,7 @@ class Ability
     can :read, WaterBioresource
     can :read, CatchRate
     can :read, RatePenalty
+    can :read, DayRate
 
     if user.present?
       can [:read, :create, :update], FishingPlace, user_id: user.id
@@ -26,6 +27,7 @@ class Ability
         can [:create, :update], WaterBioresource        
         can :manage, CatchRate
         can :manage, RatePenalty
+        can :manage, DayRate
         # can :manage, News
       end
     end
