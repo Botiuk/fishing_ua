@@ -110,7 +110,7 @@ RSpec.describe "DayRates", type: :request do
 
     it "can POST create" do
       water_bioresource = create(:water_bioresource)
-      post day_rates_path, params: { day_rate: attributes_for(:day_rate, water_bioresource_id: water_bioresource.id, amount_type: "weight") }
+      post day_rates_path, params: { day_rate: attributes_for(:day_rate, water_bioresource_id: water_bioresource.id) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.day_rate'))
@@ -123,7 +123,7 @@ RSpec.describe "DayRates", type: :request do
     end
 
     it "can PUT update" do
-      day_rate = create(:day_rate, catch_amount: 12, amount_type: "weight")
+      day_rate = create(:day_rate, catch_amount: 12)
       put day_rate_path(day_rate), params: { day_rate: {catch_amount: 21.1} }
       expect(day_rate.reload.catch_amount).to eq(21.1)
       expect(response).to redirect_to(day_rates_url)

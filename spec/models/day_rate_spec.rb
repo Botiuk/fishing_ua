@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DayRate, type: :model do
   it "is valid with valid attributes" do
-    day_rate = build(:day_rate, amount_type: "weight")
+    day_rate = build(:day_rate)
     expect(day_rate).to be_valid
   end
 
@@ -23,8 +23,8 @@ RSpec.describe DayRate, type: :model do
 
   it "is not valid with same water_bioresource" do
     water_bioresource = create(:water_bioresource)
-    day_rate_one = create(:day_rate, water_bioresource: water_bioresource, amount_type: "weight")
-    day_rate_two = build(:day_rate, water_bioresource: water_bioresource, amount_type: "weight")
+    day_rate_one = create(:day_rate, water_bioresource: water_bioresource)
+    day_rate_two = build(:day_rate, water_bioresource: water_bioresource)
     expect(day_rate_two).to_not be_valid
   end
 
