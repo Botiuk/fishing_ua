@@ -11,7 +11,7 @@
 
                 <div class="col-md-4">
                     <%= form.label :where_catch, t('.where_catch'), style: "display: block" %>
-                    <%= form.select :where_catch, CatchRate.where_catches.keys.map{ |key| [CatchRate.human_enum_name(:where_catch, key), key] }, {:prompt => t('.prompt'), :selected => @catch_rate.where_catch}, {:class => "form-select"} %>
+                    <%= form.select :where_catch, CatchRate.where_catches.keys.map{ |key| [CatchRate.human_enum_name(:where_catch, key), key] }, {:prompt => t('.prompt'), :selected => form.object.where_catch}, {:class => "form-select"} %>
                 </div>
             <% end %>
 

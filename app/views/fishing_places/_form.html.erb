@@ -10,7 +10,7 @@
 
             <div class="col-md-4">
                 <%= form.label :where_catch, t('.where_catch'), style: "display: block" %>
-                <%= form.select :where_catch, FishingPlace.where_catches.keys.map{ |key| [FishingPlace.human_enum_name(:where_catch, key), key] }, {:prompt => t('.prompt'), :selected => @fishing_place.where_catch}, {:class => "form-select"} %>
+                <%= form.select :where_catch, FishingPlace.where_catches.keys.map{ |key| [FishingPlace.human_enum_name(:where_catch, key), key] }, {:prompt => t('.prompt'), :selected => form.object.where_catch}, {:class => "form-select"} %>
             </div>
 
             <div class="col-md-12">

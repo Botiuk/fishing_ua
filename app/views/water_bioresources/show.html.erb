@@ -22,11 +22,24 @@
             <% end %>
         <% end %>
         <% if can? :update, WaterBioresource %>
-            <b class="mb-0"><%= t('.resource_type') %></b> <%= WaterBioresource.human_enum_name(:resource_type, @water_bioresource.resource_type) %>
+            <b class="mb-0"><%= t('.resource_type') %></b> <%= WaterBioresource.human_enum_name(:resource_type, @water_bioresource.resource_type) %><br>
+        <% end %>
+        <% if @water_bioresource.resource_type == "other_fish" %>
+             <b><%= t('.day_rate') %></b><%= t('.day_rate_other') %>
+        <% else %>
+            <% if @water_bioresource.day_rate.present? %>
+                <b><%= t('.day_rate') %></b>
+                <% if @water_bioresource.day_rate.catch_amount.to_i == @water_bioresource.day_rate.catch_amount %>
+                    <%=  @water_bioresource.day_rate.catch_amount.to_i %>
+                <% else %>
+                    <%= @water_bioresource.day_rate.catch_amount %>
+                <% end %>
+                <%= DayRate.human_enum_name(:amount_type, @water_bioresource.day_rate.amount_type) %>
+            <% end %>
         <% end %>
         <% if @rate_penalty.present? %>
             <h5><%= t('.rate_penalty') %> <%= @rate_penalty %> <%= t('.money') %></h5>
-        <% end %>        
+        <% end %>
     </div>
 </div>
 <div class="row mx-1">

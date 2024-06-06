@@ -10,7 +10,7 @@
 
             <div class="col-md-4">
                 <%= form.label :resource_type, t('.resource_type'), style: "display: block" %>
-                <%= form.select :resource_type, WaterBioresource.resource_types.keys.map{ |key| [WaterBioresource.human_enum_name(:resource_type, key), key] }, {:prompt => t('.prompt'), :selected => @water_bioresource.resource_type}, {:class => "form-select"} %>
+                <%= form.select :resource_type, WaterBioresource.resource_types.keys.map{ |key| [WaterBioresource.human_enum_name(:resource_type, key), key] }, {:prompt => t('.prompt'), :selected => form.object.resource_type}, {:class => "form-select"} %>
             </div>
 
             <div class="col-md-7">

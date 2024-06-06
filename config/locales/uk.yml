@@ -193,7 +193,9 @@ uk:
       rate_penalty: "Штраф "
       money: " грн"
       resource_type: "Тип ресурсу:"
-      
+      day_rate: "Добова норма: "
+      day_rate_other: "3 кг та трофей"
+
   rate_penalties:
     index:
       title: "Штрафи"
