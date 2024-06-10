@@ -8,4 +8,8 @@ class CatchRate < ApplicationRecord
   enum :where_catch, { dnipro: 0, other: 1, black: 2, azov: 3 }, prefix: true
 
   scope :ordered, -> { joins(:water_bioresource).order('water_bioresources.name') }
+
+  def self.rate_length(water_bioresource_id, where_catch)
+    CatchRate.where(water_bioresource_id: water_bioresource_id, where_catch: where_catch).pluck(:length).join.to_f
+  end
 end

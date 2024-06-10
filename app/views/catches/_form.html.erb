@@ -1,0 +1,92 @@
+<%= form_with(model: catch, local: true) do |form| %>
+    <%= render 'shared/form_errors_messages', object: form.object %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <%= form.label :water_bioresource_id, t('.water_bioresource'), style: "display: block" %>
+                <%= select(:catch, :water_bioresource_id, options_for_select(@water_bioresources, :selected => form.object.water_bioresource_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
+            </div>
+
+            <div class="col-12">
+              <% if @catch.catch_photos.attached? %>
+                  <% @catch.catch_photos.each do |catch_photo| %>
+                    <%= form.hidden_field :catch_photos, multiple: true, value: catch_photo.signed_id %>
+                    <%= cl_image_tag(catch_photo.key, width: 100, crop: :scale) %>
+                  <% end %>
+              <% end %>
+            </div>
+
+          <div class="col-12">
+            <%= form.label :catch_photos, t('.catch_photos'), style: "display: block" %>
+            <%= form.file_field :catch_photos, direct_upload: true, multiple: true, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <%= form.label :catch_time, t('.catch_time'), style: "display: block" %>
+                <%= form.datetime_local_field :catch_time, value: form.object.catch_time || DateTime.now, max: form.object.catch_time || DateTime.now, class: "form-control" %>
+            </div>
+
+            <% unless @catch_edit.present? %>
+                <div class="col-md-4">
+                    <%= form.label :catch_length, t('.catch_length'), style: "display: block" %>
+                    <%= form.number_field :catch_length, value: form.object.catch_length || 0, min: 0.0, max: 999.9, step: 0.1, class: "form-control" %>
+                </div>
+
+                <div class="col-md-4">
+                    <%= form.label :catch_weight, t('.catch_weight'), style: "display: block" %>
+                    <%= form.number_field :catch_weight, value: form.object.catch_weight || 0, min: 0.000, max: 99.999, step: 0.001, class: "form-control" %>
+                </div>
+
+            <% else %>
+
+                <div class="col-md-4">
+                    <%= form.label :catch_length, t('.catch_length'), style: "display: block" %>
+                    <%= form.number_field :catch_length, value: form.object.catch_length, min: form.object.catch_length, max: 999.9, step: 0.1, class: "form-control" %>
+                </div>
+
+                <div class="col-md-4">
+                    <%= form.label :catch_weight, t('.catch_weight'), style: "display: block" %>
+                    <%= form.number_field :catch_weight, value: form.object.catch_weight, min: 0.000, max: form.object.catch_weight, step: 0.001, class: "form-control" %>
+                </div>
+
+            <% end %>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <%= form.label :catch_result, t('.catch_result.label') %><br>
+                <div class="form-check form-check-inline">
+                    <%= form.radio_button :catch_result, "set_free", class: "form-check-input" %>
+                    <%= form.label :catch_result_set_free, t('.catch_result.set_free'), class: "form-check-label" %>
+                </div>
+                <% unless @catch_edit.present? %>
+                    <div class="form-check form-check-inline">
+                        <%= form.radio_button :catch_result, "pick_up", class: "form-check-input" %>
+                        <%= form.label :catch_result_pick_up, t('.catch_result.pick_up'), class: "form-check-label" %>
+                    </div>
+                <% else %>
+                    <div class="form-check form-check-inline">
+                        <%= form.radio_button :catch_result, "pick_up", class: "form-check-input", disabled: true %>
+                        <%= form.label :catch_result_pick_up, t('.catch_result.pick_up'), class: "form-check-label" %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+
+        <div>
+            <%= form.hidden_field :fishing_session_id %>
+        </div>
+
+        <div class="row mt-2">
+            <div>
+                <%= form.button nil, class: "btn btn-success" do %>
+                    <%= t('button.submit') %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+<% end %>

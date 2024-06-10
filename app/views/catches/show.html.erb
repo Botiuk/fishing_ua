@@ -5,7 +5,7 @@
 <div class="row">    
     <div class="col-12 fs-5">
         <b><%= t('.catch_time') %></b> <%= I18n.l(@catch.catch_time) %> <br>
-        <b><%= t('fishing_session') %></b> <%= I18n.l(@catch.fishing_session.start_at) %> - 
+        <b><%= t('.fishing_session') %></b> <%= I18n.l(@catch.fishing_session.start_at) %> - 
         <% if @catch.fishing_session.end_at.present? %>
             <%= I18n.l(@catch.fishing_session.end_at) %><br>
         <% else %>
