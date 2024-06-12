@@ -52,7 +52,7 @@
 </div>
 
 <div class="row mt-2">
-    <div class="col md-6">
+    <div class="col">
         <%= link_to t('button.all.fishing_sessions'), fishing_sessions_path, class: "btn btn-primary" %>
         <% if @fishing_session.end_at.blank? %>
             <%= link_to t('button.edit'), edit_fishing_session_path(@fishing_session), class: "btn btn-warning" %>

@@ -48,16 +48,7 @@ when "development"
             latin_name: Faker::Artist.unique.name.capitalize,
             resource_type: WaterBioresource.resource_types.keys.sample
         )
-    end
-
-    water_bioresource_ids = WaterBioresource.where(resource_type: [ "small_fish", "invertebrate"]).pluck(:id)
-    water_bioresource_ids.each do |water_bioresource_id|
-        DayRate.create(
-            water_bioresource_id: water_bioresource_id,
-            catch_amount: Faker::Number.between(from: 1, to: 30),
-            amount_type: DayRate.amount_types.keys.sample
-        )
-    end
+    end   
 
     ActiveStorage::Blob.create!(
         key: 'w7zijcg8xc4kit0d0y051nxdygen',
@@ -102,6 +93,17 @@ when "development"
             water_bioresource_id: water_bioresource_id,
             where_catch: 0,
             length: 0.0
+        )
+    end
+
+    water_bioresource_resource_type_ids = WaterBioresource.where(resource_type: [ "small_fish", "invertebrate"]).pluck(:id)
+    water_bioresource_with_catch_rate_ids = CatchRate.pluck(:water_bioresource_id).uniq
+    water_bioresource_ids = water_bioresource_resource_type_ids & water_bioresource_with_catch_rate_ids
+    water_bioresource_ids.each do |water_bioresource_id|
+        DayRate.create(
+            water_bioresource_id: water_bioresource_id,
+            catch_amount: Faker::Number.between(from: 1, to: 30),
+            amount_type: DayRate.amount_types.keys.sample
         )
     end
 

@@ -19,7 +19,9 @@ class CatchesController < ApplicationController
             end
         else
             active_session = FishingSession.where(user_id: current_user.id, end_at: nil).last
-            if active_session.present?
+            if active_session.present? && params[:water_bioresource_id].present?
+                @catch = Catch.new(fishing_session_id: active_session.id, water_bioresource_id: params[:water_bioresource_id])
+            elsif active_session.present?
                 @catch = Catch.new(fishing_session_id: active_session.id)
             else
                 redirect_to new_fishing_session_url, alert: t('alert.new.session_catch')
