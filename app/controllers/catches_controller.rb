@@ -30,14 +30,14 @@ class CatchesController < ApplicationController
     def create
         @catch = Catch.new(catch_params)
         if @catch.catch_result == "pick_up" && @catch.water_bioresource.present?
-            @rate_length = CatchRate.rate_length(@catch.water_bioresource.id, @catch.fishing_place.where_catch)
-            if @rate_length.present?
-                if @catch.catch_length >= @rate_length
+            rate_length = CatchRate.rate_length(@catch.water_bioresource.id, @catch.fishing_place.where_catch)
+            if rate_length.present?
+                if @catch.catch_length >= rate_length.length                  
                     catch_day_rate = DayRate.where(water_bioresource_id: @catch.water_bioresource.id).first
                     if catch_day_rate.present?
                         if catch_day_rate.amount_type == "weight"
                             all_day_one_resource_weight = Catch.all_day_catch_one_resource_weight(@catch.fishing_session.id, @catch.water_bioresource.id)
-                            if all_day_one_resource_weight + @catch.catch_weight <= catch_day_rate.catch_amount || catch_day_rate.catch_amount == 0
+                            if all_day_one_resource_weight + @catch.catch_weight <= catch_day_rate.catch_amount
                                 if @catch.save
                                     redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
                                 else
@@ -61,10 +61,11 @@ class CatchesController < ApplicationController
                             end
                         end
                     else
-                        all_day_weight = Catch.all_day_catch_weight(@catch.fishing_session.id)
-                        if all_day_weight.present?
-                            maximum_weight = Catch.maximum_day_catch(@catch.fishing_session.id)
-                            if (@catch.catch_weight > maximum_weight && all_day_weight <= 3) || (@catch.catch_weight.to_s.to_f <= maximum_weight && (all_day_weight - maximum_weight + @catch.catch_weight) <= 3)
+                        day_rate_water_bioresource_ids = DayRate.pluck(:water_bioresource_id)
+                        all_day_weight = Catch.all_day_catch_weight(@catch.fishing_session.id, day_rate_water_bioresource_ids)
+                        if all_day_weight != 0
+                            maximum_weight = Catch.maximum_day_catch(@catch.fishing_session.id, day_rate_water_bioresource_ids)
+                            if (@catch.catch_weight >= maximum_weight && all_day_weight <= 3) || (@catch.catch_weight <= maximum_weight && (all_day_weight - maximum_weight + @catch.catch_weight) <= 3)
                                 if @catch.save
                                     redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
                                 else

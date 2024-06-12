@@ -10,6 +10,6 @@ class CatchRate < ApplicationRecord
   scope :ordered, -> { joins(:water_bioresource).order('water_bioresources.name') }
 
   def self.rate_length(water_bioresource_id, where_catch)
-    CatchRate.where(water_bioresource_id: water_bioresource_id, where_catch: where_catch).pluck(:length).join.to_f
+    CatchRate.where(water_bioresource_id: water_bioresource_id, where_catch: where_catch).first
   end
 end

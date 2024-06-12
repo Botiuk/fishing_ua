@@ -12,13 +12,11 @@ class Catch < ApplicationRecord
 
   private
 
-  def self.all_day_catch_weight(fishing_session_id)
-    day_rate_water_bioresource_ids = DayRate.pluck(:water_bioresource_id)
+  def self.all_day_catch_weight(fishing_session_id, day_rate_water_bioresource_ids)    
     Catch.where(fishing_session_id: fishing_session_id, catch_result: "pick_up", catch_time: DateTime.now.beginning_of_day..DateTime.now.end_of_day).where.not(water_bioresource_id: day_rate_water_bioresource_ids).sum(:catch_weight).to_s.to_f
   end
 
-  def self.maximum_day_catch(fishing_session_id)
-    day_rate_water_bioresource_ids = DayRate.pluck(:water_bioresource_id)
+  def self.maximum_day_catch(fishing_session_id, day_rate_water_bioresource_ids)
     Catch.where(fishing_session_id: fishing_session_id, catch_result: "pick_up", catch_time: DateTime.now.beginning_of_day..DateTime.now.end_of_day).where.not(water_bioresource_id: day_rate_water_bioresource_ids).maximum(:catch_weight).to_s.to_f
   end
 
