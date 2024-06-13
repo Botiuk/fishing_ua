@@ -3,6 +3,7 @@ class Catch < ApplicationRecord
   belongs_to :water_bioresource
   has_one :fishing_place, through: :fishing_session
   has_one :user, through: :fishing_session
+  has_many :tool_catches
 
   has_many_attached :catch_photos  
 

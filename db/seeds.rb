@@ -153,6 +153,7 @@ when "development"
 
         user_catch_ids = Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).pluck(:id)
         user_catch_ids.delete_at(0)
+        user_tool_ids = Tool.where(user_id: user_id).pluck(:id)
         user_catch_ids.each do |user_catch_id|
             ActiveStorage::Attachment.create!(
                 record_type: 'Catch',
@@ -160,6 +161,14 @@ when "development"
                 name: 'catch_photos',
                 blob_id: 1
             )
+            rand(1..5).times do
+                selected = ToolCatch.where(catch_id: user_catch_id).pluck(:tool_id)
+                selected = [] unless selected.present?
+                ToolCatch.create(
+                    tool_id: (user_tool_ids - selected).sample,
+                    catch_id: user_catch_id
+                )                
+            end
         end
     end
 

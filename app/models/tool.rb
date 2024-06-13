@@ -1,5 +1,6 @@
 class Tool < ApplicationRecord
   belongs_to :user
+  has_many :tool_catches
 
   validates :name, presence: true, uniqueness: { case_sensitive: false, scope: [:user_id, :tool_type] }
   validates :tool_type, presence: true

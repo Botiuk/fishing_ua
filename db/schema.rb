@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_05_085428) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_050700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -112,6 +112,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_085428) do
     t.index ["water_bioresource_id"], name: "index_rate_penalties_on_water_bioresource_id"
   end
 
+  create_table "tool_catches", force: :cascade do |t|
+    t.bigint "tool_id", null: false
+    t.bigint "catch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["catch_id"], name: "index_tool_catches_on_catch_id"
+    t.index ["tool_id"], name: "index_tool_catches_on_tool_id"
+  end
+
   create_table "tools", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -153,5 +162,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_05_085428) do
   add_foreign_key "fishing_sessions", "fishing_places"
   add_foreign_key "fishing_sessions", "users"
   add_foreign_key "rate_penalties", "water_bioresources"
+  add_foreign_key "tool_catches", "catches"
+  add_foreign_key "tool_catches", "tools"
   add_foreign_key "tools", "users"
 end
