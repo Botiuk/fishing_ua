@@ -33,7 +33,7 @@ when "development"
         password_confirmation: ENV['SEEDS_PASS'],
     )
 
-    24.times do
+    14.times do
         password = Faker::Internet.password(min_length: 6)
         User.create(
             email: Faker::Internet.unique.email(domain: 'mail.com'),
@@ -140,7 +140,7 @@ when "development"
 
         water_bioresource_ids = WaterBioresource.pluck(:id)
         user_fishing_sessions_ids = FishingSession.where(user_id: user_id).pluck(:id)
-        50.times do
+        25.times do
             Catch.create(
                 catch_time: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now),
                 catch_length:  Faker::Number.decimal(l_digits: 2, r_digits: 1),
@@ -161,7 +161,7 @@ when "development"
                 name: 'catch_photos',
                 blob_id: 1
             )
-            rand(1..5).times do
+            rand(1..2).times do
                 selected = ToolCatch.where(catch_id: user_catch_id).pluck(:tool_id)
                 selected = [] unless selected.present?
                 ToolCatch.create(
