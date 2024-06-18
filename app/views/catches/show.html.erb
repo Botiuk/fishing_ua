@@ -2,10 +2,10 @@
     <div class="col"><h4><%= t('.title') %></h4></div>
 </div>
 
-<div class="row">    
+<div class="row">
     <div class="col-12 fs-5">
         <b><%= t('.catch_time') %></b> <%= I18n.l(@catch.catch_time) %> <br>
-        <b><%= t('.fishing_session') %></b> <%= I18n.l(@catch.fishing_session.start_at) %> - 
+        <b><%= t('.fishing_session') %></b> <%= I18n.l(@catch.fishing_session.start_at) %> -
         <% if @catch.fishing_session.end_at.present? %>
             <%= I18n.l(@catch.fishing_session.end_at) %><br>
         <% else %>
@@ -17,6 +17,7 @@
         <b><%= t('.catch_weight') %></b> <%= @catch.catch_weight %> <br>
         <b><%= t('.catch_result') %></b> <%= Catch.human_enum_name(:catch_result, @catch.catch_result) %> <br>
     </div>
+
     <div class="col-12 my-2">
         <% if @catch.catch_photos.attached? %>
             <% @catch.catch_photos.each do |photo| %>
@@ -26,9 +27,35 @@
     </div>
 </div>
 
+<div class="my-2">
+    <h5><b><%= t('.tool_catches') %></b></h5>
+    <div class="row mb-1">
+        <div class="col text-end">
+            <%= link_to t('button.add.bait'), new_tool_catch_path(catch_id: @catch.id, tool_type: "bait"), :method => :post, class: "btn btn-dark text-info" %>
+            <%= link_to t('button.add.equipment'), new_tool_catch_path(catch_id: @catch.id, tool_type: "equipment"), :method => :post, class: "btn btn-dark text-info" %>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table align-middle table-primary table-striped">
+            <tr class="text-center">
+                <th style="width: 10%;"><%= t('.tool_type') %></th>
+                <th style="width: 20%;"><%= t('.tool_name') %></th>
+                <th style="width: 60%;"><%= t('.tool_description') %></th>
+                <th style="width: 10%;"></th>
+            </tr>
+            <% if @tool_catches.present? %>
+                <% @tool_catches.each do |tool_catch| %>
+                    <%= render 'tool_catches/tool_catch', tool_catch: tool_catch %>
+                <% end %>
+            <% else %>
+                <tr class="text-center"><td colspan="4"><%= t('.tool_catches_empty') %></td></tr>
+            <% end %>
+        </table>
+    </div>
+</div>
 
 <div class="row mt-2">
-    <div class="col md-6">
+    <div class="col-md-6">
         <%= link_to t('button.all.catches'), catches_path, class: "btn btn-primary" %>
         <% if @catch.fishing_session.end_at.blank? %>
             <%= link_to t('button.edit'), edit_catch_path(@catch), class: "btn btn-warning" %>

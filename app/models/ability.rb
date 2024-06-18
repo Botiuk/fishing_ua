@@ -18,6 +18,9 @@ class Ability
       can [:read, :create, :update], Catch do |catch|
         catch.user.id == user.id
       end
+      can [:create, :destroy], ToolCatch do |tool_catch|
+        tool_catch.tool.user.id == user.id
+      end
 
     #   if user.staff?
     #     can [:read, :create, :update], News

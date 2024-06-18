@@ -1,0 +1,9 @@
+<tr id="<%= dom_id tool_catch %>" class="text-center">
+    <td style="width: 10%;"><%= Tool.human_enum_name(:tool_type, tool_catch.tool.tool_type) %></td>
+    <td style="width: 20%;"><%= tool_catch.tool.name %></td>
+    <td style="width: 60%; text-align: justify"><%= tool_catch.tool.description %></td>
+    
+    <td style="width: 10%;">
+        <%= button_to t('button.delete'), tool_catch, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm" %>
+    </td>
+</tr>

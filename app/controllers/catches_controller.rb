@@ -103,6 +103,7 @@ class CatchesController < ApplicationController
     end
 
     def show
+        @tool_catches = ToolCatch.where(catch_id: @catch.id)
     end
 
     def edit

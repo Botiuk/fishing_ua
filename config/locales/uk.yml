@@ -57,6 +57,9 @@ uk:
       tool:
         name: "Поле 'Назва'"
         tool_type: "Поле 'Тип'"
+        tool_types:
+          equipment: "Снасть"
+          bait: "Приманка"
       fishing_session:
         start_at: "Поле 'Початок риболовлі'"
         end_at: "Поле 'Завершення риболовлі'"
@@ -77,6 +80,8 @@ uk:
         amount_types:
           weight: "кг"
           quantity: "шт."
+      tool_catch:
+        tool: "Поле 'Назва'"
 
   notice:
     create:
@@ -90,6 +95,9 @@ uk:
       catch_pick: "Оце-так улов! Вітаю! Кидай до садка!"
       catch_free: "Улов збережено, не забудь випустити в воду!"
       day_rate: "Добову норму створено"
+      tool_catch:
+        equipment: "Снасть до улову додано"
+        bait: "Приманку до улову додано"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
@@ -107,6 +115,9 @@ uk:
       equipment: "Снасть видалено"
       bait: "Приманку видалено"
       day_rate: "Добову норму видалено"
+      tool_catch:
+        equipment: "Снасть з улову видалено"
+        bait: "Приманку з улову видалено"
 
   alert:
     access_denied: "Ви не маєте прав для доступу до цієї сторінки"
@@ -121,6 +132,9 @@ uk:
         day_weight: "Добовий улов більше 3 кілограм плюс трофей. В садок класти не можна. Випускай!"
         day_weight_one_resource: "Вага добового улов даного водного біоресурсу більше норми. В садок класти не можна. Випускай!"
         day_quantity_one_resource: "Кількість штук добового улов даного водного біоресурсу більше норми. В садок класти не можна. Випускай!"
+      tool_catch:
+        equipment: "Цю снасть до улову вже додано"
+        bait: "Цю приманку до улову вже додано"
 
   button:
     authorization:
@@ -338,6 +352,11 @@ uk:
       catch_length: "Довжина, см:"
       catch_weight: "Вага, кг:"
       catch_result: "Куди кинуто:"
+      tool_catches: "Зловлено з:"
+      tool_type: "Тип"
+      tool_name: "Назва"
+      tool_description: "Опис"
+      tool_catches_empty: "Немає даних про те чим і на що зловлено"
 
   day_rates:
     index:
@@ -355,3 +374,12 @@ uk:
       prompt: "-- виберіть зі списку --"
     edit:
       title: "Редагувати добову норму вилову"
+
+  tool_catches:
+    new:
+      title_equipment: "Нова снасть до улову"
+      title_bait: "Нова приманка до улову"
+    form:
+      tool_equipment: "Назва снасті:"
+      tool_bait: "Назва приманки:"
+      prompt: "-- виберіть зі списку --"

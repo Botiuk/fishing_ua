@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :fishing_sessions, except: :destroy
   resources :catches, except: :destroy
   resources :day_rates, except: :show
+  resources :tool_catches, only: [:new, :create, :destroy]
  
   root "main#index"
 end

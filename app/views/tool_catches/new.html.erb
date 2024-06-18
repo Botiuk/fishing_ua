@@ -1,0 +1,11 @@
+<h4>
+    <% if params[:tool_type] == "equipment" %>
+        <%= t('.title_equipment') %>
+    <% end %>
+    <% if params[:tool_type] == "bait" %>
+        <%= t('.title_bait') %>
+    <% end %>
+    <%= I18n.l(@catch.catch_time) %> "<%= @catch.water_bioresource.name %>"
+</h4>
+
+<%= render "form", tool_catch: @tool_catch %>
