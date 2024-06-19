@@ -7,7 +7,6 @@ class ToolCatchesController < ApplicationController
         if params[:catch_id].present? && params[:tool_type].present?
             @catch = Catch.find(params[:catch_id])
             @tool_catch = ToolCatch.new(catch_id: params[:catch_id])
-            @tool_type = params[:tool_type]
         else
             redirect_to catches_url
         end
@@ -22,12 +21,8 @@ class ToolCatchesController < ApplicationController
             else
                 redirect_to catch_url(@catch), notice: t('notice.create.tool_catch.bait')
             end
-        else
-            if params[:tool_type] == "equipment"
-                redirect_to catch_url(@catch), alert: t('alert.create.tool_catch.equipment')
-            else
-                redirect_to catch_url(@catch), alert: t('alert.create.tool_catch.bait')
-            end
+        else            
+            render :new, status: :unprocessable_entity
         end
     end
 

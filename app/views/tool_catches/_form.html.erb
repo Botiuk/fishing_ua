@@ -3,23 +3,25 @@
 
     <div class="container-fluid">
         <div class="row">
-            <% if @tool_type == "equipment" %>
+            <% if params[:tool_type] == "equipment" %>
                 <div class="col">
                     <%= form.label :tool_id, t('.tool_equipment'), style: "display: block" %>
-                    <%= select(:tool_catch, :tool_id, options_for_select(@tool_equipments, :selected => form.object.tool_id), {}, {:class => "form-select"}) %>
+                    <%= select(:tool_catch, :tool_id, options_for_select(@tool_equipments, :selected => form.object.tool_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
                 </div>
             <% end %>
 
-            <% if @tool_type == "bait" %>
+            <% if params[:tool_type] == "bait" %>
                 <div class="col">
                     <%= form.label :tool_id, t('.tool_bait'), style: "display: block" %>
-                    <%= select(:tool_catch, :tool_id, options_for_select(@tool_baits, :selected => form.object.tool_id), {}, {:class => "form-select"}) %>
+                    <%= select(:tool_catch, :tool_id, options_for_select(@tool_baits, :selected => form.object.tool_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
                 </div>
             <% end %>
 
             <div>
                 <%= form.hidden_field :catch_id %>
             </div>
+
+            <%= hidden_field_tag :tool_type, params[:tool_type] %>
         </div>
 
         <div class="row mt-2">
