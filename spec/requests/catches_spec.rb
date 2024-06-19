@@ -79,7 +79,7 @@ RSpec.describe "Catches", type: :request do
       catch_one = create(:catch, fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_result: "pick_up", catch_time: DateTime.now, catch_weight: 1.2 )
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_time: DateTime.now, catch_weight: 0.5) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_weight_one_resource'))
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(422)
     end
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate present, amount type quantity, all_day_resource quantity >= day_rate" do
@@ -101,7 +101,7 @@ RSpec.describe "Catches", type: :request do
       catch_one = create(:catch, fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_result: "pick_up", catch_time: DateTime.now)
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_time: DateTime.now) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_quantity_one_resource'))
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(422)
     end
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate absent, catch weight <= max and (day_weight - max + catch) <= 3" do
@@ -136,7 +136,7 @@ RSpec.describe "Catches", type: :request do
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_weight: 1.5, catch_time: DateTime.now) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_weight'))
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(422)
     end
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate absent, all_day_weight absent" do
@@ -155,7 +155,7 @@ RSpec.describe "Catches", type: :request do
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: (catch_rate.length - 1)) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.length_rate'))
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(422)
     end
 
     it "cannot POST create when catch_result pick_up and rate length not present" do
@@ -163,7 +163,7 @@ RSpec.describe "Catches", type: :request do
       water_bioresource = create(:water_bioresource)
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.forbiden'))
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(422)
     end
 
     it "can POST create when catch_result set_free" do
