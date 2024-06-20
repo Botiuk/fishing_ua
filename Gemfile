@@ -66,6 +66,9 @@ gem 'bootstrap', '~> 5.3.2'
 # Pagination
 gem 'pagy', '~> 8.4'
 
+# JavaScript charts with one line of Ruby
+gem "chartkick"
+
 # Generating fake data
 gem 'faker'
 

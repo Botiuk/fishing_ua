@@ -13,3 +13,5 @@ pin "popper", to: "popper.js", preload: true
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
 pin "activestorage", to: "activestorage.js"
+pin "chartkick", to: "chartkick.js"
+pin "Chart.bundle", to: "Chart.bundle.js"
