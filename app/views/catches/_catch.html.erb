@@ -16,8 +16,8 @@
         <%= link_to t('button.show'), catch_path(catch), class: "btn btn-info btn-sm" %>
     </td>
     <td style="width: 10%;">
-        <% if catch.fishing_session.end_at.blank? %>
-            <%= link_to t('button.edit'), edit_catch_path(catch), class: "btn btn-warning btn-sm" %>
+        <% if catch.fishing_session.end_at.blank? && catch.catch_result == "pick_up" %>
+            <%= button_to t('button.catch_set_free'), catch, method: :patch, params: { catch: {catch_result: "set_free"} }, data: { turbo_confirm: t('button.catch_set_free_confirm') }, class: "btn btn-warning btn-sm" %>
         <% end %>
     </td>
 </tr>

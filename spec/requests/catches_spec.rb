@@ -13,13 +13,6 @@ RSpec.describe "Catches", type: :request do
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
     end
-
-    it "cannot GET edit and redirects to the sign_in page" do
-      catch = create(:catch)
-      get edit_catch_path(catch)
-      expect(response).to redirect_to(new_user_session_path)
-      expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
-    end
   end
 
   describe "registered user management" do
@@ -186,29 +179,6 @@ RSpec.describe "Catches", type: :request do
       fishing_session = create(:fishing_session)
       catch = create(:catch, fishing_session_id: fishing_session.id)
       get catch_path(catch)
-      expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to include I18n.t('alert.access_denied')
-    end
-
-    it "can GET edit catch in active fishing_session" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
-      catch = create(:catch, fishing_session_id: fishing_session.id)
-      get edit_catch_path(catch)
-      expect(response).to be_successful
-    end
-
-    it "cannot GET edit catch from fishing_session which ended" do
-      fishing_session = create(:fishing_session, user_id: @user.id)
-      catch = create(:catch, fishing_session_id: fishing_session.id)
-      get edit_catch_path(catch)
-      expect(response).to redirect_to(catch_path(catch))
-      expect(flash[:alert]).to include I18n.t('alert.fishing_session_close')
-    end
-
-    it "cannot GET edit catch in active fishing_session other user" do
-      fishing_session = create(:fishing_session, end_at: nil)
-      catch = create(:catch, fishing_session_id: fishing_session.id)
-      get edit_catch_path(catch)
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end

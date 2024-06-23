@@ -1,6 +1,6 @@
 class CatchesController < ApplicationController
-    before_action :set_catch, only: %i[ show edit update ]
-    before_action :water_bioresources_formhelper, only: %i[ new create edit update ]
+    before_action :set_catch, only: %i[ show update ]
+    before_action :water_bioresources_formhelper, only: %i[ new create update ]
     authorize_resource
 
     def index
@@ -106,18 +106,9 @@ class CatchesController < ApplicationController
         @tool_catches = ToolCatch.where(catch_id: @catch.id)
     end
 
-    def edit
-        if @catch.fishing_session.end_at.present?
-            redirect_to catch_url(@catch), alert: t('alert.fishing_session_close')
-        end
-        @catch_edit = "yes"
-    end
-
     def update
         if @catch.update(catch_params)
             redirect_to catch_url(@catch), notice: t('notice.update.catch')
-        else
-            render :edit, status: :unprocessable_entity
         end
     end
 
