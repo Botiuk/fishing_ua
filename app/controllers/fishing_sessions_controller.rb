@@ -28,8 +28,10 @@ class FishingSessionsController < ApplicationController
         end
     end
 
-    def show
-        @session_catches = Catch.where(fishing_session_id: @fishing_session.id).order(:catch_time, :id).reverse_order
+    def show    
+        @pagy, @session_catches = pagy(Catch.where(fishing_session_id: @fishing_session.id).order(:catch_time, :id).reverse_order, items: 10)
+    rescue Pagy::OverflowError
+        redirect_to fishing_session_url(@fishing_session, page: 1)
     end
 
     def edit
