@@ -11,10 +11,9 @@ class FishingPlace < ApplicationRecord
   private
 
   def self.statistic_all_records(user_id, search_type, search_params)
-    if search_type == "water_bioresource"
+    case search_type
+    when "water_bioresource"
       FishingPlace.joins(:catches).where(catches: {water_bioresource_id: search_params}).where(user_id: user_id).group(:name).count
-    end
-
-    
+    end    
   end
 end

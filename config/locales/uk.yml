@@ -162,7 +162,7 @@ uk:
       water_bioresources: "Всі водні біоресурси"
       fishing_sessions: "Всі риболовлі"
       catches: "Всі улови"
-    statistic: "Моя статистика"
+    statistic: "Cтатистика"
 
   navbar:
     news: "Новини"
@@ -197,6 +197,7 @@ uk:
       quantity_from: "Зловлено з"
       equipments_empty: "До уловів недодано жодної снасті"
       baits_empty: "До уловів недодано жодної приманки"
+      water_bioresource_name: "Назва водного біоресурсу:"
 
   main:
     index:
@@ -288,6 +289,8 @@ uk:
       prompt: "-- виберіть зі списку --"
     edit:
       title: "Редагувати локацію рибалки"
+    statistic:
+      title: "Моя статистика по локації"
 
   tools:
     index:

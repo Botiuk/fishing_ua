@@ -11,9 +11,12 @@ class Tool < ApplicationRecord
   private
 
   def self.statistic_all_tool_type_records(user_id, search_type, search_params, tool_type)
-    if search_type == "water_bioresource"
+    case search_type
+    when "water_bioresource"
       Tool.joins(:catches).where(catches: {water_bioresource_id: search_params}).where(user_id: user_id, tool_type: tool_type).group(:name).count
+    when "fishing_place"
+      catches_ids = Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).pluck(:id)
+      Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).group(:name).count
     end
-
   end
 end

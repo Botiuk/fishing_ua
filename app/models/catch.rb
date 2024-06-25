@@ -31,24 +31,30 @@ class Catch < ApplicationRecord
   end
 
   def self.statistic_all_records(user_id, search_type, search_params)
-    if search_type == "water_bioresource"
+    case search_type
+    when "water_bioresource"
       Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).order(:catch_time, :id).reverse_order
+    when "fishing_place"
+      Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).order(:catch_time, :id).reverse_order
     end
-
   end
 
   def self.statistic_max_weight(user_id, search_type, search_params)
-    if search_type == "water_bioresource"
+    case search_type
+    when "water_bioresource"
       Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).maximum(:catch_weight)
+    when "fishing_place"
+      Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).maximum(:catch_weight)
     end
-
   end
 
   def self.statistic_max_length(user_id, search_type, search_params)
-    if search_type == "water_bioresource"
+    case search_type
+    when "water_bioresource"
       Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).maximum(:catch_length)
+    when "fishing_place"
+      Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).maximum(:catch_length)
     end
-
   end
 
 end

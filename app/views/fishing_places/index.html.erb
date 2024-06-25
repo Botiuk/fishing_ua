@@ -9,10 +9,13 @@
     <div class="table-responsive">
         <table class="table align-middle table-primary table-striped">
             <tr class="text-center">
-                <th style="width: 25%;"><%= t('.name') %></th>
-                <th style="width: 50%;"><%= t('.description') %></th>
+                <th style="width: 20%;"><%= t('.name') %></th>
+                <th style="width: 45%;"><%= t('.description') %></th>
                 <th style="width: 15%;"><%= t('.where_catch') %></th>
                 <th style="width: 10%;"></th>
+                <% if user_signed_in? %>
+                    <th style="width: 10%;"></th>
+                <% end %>                
             </tr>
             <% @fishing_places.each do |fishing_place| %>
                 <%= render fishing_place %>

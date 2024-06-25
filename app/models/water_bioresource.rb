@@ -15,4 +15,14 @@ class WaterBioresource < ApplicationRecord
     validates_each :name, :latin_name do |record, attr, value|
         record.errors.add(attr, I18n.t('errors.messages.first_letter')) if /\A[[:lower:]]/.match?(value)
     end
+
+    private
+
+    def self.statistic_all_records(user_id, search_type, search_params)
+        case search_type
+        when "fishing_place"
+            catches_ids = Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).pluck(:id)
+            WaterBioresource.joins(:catches).where(catches: {id: catches_ids}).group(:name).count
+        end
+    end
 end

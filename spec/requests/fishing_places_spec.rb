@@ -20,6 +20,13 @@ RSpec.describe "FishingPlaces", type: :request do
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
     end
+
+    it "cannot GET statistic" do
+      fishing_place = create(:fishing_place)
+      get fishing_places_statistic_path(id: fishing_place.id)
+      expect(response).to redirect_to(new_user_session_path)
+      expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
+    end
   end
 
   describe "registered user management" do
@@ -64,6 +71,12 @@ RSpec.describe "FishingPlaces", type: :request do
       expect(fishing_place.reload.name).to eq("My river")
       expect(response).to redirect_to(fishing_places_url)
       expect(flash[:notice]).to include(I18n.t('notice.update.fishing_place'))
+    end
+
+    it "can GET statistic" do
+      fishing_place = create(:fishing_place)
+      get fishing_places_statistic_path(id: fishing_place.id)
+      expect(response).to be_successful
     end
   end
 end
