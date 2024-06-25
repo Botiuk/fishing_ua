@@ -14,13 +14,13 @@
                     <% end %>
                 </p>
                 <div class="row mt-2">
-                    <div class="col md-6 text-center">
-                        <% if user_signed_in? %>
-                            <%= link_to t('button.statistic'), water_bioresources_statistic_path(id: water_bioresource.id), class: "btn btn-secondary btn-sm" %>
-                        <% end %>
+                    <div class="col md-6 text-center">                        
                         <%= link_to t('button.show'), water_bioresource_path(water_bioresource), class: "btn btn-info btn-sm" %>
                         <% if can? :update, WaterBioresource %>
                             <%= link_to t('button.edit'), edit_water_bioresource_path(water_bioresource), class: "btn btn-warning btn-sm" %>
+                        <% end %>
+                        <% if user_signed_in? %>
+                            <%= link_to t('button.statistic'), water_bioresources_statistic_path(id: water_bioresource.id), class: "btn btn-secondary btn-sm" %>
                         <% end %>
                     </div>
                 </div>

@@ -40,10 +40,10 @@
           <% end %>
         </table>
       </div>
+      <%= render 'shared/pagy' %>
     <% else %>
       <p class="fw-semibold text-danger text-center mt-2"><%= t('statistic.catches_empty') %></p>
-    <% end %>
-    <%= render 'shared/pagy' %>
+    <% end %>    
   </div>
 
   <div class="tab-pane fade" id="nav-fishing_places" role="tabpanel" aria-labelledby="nav-fishing_places-tab" tabindex="0">
@@ -80,7 +80,7 @@
             <% end %>
           </tr>
           <tr class="text-center">
-            <td><%= t('statistic.quantity_from') %> <%= @equipments.count %>:</td>
+            <td><%= t('statistic.quantity_from') %> <%= @catches.count %>:</td>
             <% @equipments.each_value do |value| %>
               <td><%= value %></td>
             <% end %>
@@ -104,7 +104,7 @@
             <% end %>
           </tr>
           <tr class="text-center">
-            <td><%= t('statistic.quantity_from') %> <%= @baits.count %>:</td>
+            <td><%= t('statistic.quantity_from') %> <%= @catches.count %>:</td>
             <% @baits.each_value do |value| %>
               <td><%= value %></td>
             <% end %>

@@ -33,8 +33,8 @@
         <% if can? :update, WaterBioresource %>
             <b class="mb-0"><%= t('.resource_type') %></b> <%= WaterBioresource.human_enum_name(:resource_type, @water_bioresource.resource_type) %><br>
         <% end %>
-        <% if @water_bioresource.resource_type == "other_fish" %>
-             <b><%= t('.day_rate') %></b><%= t('.day_rate_other') %>
+        <% if @water_bioresource.resource_type == "other_fish" && @catch_rates.present? %>
+            <b><%= t('.day_rate') %></b><%= t('.day_rate_other') %>
         <% else %>
             <% if @water_bioresource.day_rate.present? %>
                 <b><%= t('.day_rate') %></b>
