@@ -5,7 +5,7 @@ class DayRatesController < ApplicationController
     authorize_resource
 
     def index
-        @pagy, @day_rates = pagy(DayRate.joins(:water_bioresource).order('water_bioresources.name'), items: 20)
+        @pagy, @day_rates = pagy(DayRate.includes(:water_bioresource).joins(:water_bioresource).order('water_bioresources.name'), items: 10)
     rescue Pagy::OverflowError
         redirect_to day_rates_url(page: 1)
     end

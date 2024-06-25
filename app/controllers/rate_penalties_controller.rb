@@ -5,7 +5,7 @@ class RatePenaltiesController < ApplicationController
     authorize_resource
 
     def index
-        @pagy, @rate_penalties = pagy(RatePenalty.joins(:water_bioresource).order('water_bioresources.name'), items: 10)
+        @pagy, @rate_penalties = pagy(RatePenalty.includes(:water_bioresource).joins(:water_bioresource).order('water_bioresources.name'), items: 10)
     rescue Pagy::OverflowError
         redirect_to rate_penalties_url(page: 1)
     end

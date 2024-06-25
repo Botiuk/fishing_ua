@@ -6,10 +6,10 @@ class CatchRatesController < ApplicationController
 
     def index
         if params[:where_catch].present?
-            @pagy, @where_catch_rates = pagy(CatchRate.where(where_catch: params[:where_catch]).ordered, items: 10)
+            @pagy, @where_catch_rates = pagy(CatchRate.includes(:water_bioresource).where(where_catch: params[:where_catch]).ordered, items: 10)
             @where_catch = params[:where_catch]
         else
-            @pagy, @catch_rates = pagy(CatchRate.ordered, items: 20)
+            @pagy, @catch_rates = pagy(CatchRate.includes(:water_bioresource).ordered, items: 10)
         end
     rescue Pagy::OverflowError
         redirect_to catch_rates_url(page: 1)

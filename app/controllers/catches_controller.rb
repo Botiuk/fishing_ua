@@ -4,7 +4,7 @@ class CatchesController < ApplicationController
     authorize_resource
 
     def index
-        @pagy, @catches = pagy(Catch.joins(:fishing_place).where(fishing_place: {user_id: current_user.id}).order(:catch_time, :id).reverse_order, items: 10)
+        @pagy, @catches = pagy(Catch.includes(:water_bioresource).joins(:fishing_place).where(fishing_place: {user_id: current_user.id}).order(:catch_time, :id).reverse_order, items: 10)
     rescue Pagy::OverflowError
         redirect_to catches_url(page: 1)
     end
@@ -103,7 +103,7 @@ class CatchesController < ApplicationController
     end
 
     def show
-        @pagy, @tool_catches = pagy(ToolCatch.where(catch_id: @catch.id), items: 10)
+        @pagy, @tool_catches = pagy(ToolCatch.includes(:tool).where(catch_id: @catch.id), items: 10)
     rescue Pagy::OverflowError
         redirect_to catch_url(@catch, page: 1)
     end
