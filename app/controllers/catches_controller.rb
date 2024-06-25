@@ -103,7 +103,7 @@ class CatchesController < ApplicationController
     end
 
     def show
-        @pagy, @tool_catches = pagy(ToolCatch.includes(:tool).where(catch_id: @catch.id), items: 10)
+        @pagy, @tool_catches = pagy(ToolCatch.includes(:tool).where(catch_id: @catch.id).order_by_tool, items: 10)
     rescue Pagy::OverflowError
         redirect_to catch_url(@catch, page: 1)
     end
