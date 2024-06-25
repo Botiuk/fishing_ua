@@ -162,6 +162,7 @@ uk:
       water_bioresources: "Всі водні біоресурси"
       fishing_sessions: "Всі риболовлі"
       catches: "Всі улови"
+    statistic: "Моя статистика"
 
   navbar:
     news: "Новини"
@@ -178,6 +179,24 @@ uk:
     baits: "Приманки"
     profile: "Профіль"
     edit_profile: "Редагувати"
+
+  statistic:
+      catches_empty: "Поки не має уловів, тому інші вкладки статистики неактивні"
+      catch_time: "Коли зловлено"
+      water_bioresource: "Що зловлено"
+      catch_length: "Довжина, см"
+      catch_weight: "Вага, кг"
+      catch_result: "Куди кинуто"
+      catch_all: "Всього зловлено:"
+      catch_max_weight: "Найважчий улов, кг:"
+      catch_max_length: "Найдовший улов, см:"
+      location_name: "Назва локації:"
+      quantity: "Зловлено:"
+      equipment_name: "Назва снасті:"
+      bait_name: "Назва приманки:"
+      quantity_from: "Зловлено з"
+      equipments_empty: "До уловів недодано жодної снасті"
+      baits_empty: "До уловів недодано жодної приманки"
 
   main:
     index:
@@ -211,6 +230,8 @@ uk:
       resource_type: "Тип ресурсу:"
       day_rate: "Добова норма: "
       day_rate_other: "3 кг та трофей (спільно з іншими видами риб)"
+    statistic:
+      title: "Моя статистика по водному біоресурсу"
 
   rate_penalties:
     index:

@@ -4,6 +4,7 @@ class Catch < ApplicationRecord
   has_one :fishing_place, through: :fishing_session
   has_one :user, through: :fishing_session
   has_many :tool_catches
+  has_many :tools, through: :tool_catches
 
   has_many_attached :catch_photos  
 
@@ -27,6 +28,27 @@ class Catch < ApplicationRecord
 
   def self.all_day_catch_one_resource_quantity(fishing_session_id, water_bioresource_id)
     Catch.where(fishing_session_id: fishing_session_id, catch_result: "pick_up", catch_time: DateTime.now.beginning_of_day..DateTime.now.end_of_day, water_bioresource_id: water_bioresource_id).count
+  end
+
+  def self.statistic_all_records(user_id, search_type, search_params)
+    if search_type == "water_bioresource"
+      Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).order(:catch_time, :id).reverse_order
+    end
+
+  end
+
+  def self.statistic_max_weight(user_id, search_type, search_params)
+    if search_type == "water_bioresource"
+      Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).maximum(:catch_weight)
+    end
+
+  end
+
+  def self.statistic_max_length(user_id, search_type, search_params)
+    if search_type == "water_bioresource"
+      Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).maximum(:catch_length)
+    end
+
   end
 
 end

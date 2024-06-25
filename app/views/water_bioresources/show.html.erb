@@ -1,7 +1,7 @@
 <div class="row mb-2">
     <div class="col"><h4><%= @water_bioresource.name %> <em>(<%= @water_bioresource.latin_name %>)</em></h4></div>
     <% if can? :create, Catch %>
-        <div class="col text-end">
+        <div class="col text-end">            
             <%= link_to t('button.add.catch'), new_catch_path(water_bioresource_id: @water_bioresource.id), :method => :post, class: "btn btn-success" %>
         </div>
     <% end %>
@@ -68,6 +68,9 @@
         <%= link_to t('button.all.water_bioresources'), water_bioresources_path, class: "btn btn-primary" %>
         <% if can? :update, WaterBioresource %>
             <%= link_to t('button.edit'), edit_water_bioresource_path(@water_bioresource), class: "btn btn-warning" %>
+        <% end %>
+        <% if user_signed_in? %>
+            <%= link_to t('button.statistic'), water_bioresources_statistic_path(id: @water_bioresource.id), class: "btn btn-secondary" %>
         <% end %>
     </div>
 </div>

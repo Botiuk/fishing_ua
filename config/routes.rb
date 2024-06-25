@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'water_bioresources/statistic', to: 'water_bioresources#statistic'
+
   resources :water_bioresources, except: :destroy
   resources :rate_penalties, except: :show
   resources :catch_rates, except: :show

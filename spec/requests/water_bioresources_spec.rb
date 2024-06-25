@@ -25,6 +25,13 @@ RSpec.describe "WaterBioresources", type: :request do
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
     end
+
+    it "cannot GET statistic" do
+      water_bioresource = create(:water_bioresource)
+      get water_bioresources_statistic_path(id: water_bioresource.id)
+      expect(response).to redirect_to(new_user_session_path)
+      expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
+    end
   end
 
   describe "user-user management" do
@@ -56,6 +63,12 @@ RSpec.describe "WaterBioresources", type: :request do
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
+
+    it "can GET statistic" do
+      water_bioresource = create(:water_bioresource)
+      get water_bioresources_statistic_path(id: water_bioresource.id)
+      expect(response).to be_successful
+    end
   end
 
   describe "user-staff management" do
@@ -86,6 +99,12 @@ RSpec.describe "WaterBioresources", type: :request do
       get edit_water_bioresource_path(water_bioresource)
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
+    end
+
+    it "can GET statistic" do
+      water_bioresource = create(:water_bioresource)
+      get water_bioresources_statistic_path(id: water_bioresource.id)
+      expect(response).to be_successful
     end
   end
 
@@ -130,6 +149,12 @@ RSpec.describe "WaterBioresources", type: :request do
       expect(water_bioresource.reload.name).to eq("Dbca")
       expect(response).to redirect_to(water_bioresource_path(water_bioresource))
       expect(flash[:notice]).to include(I18n.t('notice.update.water_bioresource'))
+    end
+
+    it "can GET statistic" do
+      water_bioresource = create(:water_bioresource)
+      get water_bioresources_statistic_path(id: water_bioresource.id)
+      expect(response).to be_successful
     end
   end
 end

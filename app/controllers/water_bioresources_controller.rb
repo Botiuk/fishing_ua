@@ -1,6 +1,6 @@
 class WaterBioresourcesController < ApplicationController
-    skip_before_action :authenticate_user!, only: %i[ index show]
-    before_action :set_water_bioresource, only: %i[ show edit update ]
+    skip_before_action :authenticate_user!, only: %i[ index show ]
+    before_action :set_water_bioresource, only: %i[ show edit update statistic ]
     authorize_resource
 
     def index
@@ -36,6 +36,19 @@ class WaterBioresourcesController < ApplicationController
         else
             render :edit, status: :unprocessable_entity
         end
+    end
+
+    def statistic
+        @pagy,  @catches = pagy(Catch.includes(:water_bioresource).statistic_all_records(current_user.id, "water_bioresource", @water_bioresource.id), items: 10)
+        if @catches.present?
+            @catches_max_weight = Catch.statistic_max_weight(current_user.id, "water_bioresource", @water_bioresource.id)
+            @catches_max_length = Catch.statistic_max_length(current_user.id, "water_bioresource", @water_bioresource.id)
+            @fishing_places = FishingPlace.statistic_all_records(current_user.id, "water_bioresource", @water_bioresource.id)
+            @equipments = Tool.statistic_all_tool_type_records(current_user.id, "water_bioresource", @water_bioresource.id, "equipment")
+            @baits = Tool.statistic_all_tool_type_records(current_user.id, "water_bioresource", @water_bioresource.id, "bait")
+        end
+    rescue Pagy::OverflowError
+        redirect_to water_bioresources_statistic_url(id: @water_bioresource.id, page: 1)
     end
 
     private

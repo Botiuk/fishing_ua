@@ -21,6 +21,7 @@ class Ability
       can [:create, :destroy], ToolCatch do |tool_catch|
         tool_catch.tool.user.id == user.id
       end
+      can [:statistic], WaterBioresource
 
     #   if user.staff?
     #     can [:read, :create, :update], News
