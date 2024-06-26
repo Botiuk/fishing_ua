@@ -1,6 +1,6 @@
 class Tool < ApplicationRecord
   belongs_to :user
-  has_many :tool_catches
+  has_many :tool_catches, dependent: :destroy
   has_many :catches, through: :tool_catches
 
   validates :name, presence: true, uniqueness: { case_sensitive: false, scope: [:user_id, :tool_type] }

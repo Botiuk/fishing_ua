@@ -46,8 +46,8 @@ class ToolCatchesController < ApplicationController
     end
 
     def tool_formhelpers
-        @tool_equipments = Tool.where(tool_type: "equipment").pluck(:name, :id)
-        @tool_baits = Tool.where(tool_type: "bait").pluck(:name, :id)
+        @tool_equipments = Tool.where(user_id: current_user.id, tool_type: "equipment").order(:name).pluck(:name, :id)
+        @tool_baits = Tool.where(user_id: current_user.id, tool_type: "bait").order(:name).pluck(:name, :id)
     end
 
     def tool_catch_params
