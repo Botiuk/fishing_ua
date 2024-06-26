@@ -12,8 +12,7 @@ class Ability
     can :read, DayRate
 
     if user.present?
-      can [:read, :create, :update], FishingPlace, user_id: user.id
-      can [:statistic], FishingPlace
+      can [:read, :create, :update, :statistic], FishingPlace, user_id: user.id
       can :manage, Tool, user_id: user.id
       can [:read, :create, :update], FishingSession, user_id: user.id      
       can [:read, :create, :update], Catch do |catch|

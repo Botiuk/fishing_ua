@@ -1,7 +1,7 @@
 <h4>
     <%= t('.title') %> "<%= @fishing_place.name %>"
     <% if @fishing_place.description.present? %>
-        (<%= @fishing_place.description %>)
+        (<%= @fishing_place.description.truncate(50) %>)
     <% end %>
 </h4>
 

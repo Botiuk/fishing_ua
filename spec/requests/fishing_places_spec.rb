@@ -74,9 +74,16 @@ RSpec.describe "FishingPlaces", type: :request do
     end
 
     it "can GET statistic" do
-      fishing_place = create(:fishing_place)
+      fishing_place = create(:fishing_place, user_id: @user.id)
       get fishing_places_statistic_path(id: fishing_place.id)
       expect(response).to be_successful
+    end
+
+    it "cannot GET statistic for fishing_place with other user_id" do
+      fishing_place = create(:fishing_place)
+      get fishing_places_statistic_path(id: fishing_place.id)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end
   end
 end

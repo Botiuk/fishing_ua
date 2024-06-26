@@ -39,12 +39,11 @@ class FishingPlacesController < ApplicationController
             @catches_max_weight = Catch.statistic_max_weight(current_user.id, "fishing_place", @fishing_place.id)
             @catches_max_length = Catch.statistic_max_length(current_user.id, "fishing_place", @fishing_place.id)
             @water_bioresources = WaterBioresource.statistic_all_records(current_user.id, "fishing_place", @fishing_place.id)
-
             @equipments = Tool.statistic_all_tool_type_records(current_user.id, "fishing_place", @fishing_place.id, "equipment")
             @baits = Tool.statistic_all_tool_type_records(current_user.id, "fishing_place", @fishing_place.id, "bait")
         end
     rescue Pagy::OverflowError
-        redirect_to water_bioresources_statistic_url(id: @water_bioresource.id, page: 1)
+        redirect_to fishing_places_statistic_url(id: @water_bioresource.id, page: 1)
     end
 
     private
