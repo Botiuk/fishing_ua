@@ -17,9 +17,11 @@
                 <%= form.label :amount_type, t('.amount_type'), style: "display: block" %>
                 <%= form.select :amount_type, DayRate.amount_types.keys.map{ |key| [DayRate.human_enum_name(:amount_type, key), key] }, {:prompt => t('.prompt'), :selected => form.object.amount_type}, {:class => "form-select"} %>
             </div>
+
+            <div class="col-12 my-2"><%= t('.day_rate_instruction') %></div>
         </div>
 
-        <div class="row mt-2">
+        <div class="row mt-2">            
             <div>
                 <%= form.button nil, class: "btn btn-success" do %>
                     <%= t('button.submit') %>

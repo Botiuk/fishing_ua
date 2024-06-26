@@ -37,52 +37,70 @@ class CatchesController < ApplicationController
                 if @catch.catch_length >= rate_length.length                  
                     catch_day_rate = DayRate.where(water_bioresource_id: @catch.water_bioresource.id).first
                     if catch_day_rate.present?
-                        if catch_day_rate.amount_type == "weight"
-                            all_day_one_resource_weight = Catch.all_day_catch_one_resource_weight(@catch.fishing_session.id, @catch.water_bioresource.id)
-                            if all_day_one_resource_weight + @catch.catch_weight <= catch_day_rate.catch_amount
-                                if @catch.save
-                                    redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
-                                else
-                                    render :new, status: :unprocessable_entity
-                                end
-                            else
-                                flash.now[:alert] = t('alert.create.catch.day_weight_one_resource')
-                                render :new, status: :unprocessable_entity
-                            end
-                        else
-                            all_day_one_resource_quantity = Catch.all_day_catch_one_resource_quantity(@catch.fishing_session.id, @catch.water_bioresource.id)
-                            if all_day_one_resource_quantity < catch_day_rate.catch_amount
-                                if @catch.save
-                                    redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
-                                else
-                                    render :new, status: :unprocessable_entity
-                                end
-                            else
-                                flash.now[:alert] = t('alert.create.catch.day_quantity_one_resource')
-                                render :new, status: :unprocessable_entity
-                            end
-                        end
-                    else
-                        day_rate_water_bioresource_ids = DayRate.pluck(:water_bioresource_id)
-                        all_day_weight = Catch.all_day_catch_weight(@catch.fishing_session.id, day_rate_water_bioresource_ids)
-                        if all_day_weight != 0
-                            maximum_weight = Catch.maximum_day_catch(@catch.fishing_session.id, day_rate_water_bioresource_ids)
-                            if (@catch.catch_weight >= maximum_weight && all_day_weight <= 3) || (@catch.catch_weight <= maximum_weight && (all_day_weight - maximum_weight + @catch.catch_weight) <= 3)
-                                if @catch.save
-                                    redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
-                                else
-                                    render :new, status: :unprocessable_entity
-                                end
-                            else
-                                flash.now[:alert] = t('alert.create.catch.day_weight')
-                                render :new, status: :unprocessable_entity
-                            end
-                        else
+                        if catch_day_rate.catch_amount == 0
                             if @catch.save
                                 redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
                             else
                                 render :new, status: :unprocessable_entity
                             end
+                        else
+                            if catch_day_rate.amount_type == "weight"                            
+                                if @catch.catch_weight > 0
+                                    all_day_one_resource_weight = Catch.all_day_catch_one_resource_weight(@catch.fishing_session.id, @catch.water_bioresource.id)
+                                    if all_day_one_resource_weight + @catch.catch_weight <= catch_day_rate.catch_amount
+                                        if @catch.save
+                                            redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
+                                        else
+                                            render :new, status: :unprocessable_entity
+                                        end
+                                    else
+                                        flash.now[:alert] = t('alert.create.catch.day_weight_one_resource')
+                                        render :new, status: :unprocessable_entity
+                                    end
+                                else
+                                    flash.now[:alert] = t('alert.create.catch.catch_weight')
+                                    render :new, status: :unprocessable_entity
+                                end
+                            else
+                                all_day_one_resource_quantity = Catch.all_day_catch_one_resource_quantity(@catch.fishing_session.id, @catch.water_bioresource.id)
+                                if all_day_one_resource_quantity < catch_day_rate.catch_amount
+                                    if @catch.save
+                                        redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
+                                    else
+                                        render :new, status: :unprocessable_entity
+                                    end
+                                else
+                                    flash.now[:alert] = t('alert.create.catch.day_quantity_one_resource')
+                                    render :new, status: :unprocessable_entity
+                                end
+                            end
+                        end
+                    else
+                        if @catch.catch_weight > 0
+                            day_rate_water_bioresource_ids = DayRate.pluck(:water_bioresource_id)
+                            all_day_weight = Catch.all_day_catch_weight(@catch.fishing_session.id, day_rate_water_bioresource_ids)
+                            if all_day_weight != 0
+                                maximum_weight = Catch.maximum_day_catch(@catch.fishing_session.id, day_rate_water_bioresource_ids)
+                                if (@catch.catch_weight >= maximum_weight && all_day_weight <= 3) || (@catch.catch_weight <= maximum_weight && (all_day_weight - maximum_weight + @catch.catch_weight) <= 3)
+                                    if @catch.save
+                                        redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
+                                    else
+                                        render :new, status: :unprocessable_entity
+                                    end
+                                else
+                                    flash.now[:alert] = t('alert.create.catch.day_weight')
+                                    render :new, status: :unprocessable_entity
+                                end
+                            else
+                                if @catch.save
+                                    redirect_to catch_url(@catch), notice: t('notice.create.catch_pick')
+                                else
+                                    render :new, status: :unprocessable_entity
+                                end
+                            end
+                        else
+                            flash.now[:alert] = t('alert.create.catch.catch_weight')
+                            render :new, status: :unprocessable_entity
                         end
                     end
                 else

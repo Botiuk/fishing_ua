@@ -1,12 +1,16 @@
 <tr id="<%= dom_id day_rate %>" class="text-center">
     <td style="width: 40%;"><%= day_rate.water_bioresource.name %> (<%= day_rate.water_bioresource.latin_name %>)</td>
     <td style="width: 30%;">
-        <% if day_rate.catch_amount.to_i == day_rate.catch_amount %>
-            <%= day_rate.catch_amount.to_i %>
+        <% if  day_rate.catch_amount == 0 %>
+            -
         <% else %>
-            <%= day_rate.catch_amount %>
-        <% end %>
-        <%= DayRate.human_enum_name(:amount_type, day_rate.amount_type) %>
+            <% if day_rate.catch_amount.to_i == day_rate.catch_amount %>
+                <%= day_rate.catch_amount.to_i %>
+            <% else %>
+                <%= day_rate.catch_amount %>
+            <% end %>
+            <%= DayRate.human_enum_name(:amount_type, day_rate.amount_type) %>
+        <% end %>        
     </td>
     <% if can? :update, CatchRate %>
         <td style="width: 15%;">

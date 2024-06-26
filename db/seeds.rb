@@ -92,13 +92,22 @@ when "development"
         CatchRate.create(
             water_bioresource_id: water_bioresource_id,
             where_catch: 0,
-            length: 0.0
+            length: [0.0, 5.5, 10.1].sample
         )
     end
 
-    water_bioresource_resource_type_ids = WaterBioresource.where(resource_type: [ "small_fish", "invertebrate"]).pluck(:id)
+    water_bioresource_small_fish_ids = WaterBioresource.where(resource_type: "small_fish").pluck(:id)
+    water_bioresource_invertebrate_ids = WaterBioresource.where(resource_type: "invertebrate").pluck(:id)
     water_bioresource_with_catch_rate_ids = CatchRate.pluck(:water_bioresource_id).uniq
-    water_bioresource_ids = water_bioresource_resource_type_ids & water_bioresource_with_catch_rate_ids
+    water_bioresource_ids = water_bioresource_small_fish_ids & water_bioresource_with_catch_rate_ids
+    water_bioresource_ids.each do |water_bioresource_id|
+        DayRate.create(
+            water_bioresource_id: water_bioresource_id,
+            catch_amount: 0,
+            amount_type: DayRate.amount_types.keys.sample
+        )
+    end
+    water_bioresource_ids = water_bioresource_invertebrate_ids & water_bioresource_with_catch_rate_ids
     water_bioresource_ids.each do |water_bioresource_id|
         DayRate.create(
             water_bioresource_id: water_bioresource_id,
@@ -161,7 +170,7 @@ when "development"
                 name: 'catch_photos',
                 blob_id: 1
             )
-            rand(1..2).times do
+            rand(1..3).times do
                 selected = ToolCatch.where(catch_id: user_catch_id).pluck(:tool_id)
                 selected = [] unless selected.present?
                 ToolCatch.create(
