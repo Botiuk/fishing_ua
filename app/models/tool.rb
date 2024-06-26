@@ -15,8 +15,11 @@ class Tool < ApplicationRecord
     when "water_bioresource"
       Tool.joins(:catches).where(catches: {water_bioresource_id: search_params}).where(user_id: user_id, tool_type: tool_type).group(:name).count
     when "fishing_place"
-      catches_ids = Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).pluck(:id)
+      catches_ids = Catch.joins(:fishing_place).where(fishing_place: {id: search_params}).pluck(:id)
       Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).group(:name).count
+    when "tool"
+      catches_ids = Catch.joins(:tools).where(tools: {id: search_params}).pluck(:id)
+      Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).where.not(id: search_params).group(:name).count
     end
   end
 end

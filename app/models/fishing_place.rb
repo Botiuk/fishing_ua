@@ -14,6 +14,9 @@ class FishingPlace < ApplicationRecord
     case search_type
     when "water_bioresource"
       FishingPlace.joins(:catches).where(catches: {water_bioresource_id: search_params}).where(user_id: user_id).group(:name).count
-    end    
+    when "tool"
+      catches_ids = Catch.joins(:tools).where(tools: {id: search_params}).pluck(:id)
+      FishingPlace.joins(:catches).where(catches: {id: catches_ids}).group(:name).count
+    end   
   end
 end

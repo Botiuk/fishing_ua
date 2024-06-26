@@ -190,14 +190,16 @@ uk:
       catch_all: "Всього зловлено:"
       catch_max_weight: "Найважчий улов, кг:"
       catch_max_length: "Найдовший улов, см:"
+      water_bioresource_name: "Назва водного біоресурсу:"
       location_name: "Назва локації:"
       quantity: "Зловлено:"
       equipment_name: "Назва снасті:"
       bait_name: "Назва приманки:"
       quantity_from: "Зловлено з"
       equipments_empty: "До уловів недодано жодної снасті"
+      other_equipments_empty: "До уловів додано лише цю снасть"
       baits_empty: "До уловів недодано жодної приманки"
-      water_bioresource_name: "Назва водного біоресурсу:"
+      other_baits_empty: "До уловів додано лише цю приманку"
 
   main:
     index:
@@ -310,6 +312,9 @@ uk:
     edit:
       title_equipment: "Редагувати снасть"
       title_bait: "Редагувати приманку"
+    statistic:
+      title_equipment: "Моя статистика по снасті"
+      title_bait: "Моя статистика по приманці"
 
   fishing_sessions:
     index:

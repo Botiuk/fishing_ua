@@ -1,8 +1,11 @@
 <tr id="<%= dom_id tool %>" class="text-center">
-    <td style="width: 25%;"><%= tool.name %></td>
-    <td style="width: 55%; text-align: justify"><%= tool.description %></td>
+    <td style="width: 20%;"><%= tool.name %></td>
+    <td style="width: 50%; text-align: justify"><%= tool.description %></td>
     <td style="width: 10%;">
         <%= link_to t('button.edit'), edit_tool_path(tool), class: "btn btn-warning btn-sm" %>
+    </td>
+    <td style="width: 10%;">
+        <%= link_to t('button.statistic'), tools_statistic_path(id: tool.id), class: "btn btn-secondary btn-sm" %>
     </td>
     <td style="width: 10%;">
         <%= button_to t('button.delete'), tool, method: :delete, data: { turbo_confirm: t('button.delete_confirm_dependent') }, class: "btn btn-danger btn-sm"%>

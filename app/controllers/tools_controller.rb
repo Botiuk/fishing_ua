@@ -1,5 +1,5 @@
 class ToolsController < ApplicationController
-    before_action :set_tool, only: %i[ edit update destroy]
+    before_action :set_tool, only: %i[ edit update destroy statistic ]
     authorize_resource
 
     def index
@@ -54,6 +54,20 @@ class ToolsController < ApplicationController
         else
             redirect_to tools_url(tool_type: "bait"), notice: t('notice.destroy.bait')
         end
+    end
+
+    def statistic
+        @pagy,  @catches = pagy(Catch.includes(:water_bioresource).statistic_all_records(current_user.id, "tool", @tool.id), items: 10)
+        if @catches.present?
+            @catches_max_weight = Catch.statistic_max_weight(current_user.id, "tool", @tool.id)
+            @catches_max_length = Catch.statistic_max_length(current_user.id, "tool", @tool.id)
+            @water_bioresources = WaterBioresource.statistic_all_records(current_user.id, "tool", @tool.id)
+            @fishing_places = FishingPlace.statistic_all_records(current_user.id, "tool", @tool.id)
+            @equipments = Tool.statistic_all_tool_type_records(current_user.id, "tool", @tool.id, "equipment")
+            @baits = Tool.statistic_all_tool_type_records(current_user.id, "tool", @tool.id, "bait")
+        end
+    rescue Pagy::OverflowError
+        redirect_to tools_statistic_url(id: @tool.id, page: 1)
     end
 
     private

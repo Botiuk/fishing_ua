@@ -20,6 +20,13 @@ RSpec.describe "Tools", type: :request do
       expect(response).to redirect_to(new_user_session_path)
       expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
     end
+
+    it "cannot GET statistic" do
+      tool = create(:tool)
+      get tools_statistic_path(id: tool.id)
+      expect(response).to redirect_to(new_user_session_path)
+      expect(flash[:alert]).to include I18n.t('devise.failure.unauthenticated')
+    end
   end
 
   describe "registered user management" do
@@ -98,6 +105,19 @@ RSpec.describe "Tools", type: :request do
     it "cannot DELETE destroy tool with other user_id" do
       tool = create(:tool)
       delete tool_path(tool)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+    end
+
+    it "can GET statistic" do
+      tool = create(:tool, user_id: @user.id)
+      get tools_statistic_path(id: tool.id)
+      expect(response).to be_successful
+    end
+
+    it "cannot GET statistic for tool with other user_id" do
+      tool = create(:tool)
+      get tools_statistic_path(id: tool.id)
       expect(response).to redirect_to(root_path)
       expect(flash[:alert]).to include I18n.t('alert.access_denied')
     end

@@ -35,7 +35,9 @@ class Catch < ApplicationRecord
     when "water_bioresource"
       Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).order(:catch_time, :id).reverse_order
     when "fishing_place"
-      Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).order(:catch_time, :id).reverse_order
+      Catch.joins(:fishing_place).where(fishing_place: {id: search_params}).order(:catch_time, :id).reverse_order
+    when "tool"
+      Catch.joins(:tools).where(tools: {id: search_params}).order(:catch_time, :id).reverse_order
     end
   end
 
@@ -44,7 +46,9 @@ class Catch < ApplicationRecord
     when "water_bioresource"
       Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).maximum(:catch_weight)
     when "fishing_place"
-      Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).maximum(:catch_weight)
+      Catch.joins(:fishing_place).where(fishing_place: {id: search_params}).maximum(:catch_weight)
+    when "tool"
+      Catch.joins(:tools).where(tools: {id: search_params}).maximum(:catch_weight)
     end
   end
 
@@ -53,7 +57,9 @@ class Catch < ApplicationRecord
     when "water_bioresource"
       Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(water_bioresource_id: search_params).maximum(:catch_length)
     when "fishing_place"
-      Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).maximum(:catch_length)
+      Catch.joins(:fishing_place).where(fishing_place: {id: search_params}).maximum(:catch_length)
+    when "tool"
+      Catch.joins(:tools).where(tools: {id: search_params}).maximum(:catch_length)
     end
   end
 

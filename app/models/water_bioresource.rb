@@ -23,6 +23,9 @@ class WaterBioresource < ApplicationRecord
         when "fishing_place"
             catches_ids = Catch.joins(:fishing_place).where(fishing_place: {id: search_params,}).pluck(:id)
             WaterBioresource.joins(:catches).where(catches: {id: catches_ids}).group(:name).count
+        when "tool"
+            catches_ids = Catch.joins(:tools).where(tools: {id: search_params}).pluck(:id)
+            WaterBioresource.joins(:catches).where(catches: {id: catches_ids}).group(:name).count
         end
     end
 end
