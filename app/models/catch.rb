@@ -38,6 +38,8 @@ class Catch < ApplicationRecord
       Catch.joins(:fishing_place).where(fishing_place: {id: search_params}).order(:catch_time, :id).reverse_order
     when "tool"
       Catch.joins(:tools).where(tools: {id: search_params}).order(:catch_time, :id).reverse_order
+    when "fishing_session"
+      Catch.where(fishing_session_id: search_params).order(:catch_time, :id).reverse_order
     end
   end
 
@@ -49,6 +51,8 @@ class Catch < ApplicationRecord
       Catch.joins(:fishing_place).where(fishing_place: {id: search_params}).maximum(:catch_weight)
     when "tool"
       Catch.joins(:tools).where(tools: {id: search_params}).maximum(:catch_weight)
+    when "fishing_session"
+      Catch.where(fishing_session_id: search_params).maximum(:catch_weight)
     end
   end
 
@@ -60,6 +64,8 @@ class Catch < ApplicationRecord
       Catch.joins(:fishing_place).where(fishing_place: {id: search_params}).maximum(:catch_length)
     when "tool"
       Catch.joins(:tools).where(tools: {id: search_params}).maximum(:catch_length)
+    when "fishing_session"
+      Catch.where(fishing_session_id: search_params).maximum(:catch_length)
     end
   end
 

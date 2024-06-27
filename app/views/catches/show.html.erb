@@ -16,7 +16,7 @@
         <% else %>
             <%= t('.end_at_empty') %> <br>
         <% end %>
-        <b><%= t('.fishing_place') %></b> <%= @catch.fishing_place.name %>
+        <b><%= t('.fishing_place') %></b> "<%= @catch.fishing_place.name %>"
         <% if @catch.fishing_place.description.present? %>
             (<%= @catch.fishing_place.description.truncate(100) %>)
         <% end %>

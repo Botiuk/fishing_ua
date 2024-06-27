@@ -31,7 +31,14 @@ class FishingSessionsController < ApplicationController
     end
 
     def show    
-        @pagy, @session_catches = pagy(Catch.includes(:water_bioresource).where(fishing_session_id: @fishing_session.id).order(:catch_time, :id).reverse_order, items: 10)
+        @pagy,  @catches = pagy(Catch.includes(:water_bioresource).statistic_all_records(current_user.id, "fishing_session", @fishing_session.id), items: 10)
+        if @catches.present?
+            @catches_max_weight = Catch.statistic_max_weight(current_user.id, "fishing_session", @fishing_session.id)
+            @catches_max_length = Catch.statistic_max_length(current_user.id, "fishing_session", @fishing_session.id)
+            @water_bioresources = WaterBioresource.statistic_all_records(current_user.id, "fishing_session", @fishing_session.id)
+            @equipments = Tool.statistic_all_tool_type_records(current_user.id, "fishing_session", @fishing_session.id, "equipment")
+            @baits = Tool.statistic_all_tool_type_records(current_user.id, "fishing_session", @fishing_session.id, "bait")
+        end
     rescue Pagy::OverflowError
         redirect_to fishing_session_url(@fishing_session, page: 1)
     end

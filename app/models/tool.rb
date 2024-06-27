@@ -20,6 +20,8 @@ class Tool < ApplicationRecord
     when "tool"
       catches_ids = Catch.joins(:tools).where(tools: {id: search_params}).pluck(:id)
       Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).where.not(id: search_params).group(:name).count
+    when "fishing_session"
+      Tool.joins(:catches).where(catches: {fishing_session_id: search_params}).where(tool_type: tool_type).group(:name).count
     end
   end
 end
