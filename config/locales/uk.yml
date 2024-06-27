@@ -150,6 +150,7 @@ uk:
       catch: "Додати улов"
       day_rate: "Додати добову норму"
     close_fishing_session: "Завершити риболовлю"
+    close_fishing_session_short: "Завершити"
     close_fishing_session_confirm: "Точно завершити риболовлю?"
     catch_set_free: "Випустити"
     catch_set_free_confirm: "Точно випустити? Улов ще живий?"
@@ -164,6 +165,7 @@ uk:
       fishing_sessions: "Всі риболовлі"
       catches: "Всі улови"
     statistic: "Cтатистика"
+    fishing_session: "Риболовля"
 
   navbar:
     news: "Новини"
@@ -323,6 +325,7 @@ uk:
       start_at: "Почато"
       end_at: "Завершено"
       fishing_place: "Локація"
+      catches: "Зловлено"
       fishing_sessions_empty: "Не має риболовель"
     fishing_session:
       end_at_empty: "активна"

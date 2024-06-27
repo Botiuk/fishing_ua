@@ -16,8 +16,12 @@
         <% else %>
             <%= t('.end_at_empty') %> <br>
         <% end %>
-        <b><%= t('.fishing_place') %></b> <%= @catch.fishing_place.name %> <br>
-        <b><%= t('.water_bioresource') %></b> <%= @catch.water_bioresource.name %> <br>
+        <b><%= t('.fishing_place') %></b> <%= @catch.fishing_place.name %>
+        <% if @catch.fishing_place.description.present? %>
+            (<%= @catch.fishing_place.description.truncate(100) %>)
+        <% end %>
+        <br>
+        <b><%= t('.water_bioresource') %></b> <%= link_to @catch.water_bioresource.name, water_bioresource_path(@catch.water_bioresource), class: "text-reset text-decoration-none" %><br>
         <b><%= t('.catch_length') %></b> <%= @catch.catch_length %> <br>
         <b><%= t('.catch_weight') %></b> <%= @catch.catch_weight %> <br>
         <b><%= t('.catch_result') %></b> <%= Catch.human_enum_name(:catch_result, @catch.catch_result) %> <br>
@@ -63,5 +67,6 @@
 <div class="row mt-2">
     <div class="col-md-6">
         <%= link_to t('button.all.catches'), catches_path, class: "btn btn-primary" %>
+        <%= link_to t('button.fishing_session'), fishing_session_path(@catch.fishing_session), class: "btn btn-info" %>
     </div>
 </div>

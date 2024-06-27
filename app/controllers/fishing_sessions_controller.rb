@@ -4,7 +4,9 @@ class FishingSessionsController < ApplicationController
     authorize_resource
 
     def index
-        @pagy, @fishing_sessions = pagy(FishingSession.where(user_id: current_user.id).order(:start_at, :id).reverse_order, items: 10)
+        @pagy, @fishing_sessions = pagy(FishingSession.where(user_id: current_user.id).order(start_at: :desc, id: :desc), items: 10)
+        fishing_session_ids = FishingSession.where(user_id: current_user.id).ids
+        @fishing_session_catches_count = Catch.where(fishing_session_id: fishing_session_ids).group(:fishing_session_id).count 
     rescue Pagy::OverflowError
         redirect_to fishing_sessions_url(page: 1)
     end

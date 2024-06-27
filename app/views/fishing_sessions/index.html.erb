@@ -12,8 +12,9 @@
                 <th style="width: 20%;"><%= t('.start_at') %></th>
                 <th style="width: 20%;"><%= t('.end_at') %></th>
                 <th style="width: 30%;"><%= t('.fishing_place') %></th>
-                <th style="width: 15%;"></th>
-                <th style="width: 15%;"></th>
+                <th style="width: 10%;"><%= t('.catches') %></th>
+                <th style="width: 10%;"></th>
+                <th style="width: 10%;"></th>
             </tr>
             <% @fishing_sessions.each do |fishing_session| %>
                 <%= render fishing_session %>

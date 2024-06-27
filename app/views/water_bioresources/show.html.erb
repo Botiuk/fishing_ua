@@ -38,16 +38,20 @@
         <% else %>
             <% if @water_bioresource.day_rate.present? %>
                 <b><%= t('.day_rate') %></b>
-                <% if @water_bioresource.day_rate.catch_amount.to_i == @water_bioresource.day_rate.catch_amount %>
-                    <%=  @water_bioresource.day_rate.catch_amount.to_i %>
+                <% if @water_bioresource.day_rate.catch_amount == 0 %>
+                    -
                 <% else %>
-                    <%= @water_bioresource.day_rate.catch_amount %>
+                    <% if @water_bioresource.day_rate.catch_amount.to_i == @water_bioresource.day_rate.catch_amount %>
+                        <%=  @water_bioresource.day_rate.catch_amount.to_i %>
+                    <% else %>
+                        <%= @water_bioresource.day_rate.catch_amount %>
+                    <% end %>
+                    <%= DayRate.human_enum_name(:amount_type, @water_bioresource.day_rate.amount_type) %>
                 <% end %>
-                <%= DayRate.human_enum_name(:amount_type, @water_bioresource.day_rate.amount_type) %>
             <% end %>
         <% end %>
         <% if @rate_penalty.present? %>
-            <h5><%= t('.rate_penalty') %> <%= @rate_penalty %> <%= t('.money') %></h5>
+            <h5 class="text-danger"><%= t('.rate_penalty') %> <%= @rate_penalty %> <%= t('.money') %></h5>
         <% end %>
     </div>
 </div>

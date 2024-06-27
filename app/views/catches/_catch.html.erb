@@ -1,6 +1,6 @@
 <tr id="<%= dom_id catch %>" class="text-center">
     <td style="width: 15%;"><%= I18n.l(catch.catch_time, format: :short) %></td>
-    <td style="width: 20%;"><%= catch.water_bioresource.name %></td>
+    <td style="width: 20%;"><%= link_to catch.water_bioresource.name, water_bioresource_path(catch.water_bioresource), class: "text-reset text-decoration-none" %></td>
     <td style="width: 15%;"><%= catch.catch_length %></td>
     <td style="width: 15%;"><%= catch.catch_weight %></td>
     <td style="width: 15%;">
