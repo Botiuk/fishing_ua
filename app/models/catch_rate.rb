@@ -6,7 +6,16 @@ class CatchRate < ApplicationRecord
 
   scope :ordered, -> { joins(:water_bioresource).order('water_bioresources.name') }
 
-  # def self.rate_length(water_bioresource_id, where_catch)
-  #   CatchRate.where(water_bioresource_id: water_bioresource_id, where_catch: where_catch).first
-  # end
+  def self.rate_length(water_bioresource_id, where_catch)
+    case where_catch
+    when "dnipro"
+      CatchRate.where(water_bioresource_id: water_bioresource_id).pluck(:length_dnipro).join
+    when "other"
+      CatchRate.where(water_bioresource_id: water_bioresource_id).pluck(:length_other).join
+    when "black"
+      CatchRate.where(water_bioresource_id: water_bioresource_id).pluck(:length_black).join
+    when "azov"
+      CatchRate.where(water_bioresource_id: water_bioresource_id).pluck(:length_azov).join
+    end
+  end
 end

@@ -53,130 +53,142 @@ RSpec.describe "Catches", type: :request do
     end
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate present and == 0" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       day_rate = create(:day_rate, catch_amount: 0, water_bioresource_id: water_bioresource.id)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_time: DateTime.now) }
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_time: DateTime.now) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.catch_pick'))
     end 
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate present, amount type weight, all_day_resource weight + catch weight <= day_rate" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       day_rate = create(:day_rate, catch_amount: 1.5, amount_type: "weight", water_bioresource_id: water_bioresource.id)
       catch_one = create(:catch, fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_result: "pick_up", catch_time: DateTime.now, catch_weight: 1.0 )
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_time: DateTime.now, catch_weight: 0.5) }
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_time: DateTime.now, catch_weight: 0.5) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.catch_pick'))
     end 
    
     it "cannot POST create when catch_result pick_up and catch_length >= rate_length, day_rate present, amount type weight, all_day_resource weight + catch weight > day_rate" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       day_rate = create(:day_rate, catch_amount: 1.5, amount_type: "weight", water_bioresource_id: water_bioresource.id)
       catch_one = create(:catch, fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_result: "pick_up", catch_time: DateTime.now, catch_weight: 1.2 )
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_time: DateTime.now, catch_weight: 0.5) }
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_time: DateTime.now, catch_weight: 0.5) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_weight_one_resource'))
       expect(response).to have_http_status(422)
     end
 
     it "cannot POST create when catch_result pick_up and catch_length >= rate_length, day_rate present, amount type weight, catch weight == 0" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       day_rate = create(:day_rate, catch_amount: 1.5, amount_type: "weight", water_bioresource_id: water_bioresource.id)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_time: DateTime.now, catch_weight: 0) }
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_time: DateTime.now, catch_weight: 0) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.catch_weight'))
       expect(response).to have_http_status(422)
     end
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate present, amount type quantity, all_day_resource quantity >= day_rate" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       day_rate = create(:day_rate, catch_amount: 1.0, amount_type: "quantity", water_bioresource_id: water_bioresource.id)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_time: DateTime.now) }
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_time: DateTime.now) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.catch_pick'))
     end
 
     it "cannot POST create when catch_result pick_up and catch_length >= rate_length, day_rate present, amount type quantity, all_day_resource quantity < day_rate" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       day_rate = create(:day_rate, catch_amount: 1.0, amount_type: "quantity", water_bioresource_id: water_bioresource.id)
       catch_one = create(:catch, fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_result: "pick_up", catch_time: DateTime.now)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_time: DateTime.now) }
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_time: DateTime.now) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_quantity_one_resource'))
       expect(response).to have_http_status(422)
     end
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate absent, catch weight <= max and (day_weight - max + catch) <= 3" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       catch_one = create(:catch, fishing_session_id: fishing_session.id, catch_result: "pick_up", catch_weight: 5.0, catch_time: DateTime.now)
       catch_two = create(:catch, fishing_session_id: fishing_session.id, catch_result: "pick_up", catch_weight: 0.5, catch_time: DateTime.now)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_weight: 2.0, catch_time: DateTime.now) }
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_weight: 2.0, catch_time: DateTime.now) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.catch_pick'))
     end
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate absent, catch weight >= max and day_weight <= 3" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       catch_one = create(:catch, fishing_session_id: fishing_session.id, catch_result: "pick_up", catch_weight: 2.0, catch_time: DateTime.now)
       catch_two = create(:catch, fishing_session_id: fishing_session.id, catch_result: "pick_up", catch_weight: 0.5, catch_time: DateTime.now)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_weight: 5.0, catch_time: DateTime.now) }
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_weight: 5.0, catch_time: DateTime.now) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.catch_pick'))
     end
 
     it "cannot POST create when catch_result pick_up and catch_length >= rate_length, day_rate absent, day weight more than 3 + max" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_one = create(:catch, fishing_session_id: fishing_session.id, catch_result: "pick_up", catch_weight: 2.0, catch_time: DateTime.now)
       catch_two = create(:catch, fishing_session_id: fishing_session.id, catch_result: "pick_up", catch_weight: 4.0, catch_time: DateTime.now)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_weight: 1.5, catch_time: DateTime.now) }
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_weight: 1.5, catch_time: DateTime.now) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_weight'))
       expect(response).to have_http_status(422)
     end
 
     it "can POST create when catch_result pick_up and catch_length >= rate_length, day_rate absent, all_day_weight absent" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length) }
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.catch_pick'))
     end
 
     it "cannot POST create when catch_result pick_up and catch_length >= rate_length, day_rate absent, catch weight == 0" do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length, catch_weight: 0, catch_time: DateTime.now) }
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_weight: 0, catch_time: DateTime.now) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.catch_weight'))
       expect(response).to have_http_status(422)
     end
 
     it "cannot POST create when catch_result pick_up and catch_length < rate_length" do
-      fishing_session = create(:fishing_session, user_id: @user.id, start_at: DateTime.now, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: "other")
+      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, start_at: DateTime.now, end_at: nil)
       water_bioresource = create(:water_bioresource)
-      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, where_catch: fishing_session.fishing_place.where_catch)
-      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: (catch_rate.length - 1)) }
+      catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
+      post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: (catch_rate.length_other - 1)) }
       expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.length_rate'))
       expect(response).to have_http_status(422)
     end

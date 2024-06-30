@@ -48,7 +48,7 @@ uk:
         where_catch: "Поле 'До якого регіону відноситься'"
         where_catches:
           dnipro: "Дніпровські водосховища"
-          other: "Інші внутрішні об'єкти"
+          other: "Інші водні об'єкти"
           black: "Чорноморський"
           azov: "Азовський"
       tool:
@@ -226,6 +226,10 @@ uk:
       photo_absent: "фото відсутнє"
       description_absent: "Опис відсутній"
       catch_rates: "Норми вилову"
+      length_dnipro: "Дніпровські водосховища"
+      length_other: "Інші водні об'єкти"
+      length_black: "Чорноморський регіон"
+      length_azov: "Азовський регіон"
       santimetr: " см"
       catch_forbiden: "Вилов заборонено!"
       rate_penalty: "Штраф "

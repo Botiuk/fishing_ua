@@ -23,7 +23,7 @@ class WaterBioresourcesController < ApplicationController
     end
 
     def show
-        @catch_rates = CatchRate.where(water_bioresource_id: @water_bioresource.id).order(:where_catch).pluck(:where_catch, :length).to_h
+        @catch_rate = CatchRate.where(water_bioresource_id: @water_bioresource.id).take
         @rate_penalty = RatePenalty.where(water_bioresource_id: @water_bioresource.id).pluck(:money).join
     end
 
