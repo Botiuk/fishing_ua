@@ -1,20 +1,40 @@
 <tr id="<%= dom_id catch_rate %>" class="text-center">
-    <td style="width: 30%;"><%= catch_rate.water_bioresource.name %> (<%= catch_rate.water_bioresource.latin_name %>)</td>
-    <td style="width: 15%;"><%= CatchRate.human_enum_name(:where_catch, catch_rate.where_catch) %></td>
+    <td style="width: 20%;"><%= catch_rate.water_bioresource.name %> (<%= catch_rate.water_bioresource.latin_name %>)</td>
     <td style="width: 15%;">
-        <% if catch_rate.length == 0 %>
+        <% if catch_rate.length_dnipro == 0 %>
             -
         <% else %>
-            <%= catch_rate.length %>
+            <%= catch_rate.length_dnipro %>
+        <% end %>
+    </td>
+    <td style="width: 15%;">
+        <% if catch_rate.length_other == 0 %>
+            -
+        <% else %>
+            <%= catch_rate.length_other %>
+        <% end %>
+    </td>
+    <td style="width: 15%;">
+        <% if catch_rate.length_black == 0 %>
+            -
+        <% else %>
+            <%= catch_rate.length_black %>
+        <% end %>
+    </td>
+    <td style="width: 15%;">
+        <% if catch_rate.length_azov == 0 %>
+            -
+        <% else %>
+            <%= catch_rate.length_azov %>
         <% end %>
     </td>
     <% if can? :update, CatchRate %>
-        <td style="width: 15%;">
+        <td style="width: 10%;">
             <%= link_to t('button.edit'), edit_catch_rate_path(catch_rate), class: "btn btn-warning btn-sm" %>
         </td>
     <% end %>
     <% if can? :destroy, CatchRate %>
-        <td style="width: 15%;">
+        <td style="width: 10%;">
             <%= button_to t('button.delete'), catch_rate, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm"%>
         </td>
     <% end %>

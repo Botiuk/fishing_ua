@@ -1,16 +1,11 @@
 class CatchRatesController < ApplicationController
     skip_before_action :authenticate_user!, only: :index
     before_action :set_catch_rate, only: %i[ edit update destroy ]
-    before_action :water_bioresources_formhelper, only: %i[ new create ]
+    before_action :water_bioresources_formhelper, only: %i[ new create edit ]
     authorize_resource
 
-    def index
-        if params[:where_catch].present?
-            @pagy, @where_catch_rates = pagy(CatchRate.includes(:water_bioresource).where(where_catch: params[:where_catch]).ordered, items: 10)
-            @where_catch = params[:where_catch]
-        else
-            @pagy, @catch_rates = pagy(CatchRate.includes(:water_bioresource).ordered, items: 10)
-        end
+    def index        
+        @pagy, @catch_rates = pagy(CatchRate.includes(:water_bioresource).ordered, items: 10)
     rescue Pagy::OverflowError
         redirect_to catch_rates_url(page: 1)
     end
@@ -29,7 +24,7 @@ class CatchRatesController < ApplicationController
     end
 
     def edit
-        @where_catch = @catch_rate.where_catch
+        @water_bioresources += WaterBioresource.where(id: @catch_rate.water_bioresource.id).pluck(:name, :id)
     end
 
     def update
@@ -54,10 +49,11 @@ class CatchRatesController < ApplicationController
     end
 
     def water_bioresources_formhelper
-        @water_bioresources = WaterBioresource.order(:name).pluck(:name, :id)
+        water_bioresources_with_catch_rate_ids = CatchRate.pluck(:water_bioresource_id)
+        @water_bioresources = WaterBioresource.where.not(id: water_bioresources_with_catch_rate_ids).order(:name).pluck(:name, :id)
     end
 
     def catch_rate_params
-        params.require(:catch_rate).permit(:water_bioresource_id, :where_catch, :length)
+        params.require(:catch_rate).permit(:water_bioresource_id, :length_dnipro, :length_other, :length_black, :length_azov)
     end
 end
