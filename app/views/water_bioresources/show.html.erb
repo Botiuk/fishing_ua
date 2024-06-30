@@ -15,9 +15,16 @@
         <div class="col-3 text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
     <% end %>
 
-    <div class="col-md-6">
+    <div class="col-md-6">        
         <% if @catch_rate.present? %>
-            <h5 class="mb-0"><%= t('.catch_rates') %></h5>
+            <h5 class="mb-0"><%= t('.catch_rates') %>
+            <% if can? :update, CatchRate %>
+                <%= link_to t('button.edit'), edit_catch_rate_path(@catch_rate), class: "btn btn-warning btn-sm" %>
+            <% end %>
+            <% if can? :destroy, CatchRate %>
+                <%= button_to t('button.delete'), @catch_rate, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm", form: {style: 'display:inline-block;'} %>
+            <% end %>
+            </h5> 
             <b><%= t('.length_dnipro') %>: </b>
                 <% if @catch_rate.length_dnipro == 0 %>
                     -
@@ -46,14 +53,21 @@
                     <%= @catch_rate.length_azov %> <%= t('.santimetr') %>
                 <% end %>
             <br>
-        <% else %>
+        <% else %>            
+            <% if can? :create, CatchRate %>
+                <h5 class="mb-0"><%= t('.catch_rates') %>
+                <%= link_to t('button.add.catch_rate'), new_catch_rate_path, :method => :post, class: "btn btn-dark text-info btn-sm" %>
+                </h5>
+            <% end %>
             <b class="text-danger"><%= t('.catch_forbiden') %></b><br>
         <% end %>
+
         <% if can? :update, WaterBioresource %>
             <b class="mb-0"><%= t('.resource_type') %></b> <%= WaterBioresource.human_enum_name(:resource_type, @water_bioresource.resource_type) %><br>
         <% end %>
-        <% if @water_bioresource.resource_type == "other_fish" && @catch_rates.present? %>
-            <b><%= t('.day_rate') %></b><%= t('.day_rate_other') %>
+
+        <% if @water_bioresource.resource_type == "other_fish" && @catch_rate.present? %>
+            <b><%= t('.day_rate') %></b><%= t('.day_rate_other') %>            
         <% else %>
             <% if @water_bioresource.day_rate.present? %>
                 <b><%= t('.day_rate') %></b>
@@ -67,10 +81,35 @@
                     <% end %>
                     <%= DayRate.human_enum_name(:amount_type, @water_bioresource.day_rate.amount_type) %>
                 <% end %>
+                <% if can? :update, DayRate %>
+                    <%= link_to t('button.edit'), edit_day_rate_path(@water_bioresource.day_rate), class: "btn btn-warning btn-sm" %>
+                <% end %>
+                <% if can? :destroy, DayRate %>
+                    <%= button_to t('button.delete'), @water_bioresource.day_rate, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm", form: {style: 'display:inline-block;'} %>
+                <% end %>
+            <% else %>
+                <% if can? :create, DayRate %>
+                    <b><%= t('.day_rate') %></b>
+                    <%= link_to t('button.add.day_rate'), new_day_rate_path, :method => :post, class: "btn btn-dark text-info btn-sm" %>
+                    <br>
+                <% end %>
             <% end %>
         <% end %>
         <% if @rate_penalty.present? %>
-            <h5 class="text-danger"><%= t('.rate_penalty') %> <%= @rate_penalty %> <%= t('.money') %></h5>
+            <h5 class="text-danger"><%= t('.rate_penalty') %> <%= @rate_penalty.money %> <%= t('.money') %>
+                <% if can? :update, RatePenalty %>
+                    <%= link_to t('button.edit'), edit_rate_penalty_path(@rate_penalty), class: "btn btn-warning btn-sm" %>
+                <% end %>
+                <% if can? :destroy, RatePenalty %>
+                        <%= button_to t('button.delete'), @rate_penalty, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm" , form: {style: 'display:inline-block;'} %>
+                <% end %>
+            </h5>
+        <% else %>
+            <% if can? :create, RatePenalty %>
+                <h5><%= t('.rate_penalty') %>
+                    <%= link_to t('button.add.rate_penalty'), new_rate_penalty_path, :method => :post, class: "btn btn-dark text-info btn-sm" %>
+                </h5>
+            <% end %>
         <% end %>
     </div>
 </div>

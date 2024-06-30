@@ -24,7 +24,7 @@ class WaterBioresourcesController < ApplicationController
 
     def show
         @catch_rate = CatchRate.where(water_bioresource_id: @water_bioresource.id).take
-        @rate_penalty = RatePenalty.where(water_bioresource_id: @water_bioresource.id).pluck(:money).join
+        @rate_penalty = RatePenalty.where(water_bioresource_id: @water_bioresource.id).take
     end
 
     def edit
