@@ -123,9 +123,9 @@ RSpec.describe "CatchRates", type: :request do
     end
 
     it "can PUT update" do
-      catch_rate = create(:catch_rate, length: 11.1)
-      put catch_rate_path(catch_rate), params: { catch_rate: {length: 22.2} }
-      expect(catch_rate.reload.length).to eq(22.2)
+      catch_rate = create(:catch_rate, length_dnipro: 11.1)
+      put catch_rate_path(catch_rate), params: { catch_rate: {length_dnipro: 22.2} }
+      expect(catch_rate.reload.length_dnipro).to eq(22.2)
       expect(response).to redirect_to(catch_rates_url)
       expect(flash[:notice]).to include(I18n.t('notice.update.catch_rate'))
     end

@@ -34,7 +34,7 @@ class CatchesController < ApplicationController
         if @catch.catch_result == "pick_up" && @catch.water_bioresource.present?
             rate_length = CatchRate.rate_length(@catch.water_bioresource.id, @catch.fishing_place.where_catch)
             if rate_length.present?
-                if @catch.catch_length >= rate_length.length                  
+                if @catch.catch_length >= rate_length.to_f                  
                     catch_day_rate = DayRate.where(water_bioresource_id: @catch.water_bioresource.id).first
                     if catch_day_rate.present?
                         if catch_day_rate.catch_amount == 0

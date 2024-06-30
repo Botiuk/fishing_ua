@@ -13,71 +13,37 @@
     <% end %>
 </div>
 
-<div class="text-center">
-    <% if @where_catch.blank? %>
-        <%= link_to t('.all'), catch_rates_path, class: "btn btn-secondary btn-sm mx-auto my-1" %>
-    <% else %>
-        <%= link_to t('.all'), catch_rates_path, class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
-    <% end %>
-    <% if @where_catch == "dnipro" %>
-        <%= link_to t('.dnipro'), catch_rates_path(where_catch: "dnipro"), class: "btn btn-secondary btn-sm mx-auto my-1" %>
-    <% else %>
-        <%= link_to t('.dnipro'), catch_rates_path(where_catch: "dnipro"), class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
-    <% end %>
-    <% if @where_catch == "other" %>
-        <%= link_to t('.other'), catch_rates_path(where_catch: "other"), class: "btn btn-secondary btn-sm mx-auto my-1" %>
-    <% else %>
-        <%= link_to t('.other'), catch_rates_path(where_catch: "other"), class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
-    <% end %>
-    <% if @where_catch == "black" %>
-        <%= link_to t('.black'), catch_rates_path(where_catch: "black"), class: "btn btn-secondary btn-sm mx-auto my-1" %>
-    <% else %>
-        <%= link_to t('.black'), catch_rates_path(where_catch: "black"), class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
-    <% end %>
-    <% if @where_catch == "azov" %>
-        <%= link_to t('.azov'), catch_rates_path(where_catch: "azov"), class: "btn btn-secondary btn-sm mx-auto my-1" %>
-    <% else %>
-        <%= link_to t('.azov'), catch_rates_path(where_catch: "azov"), class: "btn btn-outline-secondary btn-sm mx-auto my-1" %>
-    <% end %>
-</div>
-
 <% if @catch_rates.present? %>
     <div class="table-responsive">
         <table class="table align-middle table-primary table-striped">
             <tr class="text-center">
-                <th style="width: 30%;"><%= t('.water_bioresource') %></th>
-                <th style="width: 15%;"><%= t('.where_catch') %></th>
-                <th style="width: 15%;"><%= t('.length') %></th>
+                <th style="width: 20%;", rowspan="3"><%= t('.water_bioresource') %></th>
+                <th style="width: 60%,", colspan="4"><%= t('.length') %></th>
             <% if can? :update, CatchRate %>
-                <th style="width: 15%;"></th>
+                <th style="width: 10%;", rowspan="3"></th>
             <% end %>
             <% if can? :destroy, CatchRate %>
-                <th style="width: 15%;"></th>
+                <th style="width: 10%;", rowspan="3"></th>
             <% end %>
+            </tr>
+            <tr class="text-center">
+                <th style="width: 30%,", colspan="2"><%= t('.length_inner') %></th>
+                <th style="width: 15%;", rowspan="2"><%= t('.length_black') %></th>
+                <th style="width: 15%;",  rowspan="2"><%= t('.length_azov') %></th>
+            </tr>
+            <tr class="text-center">
+                <th style="width: 15%;"><%= t('.length_dnipro') %></th>
+                <th style="width: 15%;"><%= t('.length_other') %></th>
             </tr>
             <% @catch_rates.each do |catch_rate| %>
                 <%= render catch_rate %>
             <% end %>
         </table>
     </div>
-<% elsif @where_catch_rates.present? %>
-    <table class="table align-middle table-primary table-striped">
-            <tr class="text-center">
-                <th style="width: 45%;"><%= t('.water_bioresource') %></th>
-                <th style="width: 25%;"><%= t('.length') %></th>
-                <% if can? :update, CatchRate %>
-                    <th style="width: 15%;"></th>
-                <% end %>
-                <% if can? :destroy, CatchRate %>
-                    <th style="width: 15%;"></th>
-                <% end %>
-            </tr>
-            <% @where_catch_rates.each do |where_catch_rate| %>
-                <%= render 'catch_rates/where_catch', catch_rate: where_catch_rate  %>
-            <% end %>
-        </table>
+    <%= render 'shared/pagy' %>
+    <div class="row mb-2">
+        <div class="col"><%= t('.subtitle_html') %></div>
+    </div>
 <% else %>
     <p class="fw-semibold text-danger text-center"><%= t('.catch_rates_empty') %></p>
 <% end %>
-
-<%= render 'shared/pagy' %>

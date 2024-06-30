@@ -1,7 +1,7 @@
 <div class="row mb-2">
     <div class="col"><h4><%= @water_bioresource.name %> <em>(<%= @water_bioresource.latin_name %>)</em></h4></div>
     <% if can? :create, Catch %>
-        <div class="col text-end">            
+        <div class="col text-end">
             <%= link_to t('button.add.catch'), new_catch_path(water_bioresource_id: @water_bioresource.id), :method => :post, class: "btn btn-success" %>
         </div>
     <% end %>
@@ -15,18 +15,37 @@
         <div class="col-3 text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
     <% end %>
 
-    <div class="col-md-6">        
-        <% if @catch_rates.present? %>
+    <div class="col-md-6">
+        <% if @catch_rate.present? %>
             <h5 class="mb-0"><%= t('.catch_rates') %></h5>
-            <% @catch_rates.each_pair do |key_where_catch, value_length| %>
-                <b><%= CatchRate.human_enum_name(:where_catch, key_where_catch) %>: </b>
-                <% if value_length == 0 %>
+            <b><%= t('.length_dnipro') %>: </b>
+                <% if @catch_rate.length_dnipro == 0 %>
                     -
                 <% else %>
-                    <%= value_length %> <%= t('.santimetr') %>
+                    <%= @catch_rate.length_dnipro %> <%= t('.santimetr') %>
                 <% end %>
-                <br>
-            <% end %>
+            <br>
+            <b><%= t('.length_other') %>: </b>
+                <% if @catch_rate.length_other == 0 %>
+                    -
+                <% else %>
+                    <%= @catch_rate.length_other %> <%= t('.santimetr') %>
+                <% end %>
+            <br>
+            <b><%= t('.length_black') %>: </b>
+                <% if @catch_rate.length_black == 0 %>
+                    -
+                <% else %>
+                    <%= @catch_rate.length_black %> <%= t('.santimetr') %>
+                <% end %>
+            <br>
+            <b><%= t('.length_azov') %>: </b>
+                <% if @catch_rate.length_azov == 0 %>
+                    -
+                <% else %>
+                    <%= @catch_rate.length_azov %> <%= t('.santimetr') %>
+                <% end %>
+            <br>
         <% else %>
             <b class="text-danger"><%= t('.catch_forbiden') %></b><br>
         <% end %>

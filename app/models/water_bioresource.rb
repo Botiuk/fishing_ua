@@ -1,7 +1,7 @@
 class WaterBioresource < ApplicationRecord
     has_one :rate_penalty
     has_one :day_rate
-    has_many :catch_rates
+    has_one :catch_rate
     has_many :catches
     
     has_one_attached :bioresource_photo

@@ -3,22 +3,32 @@
 
     <div class="container-fluid">
         <div class="row">
-            <% unless @where_catch.present? %>
-                <div class="col-md-7">
-                    <%= form.label :water_bioresource_id, t('.water_bioresource'), style: "display: block" %>
-                    <%= select(:catch_rate, :water_bioresource_id, options_for_select(@water_bioresources, :selected => form.object.water_bioresource_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
-                </div>
-
-                <div class="col-md-4">
-                    <%= form.label :where_catch, t('.where_catch'), style: "display: block" %>
-                    <%= form.select :where_catch, CatchRate.where_catches.keys.map{ |key| [CatchRate.human_enum_name(:where_catch, key), key] }, {:prompt => t('.prompt'), :selected => form.object.where_catch}, {:class => "form-select"} %>
-                </div>
-            <% end %>
-
             <div class="col-md-7">
-                <%= form.label :length, t('.length'), style: "display: block" %>
-                <%= form.number_field :length, value: form.object.length || 0, min: 0, step: 0.1, class: "form-control" %>
+                <%= form.label :water_bioresource_id, t('.water_bioresource'), style: "display: block" %>
+                <%= select(:catch_rate, :water_bioresource_id, options_for_select(@water_bioresources, :selected => form.object.water_bioresource_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
             </div>
+            
+            <div class="col-md-6">
+                <%= form.label :length_dnipro, t('.length_dnipro'), style: "display: block" %>
+                <%= form.number_field :length_dnipro, value: form.object.length_dnipro, step: 0.1, min: 0, max: 999.9, class: "form-control" %>
+            </div>
+
+            <div class="col-md-6">
+                <%= form.label :length_other, t('.length_other'), style: "display: block" %>
+                <%= form.number_field :length_other, value: form.object.length_other, step: 0.1, min: 0, max: 999.9, class: "form-control" %>
+            </div>
+
+            <div class="col-md-6">
+                <%= form.label :length_black, t('.length_black'), style: "display: block" %>
+                <%= form.number_field :length_black, value: form.object.length_black, step: 0.1, min: 0, max: 999.9, class: "form-control" %>
+            </div>
+
+            <div class="col-md-6">
+                <%= form.label :length_azov, t('.length_azov'), style: "display: block" %>
+                <%= form.number_field :length_azov, value: form.object.length_azov, step: 0.1, min: 0, max: 999.9, class: "form-control" %>
+            </div>
+
+            <div class="col-12 my-2"><%= t('.day_rate_instruction') %></div>
         </div>
 
         <div class="row mt-2">

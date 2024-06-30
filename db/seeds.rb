@@ -82,23 +82,18 @@ when "development"
     end
 
     (1..15).each do |water_bioresource_id|
-        (1..3).each do |where_catch|
-            CatchRate.create(
-                water_bioresource_id: water_bioresource_id,
-                where_catch: where_catch,
-                length: Faker::Number.decimal(l_digits: 2, r_digits: 1)
-            )
-        end
         CatchRate.create(
             water_bioresource_id: water_bioresource_id,
-            where_catch: 0,
-            length: [0.0, 5.5, 10.1].sample
+            length_dnipro: [nil, 0.0, 5.5, 10.1].sample,
+            length_other: Faker::Number.decimal(l_digits: 2, r_digits: 1),
+            length_black: Faker::Number.decimal(l_digits: 2, r_digits: 1),
+            length_azov: Faker::Number.decimal(l_digits: 2, r_digits: 1)
         )
     end
 
     water_bioresource_small_fish_ids = WaterBioresource.where(resource_type: "small_fish").pluck(:id)
     water_bioresource_invertebrate_ids = WaterBioresource.where(resource_type: "invertebrate").pluck(:id)
-    water_bioresource_with_catch_rate_ids = CatchRate.pluck(:water_bioresource_id).uniq
+    water_bioresource_with_catch_rate_ids = CatchRate.pluck(:water_bioresource_id)
     water_bioresource_ids = water_bioresource_small_fish_ids & water_bioresource_with_catch_rate_ids
     water_bioresource_ids.each do |water_bioresource_id|
         DayRate.create(
@@ -122,7 +117,7 @@ when "development"
             FishingPlace.create(
                 name: Faker::Lorem.unique.word.capitalize,
                 description: Faker::Lorem.paragraph,
-                where_catch: CatchRate.where_catches.keys.sample,
+                where_catch: FishingPlace.where_catches.keys.sample,
                 user_id: user_id
             )
         end
