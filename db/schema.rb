@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_050700) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_30_061935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,10 +54,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_050700) do
 
   create_table "catch_rates", force: :cascade do |t|
     t.bigint "water_bioresource_id", null: false
-    t.integer "where_catch"
-    t.decimal "length", precision: 3, scale: 1, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "length_dnipro", precision: 3, scale: 1
+    t.decimal "length_other", precision: 3, scale: 1
+    t.decimal "length_black", precision: 3, scale: 1
+    t.decimal "length_azov", precision: 3, scale: 1
     t.index ["water_bioresource_id"], name: "index_catch_rates_on_water_bioresource_id"
   end
 

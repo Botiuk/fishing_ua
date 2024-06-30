@@ -38,13 +38,10 @@ uk:
         money: "Поле 'Штраф, грн'"
       catch_rate:
         water_bioresource: "Поле 'Водний біоресурс'"
-        length: "Поле 'Довжина, см'"
-        where_catch: "Поле 'Де зловлено'"
-        where_catches:
-          dnipro: "Дніпровські водосховища"
-          other: "Інші внутрішні об'єкти"
-          black: "Чорноморський регіон"
-          azov: "Азовський регіон"
+        length_dnipro: "Поле 'Дніпровські водосховища'"
+        length_other: "Поле 'Інші внутрішні об'єкти'"
+        length_black: "Поле 'Чорноморський регіон'"
+        length_azov: "Поле 'Азовський регіон'"
       fishing_place:
         name: "'Назва локації'"
         description: "Поле 'Опис'"
