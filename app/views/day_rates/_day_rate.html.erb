@@ -1,5 +1,9 @@
 <tr id="<%= dom_id day_rate %>" class="text-center">
-    <td style="width: 40%;"><%= day_rate.water_bioresource.name %> (<%= day_rate.water_bioresource.latin_name %>)</td>
+    <td style="width: 40%;">
+        <%= link_to water_bioresource_path(day_rate.water_bioresource), class: "text-reset text-decoration-none" do %>
+            <%= day_rate.water_bioresource.name %> (<%= day_rate.water_bioresource.latin_name %>)
+        <% end %>
+    </td>
     <td style="width: 30%;">
         <% if  day_rate.catch_amount == 0 %>
             -

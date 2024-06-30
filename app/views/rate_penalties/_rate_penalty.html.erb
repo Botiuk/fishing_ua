@@ -1,5 +1,9 @@
 <tr id="<%= dom_id rate_penalty %>" class="text-center">
-    <td style="width: 50%;"><%= rate_penalty.water_bioresource.name %> (<%= rate_penalty.water_bioresource.latin_name %>)</td>
+    <td style="width: 50%;">
+        <%= link_to water_bioresource_path(rate_penalty.water_bioresource), class: "text-reset text-decoration-none" do %>
+            <%= rate_penalty.water_bioresource.name %> (<%= rate_penalty.water_bioresource.latin_name %>)
+        <% end %>
+    </td>
     <td style="width: 20%;"><%= rate_penalty.money %></td>
     <% if can? :update, RatePenalty %>
         <td style="width: 15%;">
