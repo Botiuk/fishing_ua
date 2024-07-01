@@ -424,3 +424,30 @@ uk:
       tool_equipment: "Назва снасті:"
       tool_bait: "Назва приманки:"
       prompt: "-- виберіть зі списку --"
+
+  devise:
+    registrations:
+      new:
+        characters_min: "символів мінімум"
+        sign_up: "Зареєструватися"
+      edit:
+        title: "Редагувати профіль"
+        new_password: "Новий пароль"
+        new_password_blank: "залиште поле пустим, якщо не хочете змінювати пароль"
+        new_password_confirmation: "Підтвердження нового паролю"
+        characters_min: "символів мінімум"
+        current_password_confirmation: "для підтвердження змін, введіть поточний пароль"
+        title_delete: "Видалити мій профіль і всі мої дані"
+        unhappy: "Не сподобалось?"
+    sessions:
+      new:
+        log_in: "Ввійти"
+    shared:
+      links:
+        forgot_password: "Забули пароль?"
+        log_in: "Ввійти"
+        sign_up: "Зареєструватися"
+    passwords:
+      new:
+        title: "Забули пароль?"
+        submit: "Надіслати мені іструкції для скидання паролю"
