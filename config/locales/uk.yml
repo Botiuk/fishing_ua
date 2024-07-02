@@ -364,6 +364,7 @@ uk:
       end_at: "Завершено:"
       fishing_place: "Локація:"
       end_at_empty: "активна"
+      duration: "Тривалість:"
       catches_empty: "Щоб клювало, треба намочити сак!"
       catch_time: "Коли зловлено"
       water_bioresource: "Що зловлено"

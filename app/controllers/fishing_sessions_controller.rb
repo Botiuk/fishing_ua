@@ -32,6 +32,7 @@ class FishingSessionsController < ApplicationController
 
     def show    
         @pagy,  @catches = pagy(Catch.includes(:water_bioresource).statistic_all_records(current_user.id, "fishing_session", @fishing_session.id), items: 10)
+        fishing_session_duration
         if @catches.present?
             @catches_max_weight = Catch.statistic_max_weight(current_user.id, "fishing_session", @fishing_session.id)
             @catches_max_length = Catch.statistic_max_length(current_user.id, "fishing_session", @fishing_session.id)
@@ -75,5 +76,17 @@ class FishingSessionsController < ApplicationController
 
     def fishing_session_params
         params.require(:fishing_session).permit(:start_at, :end_at, :user_id, :fishing_place_id)
+    end
+
+    def fishing_session_duration        
+        if @fishing_session.end_at == nil
+            duration_seconds = Time.now - @fishing_session.start_at
+        else
+            duration_seconds = @fishing_session.end_at - @fishing_session.start_at
+        end
+        duration_days = (duration_seconds / 86400).to_i
+        duration_day_seconds = (duration_seconds % 86400)
+        duration_time = Time.at(duration_day_seconds).utc.strftime "%H:%M"    
+        @duration = "#{duration_days} #{I18n.t('statistic.duration_days')} #{duration_time}"
     end
 end
