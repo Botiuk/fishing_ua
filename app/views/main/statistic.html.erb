@@ -3,7 +3,7 @@
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <button class="nav-link active" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all" aria-selected="true"><%= t('statistic.all') %></button>
-    <% if @catches_count.present? %>
+    <% if @catches_count != 0 %>
       <button class="nav-link" id="nav-water_bioresources-tab" data-bs-toggle="tab" data-bs-target="#nav-water_bioresources" type="button" role="tab" aria-controls="nav-water_bioresources" aria-selected="false"><%= t('navbar.water_bioresources') %></button>
       <button class="nav-link" id="nav-fishing_places-tab" data-bs-toggle="tab" data-bs-target="#nav-fishing_places" type="button" role="tab" aria-controls="nav-fishing_places" aria-selected="false"><%= t('sidebar.fishing_places') %></button>
       <button class="nav-link" id="nav-equipments-tab" data-bs-toggle="tab" data-bs-target="#nav-equipments" type="button" role="tab" aria-controls="nav-equipments" aria-selected="false"><%= t('sidebar.equipments') %></button>
@@ -20,13 +20,21 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab" tabindex="0">
     <div class="my-2">
-        <% if @catches_count.present? %>
+        <% if @catches_count != 0 %>
             <b><%= t('statistic.catch_all') %></b> <%= @catches_count %> <br>
             <b><%= t('statistic.catch_max_weight') %></b> <%= @catches_max_weight %> <br>
             <b><%= t('statistic.catch_max_length') %></b> <%= @catches_max_length %> <br>
         <% else %>
             <p class="fw-semibold text-danger mt-2"><%= t('statistic.catches_empty') %></p>
         <% end %>
+        <b><%= t('statistic.fishing_sessions_count') %></b> <%= @fishing_sessions_count %> <br>
+        <% if @fishing_sessions_count != 0 %>
+            <b><%= t('statistic.fishing_session_durations') %></b> <%= @fishing_sessions_duration %> <br>
+        <% end %>
+        <b><%= t('statistic.fishing_places_count') %></b> <%= @fishing_places_count %> <br>
+        <b><%= t('statistic.equipments_count') %></b> <%= @equipments_count %> <br>
+        <b><%= t('statistic.baits_count') %></b> <%= @baits_count %> <br>
+        <b><%= t('statistic.registration_date') %></b> <%= I18n.l(current_user.created_at) %> <br>
     </div>
   </div>
 

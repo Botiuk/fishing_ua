@@ -202,6 +202,13 @@ uk:
       baits_empty: "До уловів недодано жодної приманки"
       other_baits_empty: "До уловів додано лише цю приманку"
       all: "Загальна"
+      fishing_places_count: "Всього локацій:"
+      fishing_sessions_count: "Всього риболовель:"
+      equipments_count: "Всього снастей:"
+      baits_count: "Всього приманок:"
+      fishing_session_durations: "Загальна тривалість всіх риболовель:"
+      duration_days: "д."
+      registration_date: "На Рибалка.ua з:"
 
   main:
     index:
@@ -442,7 +449,7 @@ uk:
         characters_min: "символів мінімум"
         current_password_confirmation: "для підтвердження змін, введіть поточний пароль"
         title_delete: "Видалити мій профіль і всі мої дані"
-        unhappy: "Не сподобалось?"
+        unhappy: "Не сподобалась Рибалка.ua?"
     sessions:
       new:
         log_in: "Ввійти"
