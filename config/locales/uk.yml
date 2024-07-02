@@ -179,6 +179,7 @@ uk:
     baits: "Приманки"
     profile: "Профіль"
     edit_profile: "Редагувати"
+    statistic_profile: "Статистика"
 
   statistic:
       catches_empty: "Поки не має уловів, тому інші вкладки статистики неактивні"
@@ -200,10 +201,13 @@ uk:
       other_equipments_empty: "До уловів додано лише цю снасть"
       baits_empty: "До уловів недодано жодної приманки"
       other_baits_empty: "До уловів додано лише цю приманку"
+      all: "Загальна"
 
   main:
     index:
       welcome: "Вітаємо на стартовій сторінці!"
+    statistic:
+      title: "Статистика профілю"
 
   water_bioresources:
     index:

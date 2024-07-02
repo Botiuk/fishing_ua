@@ -11,7 +11,7 @@ class Ability
     can :read, RatePenalty
     can :read, DayRate
 
-    if user.present?
+    if user.present?      
       can [:read, :create, :update, :statistic], FishingPlace, user_id: user.id
       can :manage, Tool, user_id: user.id
       can [:read, :create, :update], FishingSession, user_id: user.id      
@@ -21,7 +21,8 @@ class Ability
       can [:create, :destroy], ToolCatch do |tool_catch|
         tool_catch.tool.user.id == user.id
       end
-      can [:statistic], WaterBioresource
+      can :statistic, WaterBioresource
+      can :statistic, :main
 
     #   if user.staff?
     #     can [:read, :create, :update], News

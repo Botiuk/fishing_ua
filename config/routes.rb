@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'water_bioresources/statistic', to: 'water_bioresources#statistic'
   get 'fishing_places/statistic', to: 'fishing_places#statistic'
   get 'tools/statistic', to: 'tools#statistic'
+  get 'main/statistic', to: 'main#statistic'
 
   resources :water_bioresources, except: :destroy
   resources :rate_penalties, except: :show

@@ -13,15 +13,18 @@ class Tool < ApplicationRecord
   def self.statistic_all_tool_type_records(user_id, search_type, search_params, tool_type)
     case search_type
     when "water_bioresource"
-      Tool.joins(:catches).where(catches: {water_bioresource_id: search_params}).where(user_id: user_id, tool_type: tool_type).group(:name).count
+      Tool.joins(:catches).where(catches: {water_bioresource_id: search_params}).where(user_id: user_id, tool_type: tool_type).order(:name).group(:name).count
     when "fishing_place"
       catches_ids = Catch.joins(:fishing_place).where(fishing_place: {id: search_params}).pluck(:id)
-      Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).group(:name).count
+      Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).order(:name).group(:name).count
     when "tool"
       catches_ids = Catch.joins(:tools).where(tools: {id: search_params}).pluck(:id)
-      Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).where.not(id: search_params).group(:name).count
+      Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).where.not(id: search_params).order(:name).group(:name).count
     when "fishing_session"
-      Tool.joins(:catches).where(catches: {fishing_session_id: search_params}).where(tool_type: tool_type).group(:name).count
+      Tool.joins(:catches).where(catches: {fishing_session_id: search_params}).where(tool_type: tool_type).order(:name).group(:name).count
+    when "user"
+      catches_ids = Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).pluck(:id)
+      Tool.joins(:catches).where(catches: {id: catches_ids}).where(tool_type: tool_type).order(:name).group(:name).count
     end
   end
 end

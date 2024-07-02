@@ -1,0 +1,125 @@
+<h4><%= t('.title') %></h4>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all" type="button" role="tab" aria-controls="nav-all" aria-selected="true"><%= t('statistic.all') %></button>
+    <% if @catches_count.present? %>
+      <button class="nav-link" id="nav-water_bioresources-tab" data-bs-toggle="tab" data-bs-target="#nav-water_bioresources" type="button" role="tab" aria-controls="nav-water_bioresources" aria-selected="false"><%= t('navbar.water_bioresources') %></button>
+      <button class="nav-link" id="nav-fishing_places-tab" data-bs-toggle="tab" data-bs-target="#nav-fishing_places" type="button" role="tab" aria-controls="nav-fishing_places" aria-selected="false"><%= t('sidebar.fishing_places') %></button>
+      <button class="nav-link" id="nav-equipments-tab" data-bs-toggle="tab" data-bs-target="#nav-equipments" type="button" role="tab" aria-controls="nav-equipments" aria-selected="false"><%= t('sidebar.equipments') %></button>
+      <button class="nav-link" id="nav-baits-tab" data-bs-toggle="tab" data-bs-target="#nav-baits" type="button" role="tab" aria-controls="nav-baits" aria-selected="false"><%= t('sidebar.baits') %></button>
+    <% else %>
+      <button class="nav-link" id="nav-water_bioresources-tab" data-bs-toggle="tab" data-bs-target="#nav-water_bioresources" type="button" role="tab" aria-controls="nav-water_bioresources" aria-selected="false" disabled><%= t('navbar.water_bioresources') %></button>
+      <button class="nav-link" id="nav-fishing_places-tab" data-bs-toggle="tab" data-bs-target="#nav-fishing_places" type="button" role="tab" aria-controls="nav-fishing_places" aria-selected="false" disabled><%= t('sidebar.fishing_places') %></button>
+      <button class="nav-link" id="nav-equipments-tab" data-bs-toggle="tab" data-bs-target="#nav-equipments" type="button" role="tab" aria-controls="nav-equipments" aria-selected="false" disabled><%= t('sidebar.equipments') %></button>
+      <button class="nav-link" id="nav-baits-tab" data-bs-toggle="tab" data-bs-target="#nav-baits" type="button" role="tab" aria-controls="nav-baits" aria-selected="false" disabled><%= t('sidebar.baits') %></button>
+    <% end %>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab" tabindex="0">
+    <div class="my-2">
+        <% if @catches_count.present? %>
+            <b><%= t('statistic.catch_all') %></b> <%= @catches_count %> <br>
+            <b><%= t('statistic.catch_max_weight') %></b> <%= @catches_max_weight %> <br>
+            <b><%= t('statistic.catch_max_length') %></b> <%= @catches_max_length %> <br>
+        <% else %>
+            <p class="fw-semibold text-danger mt-2"><%= t('statistic.catches_empty') %></p>
+        <% end %>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="nav-water_bioresources" role="tabpanel" aria-labelledby="nav-water_bioresources-tab" tabindex="0">
+    <% if @water_bioresources.present? %>
+      <%= pie_chart @water_bioresources %>
+      <div class="table-responsive mt-2">
+        <table class="table align-middle table-primary table-striped">
+          <tr class="text-center">
+            <th><%= t('statistic.water_bioresource_name') %></th>
+            <% @water_bioresources.each_key do |key| %>
+              <th><%= key %></th>
+            <% end %>
+          </tr>
+          <tr class="text-center">
+            <td><%= t('statistic.quantity') %></td>
+            <% @water_bioresources.each_value do |value| %>
+              <td><%= value %></td>
+            <% end %>
+            </tr>
+        </table>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="nav-fishing_places" role="tabpanel" aria-labelledby="nav-fishing_places-tab" tabindex="0">
+    <% if @fishing_places.present? %>
+      <%= pie_chart @fishing_places %>
+      <div class="table-responsive mt-2">
+        <table class="table align-middle table-primary table-striped">
+          <tr class="text-center">
+            <th><%= t('statistic.location_name') %></th>
+            <% @fishing_places.each_key do |key| %>
+              <th><%= key %></th>
+            <% end %>
+          </tr>
+          <tr class="text-center">
+            <td><%= t('statistic.quantity') %></td>
+            <% @fishing_places.each_value do |value| %>
+              <td><%= value %></td>
+            <% end %>
+            </tr>
+        </table>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="nav-equipments" role="tabpanel" aria-labelledby="nav-equipments-tab" tabindex="0">
+    <% if @equipments.present? %>
+      <%= pie_chart @equipments %>
+      <div class="table-responsive mt-2">
+        <table class="table align-middle table-primary table-striped">
+          <tr class="text-center">
+            <th><%= t('statistic.equipment_name') %></th>
+            <% @equipments.each_key do |key| %>
+              <th><%= key %></th>
+            <% end %>
+          </tr>
+          <tr class="text-center">
+            <td><%= t('statistic.quantity_from') %> <%= @catches_count %>:</td>
+            <% @equipments.each_value do |value| %>
+              <td><%= value %></td>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+    <% else %>
+        <p class="fw-semibold text-danger text-center mt-2"><%= t('statistic.equipments_empty') %></p>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="nav-baits" role="tabpanel" aria-labelledby="nav-baits-tab" tabindex="0">
+    <% if @baits.present? %>
+      <%= pie_chart @baits %>
+      <div class="table-responsive mt-2">
+        <table class="table align-middle table-primary table-striped">
+          <tr class="text-center">
+            <th><%= t('statistic.bait_name') %></th>
+            <% @baits.each_key do |key| %>
+              <th><%= key %></th>
+            <% end %>
+          </tr>
+          <tr class="text-center">
+            <td><%= t('statistic.quantity_from') %> <%= @catches_count %>:</td>
+            <% @baits.each_value do |value| %>
+              <td><%= value %></td>
+            <% end %>
+          </tr>
+        </table>
+      </div>
+    <% else %>
+        <p class="fw-semibold text-danger text-center mt-2"><%= t('statistic.baits_empty') %></p>
+    <% end %>
+  </div>
+</div>
+
