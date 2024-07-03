@@ -80,6 +80,8 @@ uk:
       tool_catch:
         tool: "Поле 'Назва'"
         tool_id: "Додана до улову назва"
+      news_story:
+        title: "Поле 'Заголовок"
 
   notice:
     create:

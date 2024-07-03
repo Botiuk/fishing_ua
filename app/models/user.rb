@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :fishing_places
   has_many :tools
   has_many :fishing_sessions
+  has_many :news_stories
 
   enum :role, { user: 0, staff: 1, admin: 2 }, prefix: true
   after_initialize :set_default_role, if: :new_record?  

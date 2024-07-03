@@ -176,6 +176,28 @@ when "development"
         end
     end
 
+    user_admin_or_staff_ids = User.where(role: ["admin", "staff"]).pluck(:id)
+    15.times do
+        NewsStory.create(
+            title: Faker::Movie.title.capitalize,
+            user_id: user_admin_or_staff_ids.sample
+        )
+    end
+    (1..15).each do |news_story_id|
+        ActiveStorage::Attachment.create!(
+            record_type: 'NewsStory',
+            record_id: news_story_id,
+            name: 'cover',
+            blob_id: 1
+        )
+        ActionText::RichText.create!(
+            record_type: 'NewsStory',
+            record_id: news_story_id,
+            name: 'content',
+            body: Faker::Lorem.paragraph_by_chars
+        )
+    end
+
 when "production"
 
     user = User.where(email: "svetabotiuk@gmail.com").first_or_initialize
