@@ -10,6 +10,7 @@ class Ability
     can :read, CatchRate
     can :read, RatePenalty
     can :read, DayRate
+    can :read, NewsStory
 
     if user.present?      
       can [:read, :create, :update, :statistic], FishingPlace, user_id: user.id
@@ -24,16 +25,16 @@ class Ability
       can :statistic, WaterBioresource
       can :statistic, :main
 
-    #   if user.staff?
-    #     can [:read, :create, :update], News
-    #   end
+      if user.role == "staff"
+        can [:create, :update, :destroy], NewsStory, user_id: user.id
+      end
 
       if user.role == "admin"
         can [:create, :update], WaterBioresource        
         can :manage, CatchRate
         can :manage, RatePenalty
         can :manage, DayRate
-        # can :manage, News
+        can :manage, NewsStory
       end
     end
 

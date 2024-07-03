@@ -1,0 +1,40 @@
+<div class="row mb-2">
+    <div class="col"><h4><%= @news_story.title %></h4></div>
+
+    <div class="col text-end">
+        <% if can? :update, @news_story %>
+            <%= link_to t('button.edit'), edit_news_story_path(@news_story), class: "btn btn-warning" %>
+        <% end %>
+        <% if can? :destroy, @news_story %>
+            <%= button_to t('button.delete'), @news_story, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger", form: {style: 'display:inline-block;'} %>
+        <% end %>
+    </div>
+</div>
+
+<div class="row mx-1 text-center">
+    <% if @news_story.cover.present? %>
+        <div class="col-12">
+            <img class="mw-100" src="<%= cloudinary_url(@news_story.cover.key, height: 200, crop: :scale) %>" >
+        </div>
+    <% else %>
+        <div class="col-3 text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
+    <% end %>
+</div>
+
+<div class="row mx-1">
+    <div class="col mt-1">
+        <% if @news_story.content.present? %>
+            <div style="text-align: justify; text-indent: 15px;">
+                <%= @news_story.content %>
+            </div>
+        <% else %>
+            <%= t('.content_absent') %>
+        <% end %>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col">
+        <%= link_to t('button.all.news_stories'), news_stories_path, class: "btn btn-primary" %>
+    </div>
+</div>

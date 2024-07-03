@@ -1,0 +1,27 @@
+<%= form_with(model: news_story) do |form| %>
+    <%= render 'shared/form_errors_messages', object: form.object %>
+
+    <div class="row g-3">
+        <div class="col-12">
+            <%= form.label :title, t('.title'), style: "display: block" %>
+            <%= form.text_field :title,  placeholder: t('.placeholder.title'), autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class="col-12">
+            <%= form.label :cover, t('.cover'), style: "display: block" %>
+            <%= cl_image_tag news_story.cover.key, class: "w-25 my-2" if news_story.cover.present? %>
+            <%= form.file_field :cover, direct_upload: true, class: "form-control" %>
+        </div>
+
+        <div class="field">
+            <%= form.label :content, t('.content'), style: "display: block" %>
+            <%= form.rich_text_area :content %>
+        </div>
+
+        <div class="col-12">
+            <%= form.button nil, class: "btn btn-success" do %>
+               <%= t('button.submit') %>
+            <% end %>
+        </div>
+    </div>
+<% end %>

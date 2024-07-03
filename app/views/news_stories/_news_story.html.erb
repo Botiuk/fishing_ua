@@ -1,0 +1,26 @@
+<div class="col-sm-4">
+    <div id="<%= dom_id news_story %>">
+        <div class="card text-bg-light mt-2 mb-3">
+            <div class="card-body">
+                <h5 class="card-title mb-1 pb-1">
+                    <%= news_story.title %>
+                </h5>
+                <p class="card-text m-0 p-0 text-center">
+                    <% if news_story.cover.present? %>
+                        <img class="mw-100" src="<%= cloudinary_url(news_story.cover.key, height: 200, crop: :scale) %>" >
+                    <% else %>
+                        <div class="text-center bg-secondary text-white"><br><br><br><%= t('.cover_absent') %><br><br><br><br></div>
+                    <% end %>
+                </p>
+                <div class="row mt-2">
+                    <div class="col md-6 text-center">                        
+                        <%= link_to t('button.show'), news_story_path(news_story), class: "btn btn-info btn-sm" %>
+                        <% if can? :update, news_story %>
+                            <%= link_to t('button.edit'), edit_news_story_path(news_story), class: "btn btn-warning btn-sm" %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

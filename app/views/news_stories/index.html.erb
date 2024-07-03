@@ -1,0 +1,20 @@
+<div class="row mb-2">
+    <div class="col"><h4><%= t('.title') %></h4></div>
+    <% if can? :create, NewsStory %>
+        <div class="col text-end">
+            <%= link_to t('button.add.news_story'), new_news_story_path, :method => :post, class: "btn btn-dark text-info" %>
+        </div>
+    <% end %>
+</div>
+
+<% if @news_stories.present? %>
+    <div class="row">
+        <% @news_stories.each do |news_story| %>
+            <%= render news_story %>
+        <% end %>
+    </div>
+<% else %>
+    <p class="fw-semibold text-danger text-center"><%= t('.news_stories_empty') %></p>
+<% end %>
+
+<%= render 'shared/pagy' %>

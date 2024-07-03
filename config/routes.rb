@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :catches, except: [:edit, :destroy]
   resources :day_rates, except: :show
   resources :tool_catches, only: [:new, :create, :destroy]
+  resources :news_stories
  
   root "main#index"
 end

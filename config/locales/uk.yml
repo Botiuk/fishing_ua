@@ -98,6 +98,7 @@ uk:
       tool_catch:
         equipment: "Снасть до улову додано"
         bait: "Приманку до улову додано"
+      news_story: "Новину додано"
     update:
       water_bioresource: "Водний біоресурс оновлено"
       rate_penalty: "Штраф оновлено"
@@ -109,6 +110,7 @@ uk:
       fishing_session_close: "Риболовлю завершено. Поприбирай за собою!"
       catch: "Улов оновлено"
       day_rate: "Добову норму оновлено"
+      news_story: "Новину оновлено"
     destroy:
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
@@ -118,6 +120,7 @@ uk:
       tool_catch:
         equipment: "Снасть з улову видалено"
         bait: "Приманку з улову видалено"
+      news_story: "Новину видалено"
 
   alert:
     access_denied: "Ви не маєте прав для доступу до цієї сторінки"
@@ -148,6 +151,7 @@ uk:
       fishing_session: "Почати риболовлю"
       catch: "Додати улов"
       day_rate: "Додати добову норму"
+      news_story: "Додати новину"
     close_fishing_session: "Завершити риболовлю"
     close_fishing_session_short: "Завершити"
     close_fishing_session_confirm: "Точно завершити риболовлю?"
@@ -163,6 +167,7 @@ uk:
       water_bioresources: "Всі водні біоресурси"
       fishing_sessions: "Всі риболовлі"
       catches: "Всі улови"
+      news_stories: "Всі новини"
     statistic: "Cтатистика"
     fishing_session: "Риболовля"
 
@@ -465,3 +470,23 @@ uk:
       new:
         title: "Забули пароль?"
         submit: "Надіслати мені іструкції для скидання паролю"
+
+  news_stories:
+    index:
+      title: "Новини"
+      news_stories_empty: "Поки новин немає"
+    news_story:
+      cover_absent: "обкладинка відсутня"
+    new:
+      title: "Нова новина"
+    form:
+      title: "Заголовок новини:"
+      cover: "Обкладинка новини:"
+      content: "Текст новини:"
+      placeholder:
+        title: "Введіть назву новини"
+    edit:
+      title: "Редагувати новину"
+    show:
+      cover_absent: "обкладинка відсутня"
+      content_absent: "Текст новини відсутній"
