@@ -1,0 +1,20 @@
+<h4><%= t('.title') %> "<%= @search_params %>" </h4>
+
+<% if @users.present? %>
+    <div class="table-responsive">
+        <table class="table align-middle table-primary table-striped">
+            <tr class="text-center">
+                <th style="width: 20%;"><%= t('.email') %></th>
+                <th style="width: 20%;"><%= t('.role') %></th>
+                <th colspan="3", style="width: 10%;"><%= t('.change_role') %></th>
+            </tr>
+            <% @users.each do |user| %>
+                <%= render user %>
+            <% end %>
+        </table>
+    </div>
+<% else %>
+    <p class="fw-semibold text-danger"><%= t('.search_empty') %></p>
+<% end %>
+
+<%= render 'shared/pagy' %>

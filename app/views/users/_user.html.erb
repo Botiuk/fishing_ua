@@ -1,0 +1,21 @@
+<tr id="<%= dom_id user %>" class="text-center">
+    <td style="width: 20%;"><%= user.email %></td>
+    <td style="width: 20%;">
+        <%= User.human_enum_name(:role, user.role) %>
+    </td>
+    <td style="width: 10%;">
+        <% if user.role != "user" && user.id != current_user.id %>
+            <%= button_to t('button.change_role.user'), user, method: :patch, params: { user: {role: "user"} }, data: { turbo_confirm: t('button.change_role_confirm') }, class: "btn btn-success btn-sm" %>
+        <% end %>
+    </td>
+    <td style="width: 10%;">
+        <% if user.role != "staff" && user.id != current_user.id %>
+            <%= button_to t('button.change_role.staff'), user, method: :patch, params: { user: {role: "staff"} }, data: { turbo_confirm: t('button.change_role_confirm') }, class: "btn btn-warning btn-sm" %>
+        <% end %>
+    </td>
+    <td style="width: 10%;">
+        <% if user.role != "admin" %>
+            <%= button_to t('button.change_role.admin'), user, method: :patch, params: { user: {role: "admin"} }, data: { turbo_confirm: t('button.change_role_confirm') }, class: "btn btn-danger btn-sm" %>
+        <% end %>
+    </td>
+</tr>

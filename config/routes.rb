@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'admin/users/search', to: 'users#search'
+  scope "/admin" do
+    resources :users, only: [:index, :update]
+  end
+
   get 'water_bioresources/statistic', to: 'water_bioresources#statistic'
   get 'fishing_places/statistic', to: 'fishing_places#statistic'
   get 'tools/statistic', to: 'tools#statistic'

@@ -1,0 +1,24 @@
+<h4><%= t('.title') %></h4>
+
+<div class="text-end pb-2">
+    <%= form_tag(admin_users_search_path, :method => "get") do %>
+        <%= label_tag(:email, t('.search_label')) %>
+        <%= text_field_tag(:email, nil, placeholder: t('.search_placeholder')) %>
+        <%= button_tag(t('button.search'), type: "submit", :name => nil, class: "btn btn-primary") %>
+    <% end %>
+</div>
+
+<div class="table-responsive">
+    <table class="table align-middle table-primary table-striped">
+        <tr class="text-center">
+            <th style="width: 20%;"><%= t('.email') %></th>
+            <th style="width: 20%;"><%= t('.role') %></th>
+            <th colspan="3", style="width: 30%;"><%= t('.change_role') %></th>
+        </tr>
+        <% @users.each do |user| %>
+            <%= render user %>
+        <% end %>
+    </table>
+</div>
+
+<%= render 'shared/pagy' %>

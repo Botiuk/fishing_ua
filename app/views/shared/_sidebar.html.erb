@@ -54,6 +54,13 @@
                 <i class="bi bi-coin"></i> <span class="ms-1 d-none d-sm-inline"><%= t('navbar.rate_penalties') %></span>
             <% end %>
         </li>
+        <% if can? :read, User %>
+            <li class="nav-item">
+                <%= link_to users_path, class: "nav-link px-sm-0 px-2" do %>
+                    <i class="bi bi-people"></i> <span class="ms-1 d-none d-sm-inline"><%= t('sidebar.users') %></span>
+                <% end %>
+            </li>
+        <% end %>
     </ul>
 
     <div class="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">

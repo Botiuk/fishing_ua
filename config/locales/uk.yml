@@ -82,6 +82,11 @@ uk:
         tool_id: "Додана до улову назва"
       news_story:
         title: "Поле 'Заголовок"
+      user:
+        roles:
+          user: "Користувач"
+          staff: "Персонал"
+          admin: "Адмін"
 
   notice:
     create:
@@ -111,6 +116,7 @@ uk:
       catch: "Улов оновлено"
       day_rate: "Добову норму оновлено"
       news_story: "Новину оновлено"
+      user_role: "Роль користувача змінено"
     destroy:
       rate_penalty: "Штраф видалено"
       catch_rate: "Норму вилову видалено"
@@ -139,6 +145,7 @@ uk:
         day_weight_now_catch_trophy: ". Трофей, кг: "
         day_weight_now_catch_without_trophy: " В садку без трофею, кг: "
         day_quantity_one_resource: "Кількість штук добового улову даного водного біоресурсу більше норми. В садок класти не можна. Випускай! Добова норма, шт: "
+    search_user: "Для пошуку потрібно ввести в поле хоча б один символ з електронної пошти"
 
   button:
     authorization:
@@ -166,6 +173,12 @@ uk:
     delete_confirm: "Точно видалити?"
     delete_confirm_dependent: "Точно видалити? Буде видалено все, що пов'зано"
     submit: "Підтвердити"
+    search: "Пошук"
+    change_role:
+      user: "Користувач"
+      staff: "Персонал"
+      admin: "Адмін"
+    change_role_confirm: "Точно змінити роль цього користувача?"
     all:
       water_bioresources: "Всі водні біоресурси"
       fishing_sessions: "Всі риболовлі"
@@ -190,6 +203,7 @@ uk:
     profile: "Профіль"
     edit_profile: "Редагувати"
     statistic_profile: "Статистика"
+    users: "Користувачі"
 
   statistic:
       catches_empty: "Поки не має уловів, тому інші вкладки статистики неактивні"
@@ -474,6 +488,21 @@ uk:
       new:
         title: "Забули пароль?"
         submit: "Надіслати мені іструкції для скидання паролю"
+
+  users:
+    index:
+      title: "Користувачі"
+      search_label: "Введіть електронну пошту, або кілька її букв, для пошуку профіля користувача:"
+      search_placeholder: ""
+      email: "Електронна пошта"
+      role: "Роль"
+      change_role: "Змінити роль"
+    search:
+      title: "Пошук профіля користувача за електронною поштою з"
+      search_empty: "Немає даних про профілі користувачів, електронна пошта в яких співпадає з запитом"
+      email: "Електронна пошта"
+      role: "Роль"
+      change_role: "Змінити роль"
 
   news_stories:
     index:

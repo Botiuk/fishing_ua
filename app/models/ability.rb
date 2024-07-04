@@ -35,6 +35,7 @@ class Ability
         can :manage, RatePenalty
         can :manage, DayRate
         can :manage, NewsStory
+        can [:read, :update, :search], User
       end
     end
 
