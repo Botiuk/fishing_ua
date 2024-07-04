@@ -54,7 +54,7 @@ class CatchesController < ApplicationController
                                             render :new, status: :unprocessable_entity
                                         end
                                     else
-                                        flash.now[:alert] = t('alert.create.catch.day_weight_one_resource')
+                                        flash.now[:alert] = t('alert.create.catch.day_weight_one_resource') + "#{catch_day_rate.catch_amount}" + t('alert.create.catch.day_weight_now_catch') + "#{all_day_one_resource_weight}"
                                         render :new, status: :unprocessable_entity
                                     end
                                 else
@@ -70,7 +70,7 @@ class CatchesController < ApplicationController
                                         render :new, status: :unprocessable_entity
                                     end
                                 else
-                                    flash.now[:alert] = t('alert.create.catch.day_quantity_one_resource')
+                                    flash.now[:alert] = t('alert.create.catch.day_quantity_one_resource') + "#{catch_day_rate.catch_amount.to_i}"
                                     render :new, status: :unprocessable_entity
                                 end
                             end
@@ -88,7 +88,7 @@ class CatchesController < ApplicationController
                                         render :new, status: :unprocessable_entity
                                     end
                                 else
-                                    flash.now[:alert] = t('alert.create.catch.day_weight')
+                                    flash.now[:alert] = t('alert.create.catch.day_weight') + t('alert.create.catch.day_weight_now_catch_without_trophy') + "#{(all_day_weight - maximum_weight)}" + t('alert.create.catch.day_weight_now_catch_trophy') + "#{maximum_weight}"
                                     render :new, status: :unprocessable_entity
                                 end
                             else
@@ -104,7 +104,7 @@ class CatchesController < ApplicationController
                         end
                     end
                 else
-                    flash.now[:alert] = t('alert.create.catch.length_rate')
+                    flash.now[:alert] = t('alert.create.catch.length_rate') + "#{rate_length}"
                     render :new, status: :unprocessable_entity
                 end
             else

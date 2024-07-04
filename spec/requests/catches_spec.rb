@@ -85,7 +85,7 @@ RSpec.describe "Catches", type: :request do
       day_rate = create(:day_rate, catch_amount: 1.5, amount_type: "weight", water_bioresource_id: water_bioresource.id)
       catch_one = create(:catch, fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_result: "pick_up", catch_time: DateTime.now, catch_weight: 1.2 )
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_time: DateTime.now, catch_weight: 0.5) }
-      expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_weight_one_resource'))
+      expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_weight_one_resource') + "#{day_rate.catch_amount}" + I18n.t('alert.create.catch.day_weight_now_catch') + "#{catch_one.catch_weight}")
       expect(response).to have_http_status(422)
     end
 
@@ -120,7 +120,7 @@ RSpec.describe "Catches", type: :request do
       day_rate = create(:day_rate, catch_amount: 1.0, amount_type: "quantity", water_bioresource_id: water_bioresource.id)
       catch_one = create(:catch, fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_result: "pick_up", catch_time: DateTime.now)
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_time: DateTime.now) }
-      expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_quantity_one_resource'))
+      expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_quantity_one_resource') + "#{day_rate.catch_amount.to_i}")
       expect(response).to have_http_status(422)
     end
 
@@ -158,7 +158,7 @@ RSpec.describe "Catches", type: :request do
       catch_two = create(:catch, fishing_session_id: fishing_session.id, catch_result: "pick_up", catch_weight: 4.0, catch_time: DateTime.now)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: catch_rate.length_other, catch_weight: 1.5, catch_time: DateTime.now) }
-      expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_weight'))
+      expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.day_weight') + I18n.t('alert.create.catch.day_weight_now_catch_without_trophy') + "#{(catch_one.catch_weight)}" + I18n.t('alert.create.catch.day_weight_now_catch_trophy') + "#{catch_two.catch_weight}")
       expect(response).to have_http_status(422)
     end
 
@@ -189,7 +189,7 @@ RSpec.describe "Catches", type: :request do
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       post catches_path, params: { catch: attributes_for(:catch, catch_result: "pick_up", fishing_session_id: fishing_session.id, water_bioresource_id: water_bioresource.id, catch_length: (catch_rate.length_other - 1)) }
-      expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.length_rate'))
+      expect(flash.now[:alert]).to include(I18n.t('alert.create.catch.length_rate') + "#{catch_rate.length_other}")
       expect(response).to have_http_status(422)
     end
 
