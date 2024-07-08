@@ -13,6 +13,20 @@ RSpec.describe "NewsStories", type: :request do
       expect(response).to be_successful
     end
 
+    it "cannot GET show if published_at == nil and  redirects to the root page" do
+      news_story = create(:news_story, published_at: nil)
+      get news_story_path(news_story)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+    end
+
+    it "cannot GET show if published_at > DateTime.now and  redirects to the root page" do
+      news_story = create(:news_story, published_at: DateTime.now + 5.day)
+      get news_story_path(news_story)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+    end
+
     it "cannot GET new and redirects to the sign_in page" do
       get new_news_story_path
       expect(response).to redirect_to(new_user_session_path)
@@ -44,6 +58,20 @@ RSpec.describe "NewsStories", type: :request do
       expect(response).to be_successful
     end
 
+    it "cannot GET show if published_at == nil and redirects to the root page" do
+      news_story = create(:news_story, published_at: nil)
+      get news_story_path(news_story)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+    end
+
+    it "cannot GET show if published_at > DateTime.now and redirects to the root page" do
+      news_story = create(:news_story, published_at: DateTime.now + 5.day)
+      get news_story_path(news_story)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to include I18n.t('alert.access_denied')
+    end
+
     it "cannot GET new and redirects to the root page" do
       get new_news_story_path
       expect(response).to redirect_to(root_path)
@@ -71,6 +99,18 @@ RSpec.describe "NewsStories", type: :request do
 
     it "can GET show" do
       news_story = create(:news_story)
+      get news_story_path(news_story)
+      expect(response).to be_successful
+    end
+
+    it "can GET show if published_at == nil" do
+      news_story = create(:news_story, published_at: nil)
+      get news_story_path(news_story)
+      expect(response).to be_successful
+    end
+
+    it "can GET show if published_at > DateTime.now" do
+      news_story = create(:news_story, published_at: DateTime.now + 5.day)
       get news_story_path(news_story)
       expect(response).to be_successful
     end
@@ -141,6 +181,18 @@ RSpec.describe "NewsStories", type: :request do
 
     it "can GET show" do
       news_story = create(:news_story)
+      get news_story_path(news_story)
+      expect(response).to be_successful
+    end
+
+    it "can GET show if published_at == nil" do
+      news_story = create(:news_story, published_at: nil)
+      get news_story_path(news_story)
+      expect(response).to be_successful
+    end
+
+    it "can GET show if published_at > DateTime.now" do
+      news_story = create(:news_story, published_at: DateTime.now + 5.day)
       get news_story_path(news_story)
       expect(response).to be_successful
     end

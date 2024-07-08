@@ -1,25 +1,59 @@
-<div class="row mb-2">
-    <div class="col"><h4><%= @news_story.title %></h4></div>
-
-    <div class="col text-end">
-        <% if can? :update, @news_story %>
-            <%= link_to t('button.edit'), edit_news_story_path(@news_story), class: "btn btn-warning" %>
-        <% end %>
-        <% if can? :destroy, @news_story %>
-            <%= button_to t('button.delete'), @news_story, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger", form: {style: 'display:inline-block;'} %>
-        <% end %>
-    </div>
-</div>
-
-<div class="row mx-1 text-center">
-    <% if @news_story.cover.present? %>
-        <div class="col-12">
-            <img class="mw-100" src="<%= cloudinary_url(@news_story.cover.key, height: 200, crop: :scale) %>" >
+<% if @news_story.cover.present? %>
+    <div class="container-image-text">
+        <img class="mw-100" src="<%= cloudinary_url(@news_story.cover.key, height: 200, crop: :scale) %>" style="width:100%;">
+        <div class="header-image-text">
+            <h3>
+                <%= @news_story.title %>
+                <% if can? :update, @news_story %>
+                    <%= link_to t('button.edit'), edit_news_story_path(@news_story), class: "btn btn-warning btn-sm" %>
+                <% end %>
+                <% if can? :destroy, @news_story %>
+                    <%= button_to t('button.delete'), @news_story, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm", form: {style: 'display:inline-block;'} %>
+                <% end %>
+            </h3>
         </div>
-    <% else %>
-        <div class="col-3 text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
-    <% end %>
-</div>
+    </div>
+<% else %>
+    <div class="row mb-2">
+        <div class="col"><h4><%= @news_story.title %></h4></div>
+        <div class="col text-end">
+            <% if can? :update, @news_story %>
+                <%= link_to t('button.edit'), edit_news_story_path(@news_story), class: "btn btn-warning" %>
+            <% end %>
+            <% if can? :destroy, @news_story %>
+                <%= button_to t('button.delete'), @news_story, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger", form: {style: 'display:inline-block;'} %>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+
+<% if @news_story.published_at.present? || (user_signed_in? && current_user.role != "user") %>
+    <div class="row mx-1">
+        <div class="col mt-1 text-secondary text-start">
+            <i class="bi bi-clock"></i>
+            <% if @news_story.published_at.present? %>
+                <%= I18n.l(@news_story.published_at, format: :long) %>
+            <% end %>
+            <% if user_signed_in? && current_user.role != "user" %>
+                <% if @news_story.published_at == nil %>
+                    <div class="btn btn-secondary btn-sm ms-2">
+                        <%= t('.draft') %>
+                    </div>
+                <% end %>
+                <% if @news_story.published_at != nil && @news_story.published_at > DateTime.now %>
+                    <div class="btn btn-primary btn-sm ms-2">
+                        <%= t('.scheduled') %>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+        <% if (user_signed_in? && (current_user.role == "admin" || @news_story.user_id == current_user.id)) %>
+            <div class="col mt-1 text-secondary text-end">
+                <i class="bi bi-person-add"></i> <%= @news_story.user.email %>
+            </div>
+        <% end %>        
+    </div>
+<% end %>
 
 <div class="row mx-1">
     <div class="col mt-1">

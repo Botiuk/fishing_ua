@@ -10,7 +10,9 @@ class Ability
     can :read, CatchRate
     can :read, RatePenalty
     can :read, DayRate
-    can :read, NewsStory
+    can :read, NewsStory do |news_story|
+      news_story.published_at != nil && news_story.published_at <= DateTime.now
+    end
 
     if user.present?      
       can [:read, :create, :update, :statistic], FishingPlace, user_id: user.id
@@ -27,6 +29,7 @@ class Ability
 
       if user.role == "staff"
         can [:create, :update, :destroy], NewsStory, user_id: user.id
+        can :read, NewsStory
       end
 
       if user.role == "admin"

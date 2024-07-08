@@ -7,6 +7,13 @@
             <%= form.text_field :title,  placeholder: t('.placeholder.title'), autofocus: true, class: "form-control" %>
         </div>
 
+        <div class="col-md-4">
+            <%= form.label :published_at, t('.published_at'), style: "display: block" %>
+            <%= form.datetime_local_field :published_at, value: form.object.published_at, min: nil || form.object.published_at || DateTime.now, class: "form-control" %>
+        </div>
+
+        <div class="col-12 my-2"><%= t('.news_story_instruction') %></div>
+
         <div class="col-12">
             <%= form.label :cover, t('.cover'), style: "display: block" %>
             <%= cl_image_tag news_story.cover.key, class: "w-25 my-2" if news_story.cover.present? %>

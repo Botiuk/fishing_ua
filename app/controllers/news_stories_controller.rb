@@ -4,7 +4,11 @@ class NewsStoriesController < ApplicationController
     authorize_resource
 
     def index
-        @pagy, @news_stories = pagy(NewsStory.all.reverse_order, items: 9)
+        if user_signed_in? && current_user.role != "user"
+            @pagy, @news_stories = pagy(NewsStory.all.order(published_at: :desc), items: 9)
+        else
+            @pagy, @news_stories = pagy(NewsStory.where.not(published_at: nil).where.not('published_at > ?', DateTime.now).order(published_at: :desc), items: 9)
+        end
     rescue Pagy::OverflowError
         redirect_to news_stories_url(page: 1)
     end
@@ -51,6 +55,6 @@ class NewsStoriesController < ApplicationController
     end
 
     def news_story_params
-        params.require(:news_story).permit(:title, :cover, :content)
+        params.require(:news_story).permit(:title, :published_at, :cover, :content)
     end
 end
