@@ -180,7 +180,8 @@ when "development"
     15.times do
         NewsStory.create(
             title: Faker::Movie.title.capitalize,
-            user_id: user_admin_or_staff_ids.sample
+            user_id: user_admin_or_staff_ids.sample,
+            published_at: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now + 1.month)
         )
     end
     (1..15).each do |news_story_id|

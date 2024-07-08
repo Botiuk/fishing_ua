@@ -6,9 +6,19 @@ RSpec.describe NewsStory, type: :model do
     expect(news_story).to be_valid
   end
 
-  it "is not valid without a catch_amount" do
+  it "is not valid without a title" do
     news_story = build(:news_story, title: nil)
     expect(news_story).to_not be_valid
+  end
+
+  it "is not valid without a user_id" do
+    news_story = build(:news_story, user_id: nil)
+    expect(news_story).to_not be_valid
+  end
+
+  it "is valid without a published_at" do
+    news_story = build(:news_story, published_at: nil)
+    expect(news_story).to be_valid
   end
 
   it "is not valid with a small first letter in title" do
