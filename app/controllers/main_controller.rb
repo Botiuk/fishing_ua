@@ -3,6 +3,7 @@ class MainController < ApplicationController
     authorize_resource :class => false
 
     def index
+        @news_stories = NewsStory.where.not(published_at: nil).where.not('published_at > ?', DateTime.now).order(published_at: :desc).limit(3)
     end
 
     def statistic

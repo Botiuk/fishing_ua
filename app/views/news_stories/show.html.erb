@@ -3,7 +3,7 @@
         <img class="mw-100" src="<%= cloudinary_url(@news_story.cover.key, height: 200, crop: :scale) %>" style="width:100%;">
         <div class="header-image-text">
             <h3>
-                <%= @news_story.title %>
+                <%= @news_story.title.truncate(200) %>
                 <% if can? :update, @news_story %>
                     <%= link_to t('button.edit'), edit_news_story_path(@news_story), class: "btn btn-warning btn-sm" %>
                 <% end %>

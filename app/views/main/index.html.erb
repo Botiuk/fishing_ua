@@ -1,1 +1,44 @@
-<h1><%= t('.welcome') %></h1>
+<div class="row bg-primary-subtle">
+    <div class="col-8">
+        <div class="col-12 my-2">
+            <%= link_to @news_stories[0], class: "text-decoration-none" do %>
+                <div class="container-image-text">
+                    <% if @news_stories[0].cover.present? %>
+                        <img class="mw-100" src="<%= cloudinary_url(@news_stories[0].cover.key, height: 200, crop: :fill) %>" style="width:100%;">
+                    <% else %>
+                        <div class="text-center bg-secondary text-white"><br><br><br><%= t('.cover_absent') %><br><br><br><br></div>
+                    <% end %>
+                    <div class="header-image-text py-2">
+                        <h3>
+                            <%= @news_stories[0].title.truncate(200) %>
+                        </h3>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row">
+            <% @news_stories.each do |news_story| %>
+                <% if @news_stories.index(news_story) != 0 %>
+                    <div class="col-12 my-2">
+                        <%= link_to news_story, class: "text-decoration-none" do %>
+                            <div class="container-image-text">
+                                <% if news_story.cover.present? %>
+                                    <img class="mw-100" src="<%= cloudinary_url(news_story.cover.key, height: 200, crop: :fill) %>" style="width:100%;">
+                                <% else %>
+                                    <div class="text-center bg-secondary text-white"><br><br><br><%= t('.cover_absent') %><br><br><br><br></div>
+                                <% end %>
+                                <div class="header-image-text py-2">
+                                    <h6>
+                                        <%= news_story.title.truncate(40) %>
+                                    </h6>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
