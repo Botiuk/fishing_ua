@@ -1,8 +1,11 @@
 <div class="row mb-2">
-    <div class="col"><h4><%= @water_bioresource.name %> <em>(<%= @water_bioresource.latin_name %>)</em></h4></div>
+    <div class="col my-1"><h4><%= @water_bioresource.name %> <em>(<%= @water_bioresource.latin_name %>)</em></h4></div>
     <% if can? :create, Catch %>
         <div class="col text-end">
-            <%= link_to t('button.add.catch'), new_catch_path(water_bioresource_id: @water_bioresource.id), :method => :post, class: "btn btn-success" %>
+            <% if user_signed_in? %>
+                <%= link_to t('button.statistic'), water_bioresources_statistic_path(id: @water_bioresource.id), class: "btn btn-secondary my-1" %>
+            <% end %>
+            <%= link_to t('button.add.catch'), new_catch_path(water_bioresource_id: @water_bioresource.id), :method => :post, class: "btn btn-success my-1" %>
         </div>
     <% end %>
 </div>
@@ -15,7 +18,7 @@
         <div class="col-3 text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
     <% end %>
 
-    <div class="col-md-6">        
+    <div class="col-md-6 my-2">
         <% if @catch_rate.present? %>
             <h5 class="mb-0"><%= t('.catch_rates') %>
             <% if can? :update, CatchRate %>
@@ -24,7 +27,7 @@
             <% if can? :destroy, CatchRate %>
                 <%= button_to t('button.delete'), @catch_rate, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm", form: {style: 'display:inline-block;'} %>
             <% end %>
-            </h5> 
+            </h5>
             <b><%= t('.length_dnipro') %>: </b>
                 <% if @catch_rate.length_dnipro == 0 %>
                     -
@@ -53,7 +56,7 @@
                     <%= @catch_rate.length_azov %> <%= t('.santimetr') %>
                 <% end %>
             <br>
-        <% else %>            
+        <% else %>
             <% if can? :create, CatchRate %>
                 <h5 class="mb-0"><%= t('.catch_rates') %>
                 <%= link_to t('button.add.catch_rate'), new_catch_rate_path, :method => :post, class: "btn btn-dark text-info btn-sm" %>
@@ -67,7 +70,7 @@
         <% end %>
 
         <% if @water_bioresource.resource_type == "other_fish" && @catch_rate.present? %>
-            <b><%= t('.day_rate') %></b><%= t('.day_rate_other') %>            
+            <b><%= t('.day_rate') %></b><%= t('.day_rate_other') %>
         <% else %>
             <% if @water_bioresource.day_rate.present? %>
                 <b><%= t('.day_rate') %></b>
@@ -130,9 +133,6 @@
         <%= link_to t('button.all.water_bioresources'), water_bioresources_path, class: "btn btn-primary" %>
         <% if can? :update, WaterBioresource %>
             <%= link_to t('button.edit'), edit_water_bioresource_path(@water_bioresource), class: "btn btn-warning" %>
-        <% end %>
-        <% if user_signed_in? %>
-            <%= link_to t('button.statistic'), water_bioresources_statistic_path(id: @water_bioresource.id), class: "btn btn-secondary" %>
         <% end %>
     </div>
 </div>

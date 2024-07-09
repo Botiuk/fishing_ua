@@ -1,30 +1,23 @@
 <div class="col-sm-4">
     <div id="<%= dom_id water_bioresource %>">
-        <div class="card text-bg-light mt-2 mb-3">
-            <div class="card-body">
-                <h5 class="card-title mb-1 pb-1">
-                    <%= water_bioresource.name %><br>
-                    <em class="fs-6 fw-normal">(<%= water_bioresource.latin_name %>)</em>
-                </h5>
-                <p class="card-text m-0 p-0 text-center">
-                    <% if water_bioresource.bioresource_photo.present? %>
-                        <img class="mw-100" src="<%= cloudinary_url(water_bioresource.bioresource_photo.key, height: 200, crop: :scale) %>" >
-                    <% else %>
-                        <div class="text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
-                    <% end %>
-                </p>
-                <div class="row mt-2">
-                    <div class="col md-6 text-center">                        
-                        <%= link_to t('button.show'), water_bioresource_path(water_bioresource), class: "btn btn-info btn-sm" %>
-                        <% if can? :update, WaterBioresource %>
-                            <%= link_to t('button.edit'), edit_water_bioresource_path(water_bioresource), class: "btn btn-warning btn-sm" %>
+        <%= link_to water_bioresource, class: "text-decoration-none" do %>
+            <div class="card text-bg-light mt-2 mb-3">
+                <div class="card-body">
+                    <div class="container-image-text">
+                        <% if water_bioresource.bioresource_photo.present? %>
+                            <img class="mw-100" src="<%= cloudinary_url(water_bioresource.bioresource_photo.key, height: 200, crop: :scale) %>" style="width:100%;">
+                        <% else %>
+                            <div class="text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
                         <% end %>
-                        <% if user_signed_in? %>
-                            <%= link_to t('button.statistic'), water_bioresources_statistic_path(id: water_bioresource.id), class: "btn btn-secondary btn-sm" %>
-                        <% end %>
+                        <div class="header-image-text py-2">
+                            <h5>
+                                <%= water_bioresource.name %><br>
+                                <em class="fs-6 fw-normal">(<%= water_bioresource.latin_name %>)</em>
+                            </h5>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <% end %>
     </div>
 </div>
