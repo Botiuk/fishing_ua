@@ -11,10 +11,10 @@
                         <% end %>
                         <div class="header-image-text py-2">
                             <h5>
-                                <%= news_story.title.truncate(55) %>                                
+                                <%= news_story.title.truncate(55) %>
                             </h5>
                             <div style="font-size: 12px;">
-                                <i class="bi bi-clock"></i> 
+                                <i class="bi bi-clock"></i>
                                 <% if news_story.published_at.present? %>
                                     <%= I18n.l(news_story.published_at, format: :long) %>
                                 <% end %>

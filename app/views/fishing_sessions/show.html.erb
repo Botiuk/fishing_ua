@@ -17,7 +17,7 @@
 
 <div class="row">
     <div class="col-12 fs-5">
-        <b><%= t('.fishing_place') %></b> "<%= @fishing_session.fishing_place.name %>" 
+        <b><%= t('.fishing_place') %></b> "<%= @fishing_session.fishing_place.name %>"
         <% if @fishing_session.fishing_place.description.present? %>
             (<%= @fishing_session.fishing_place.description.truncate(100) %>)
         <% end %>
@@ -58,7 +58,7 @@
       </div>
     <% end %>
     <div class="table-responsive">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
             <tr class="text-center">
                 <th style="width: 15%;"><%= t('.catch_time') %></th>
                 <th style="width: 20%;"><%= t('.water_bioresource') %></th>
@@ -84,7 +84,7 @@
     <% if @water_bioresources.present? %>
       <%= pie_chart @water_bioresources %>
       <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
           <tr class="text-center">
             <th><%= t('statistic.water_bioresource_name') %></th>
             <% @water_bioresources.each_key do |key| %>
@@ -106,7 +106,7 @@
     <% if @equipments.present? %>
       <%= pie_chart @equipments %>
       <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
           <tr class="text-center">
             <th><%= t('statistic.equipment_name') %></th>
             <% @equipments.each_key do |key| %>
@@ -130,7 +130,7 @@
     <% if @baits.present? %>
       <%= pie_chart @baits %>
       <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
           <tr class="text-center">
             <th><%= t('statistic.bait_name') %></th>
             <% @baits.each_key do |key| %>

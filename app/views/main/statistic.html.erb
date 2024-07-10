@@ -20,21 +20,21 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab" tabindex="0">
     <div class="my-2">
-        <% if @catches_count != 0 %>
-            <b><%= t('statistic.catch_all') %></b> <%= @catches_count %> <br>
-            <b><%= t('statistic.catch_max_weight') %></b> <%= @catches_max_weight %> <br>
-            <b><%= t('statistic.catch_max_length') %></b> <%= @catches_max_length %> <br>
-        <% else %>
-            <p class="fw-semibold text-danger mt-2"><%= t('statistic.catches_empty') %></p>
-        <% end %>
-        <b><%= t('statistic.fishing_sessions_count') %></b> <%= @fishing_sessions_count %> <br>
-        <% if @fishing_sessions_count != 0 %>
-            <b><%= t('statistic.fishing_session_durations') %></b> <%= @fishing_sessions_duration %> <br>
-        <% end %>
-        <b><%= t('statistic.fishing_places_count') %></b> <%= @fishing_places_count %> <br>
-        <b><%= t('statistic.equipments_count') %></b> <%= @equipments_count %> <br>
-        <b><%= t('statistic.baits_count') %></b> <%= @baits_count %> <br>
-        <b><%= t('statistic.registration_date') %></b> <%= I18n.l(current_user.created_at) %> <br>
+      <% if @catches_count != 0 %>
+        <b><%= t('statistic.catch_all') %></b> <%= @catches_count %> <br>
+        <b><%= t('statistic.catch_max_weight') %></b> <%= @catches_max_weight %> <br>
+        <b><%= t('statistic.catch_max_length') %></b> <%= @catches_max_length %> <br>
+      <% else %>
+        <p class="fw-semibold text-danger mt-2"><%= t('statistic.catches_empty') %></p>
+      <% end %>
+      <b><%= t('statistic.fishing_sessions_count') %></b> <%= @fishing_sessions_count %> <br>
+      <% if @fishing_sessions_count != 0 %>
+        <b><%= t('statistic.fishing_session_durations') %></b> <%= @fishing_sessions_duration %> <br>
+      <% end %>
+      <b><%= t('statistic.fishing_places_count') %></b> <%= @fishing_places_count %> <br>
+      <b><%= t('statistic.equipments_count') %></b> <%= @equipments_count %> <br>
+      <b><%= t('statistic.baits_count') %></b> <%= @baits_count %> <br>
+      <b><%= t('statistic.registration_date') %></b> <%= I18n.l(current_user.created_at) %> <br>
     </div>
   </div>
 
@@ -42,7 +42,7 @@
     <% if @water_bioresources.present? %>
       <%= pie_chart @water_bioresources %>
       <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
           <tr class="text-center">
             <th><%= t('statistic.water_bioresource_name') %></th>
             <% @water_bioresources.each_key do |key| %>
@@ -54,7 +54,7 @@
             <% @water_bioresources.each_value do |value| %>
               <td><%= value %></td>
             <% end %>
-            </tr>
+          </tr>
         </table>
       </div>
     <% end %>
@@ -64,7 +64,7 @@
     <% if @fishing_places.present? %>
       <%= pie_chart @fishing_places %>
       <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
           <tr class="text-center">
             <th><%= t('statistic.location_name') %></th>
             <% @fishing_places.each_key do |key| %>
@@ -86,7 +86,7 @@
     <% if @equipments.present? %>
       <%= pie_chart @equipments %>
       <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
           <tr class="text-center">
             <th><%= t('statistic.equipment_name') %></th>
             <% @equipments.each_key do |key| %>
@@ -110,7 +110,7 @@
     <% if @baits.present? %>
       <%= pie_chart @baits %>
       <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
           <tr class="text-center">
             <th><%= t('statistic.bait_name') %></th>
             <% @baits.each_key do |key| %>
@@ -126,8 +126,7 @@
         </table>
       </div>
     <% else %>
-        <p class="fw-semibold text-danger text-center mt-2"><%= t('statistic.baits_empty') %></p>
+      <p class="fw-semibold text-danger text-center mt-2"><%= t('statistic.baits_empty') %></p>
     <% end %>
   </div>
 </div>
-

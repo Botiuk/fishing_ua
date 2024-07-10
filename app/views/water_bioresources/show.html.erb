@@ -11,7 +11,7 @@
 </div>
 <div class="row mx-1">
     <% if @water_bioresource.bioresource_photo.present? %>
-        <div class="col-md-6">
+        <div class="col-md-6 text-center">
             <img class="mw-100" src="<%= cloudinary_url(@water_bioresource.bioresource_photo.key, height: 200, crop: :scale) %>" >
         </div>
     <% else %>

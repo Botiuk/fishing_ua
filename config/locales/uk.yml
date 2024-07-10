@@ -235,8 +235,6 @@ uk:
       registration_date: "На Рибалка.ua з:"
 
   main:
-    index:
-      welcome: "Вітаємо на стартовій сторінці!"
     statistic:
       title: "Статистика профілю"
 

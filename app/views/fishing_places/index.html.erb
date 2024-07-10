@@ -7,7 +7,7 @@
 
 <% if @fishing_places.present? %>
     <div class="table-responsive">
-        <table class="table align-middle table-primary table-striped">
+        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
             <tr class="text-center">
                 <th style="width: 20%;"><%= t('.name') %></th>
                 <th style="width: 45%;"><%= t('.description') %></th>
@@ -15,7 +15,7 @@
                 <th style="width: 10%;"></th>
                 <% if user_signed_in? %>
                     <th style="width: 10%;"></th>
-                <% end %>                
+                <% end %>
             </tr>
             <% @fishing_places.each do |fishing_place| %>
                 <%= render fishing_place %>

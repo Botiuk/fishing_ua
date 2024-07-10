@@ -19,8 +19,8 @@
             <%= render 'shared/sidebar' %>
           </div>
 
-          <div class="col d-flex flex-column h-sm-100">
-            <main class="row overflow-auto">
+          <div class="col d-flex flex-column h-100" style="flex: 1; min-width: 0;">
+            <main class="row">
               <div class="col pt-4">
                 <%= render 'shared/flash_messages' %>
                 <%= yield %>

@@ -18,10 +18,14 @@
 
 @media only screen and (max-width: 576px) {
     .container-image-text .header-image-text {
-        padding: 5px;
+        padding: 5px 20px;
     }
 
     .header-image-text .h6 {
         font-size: 10px;
+    }
+
+    .header-image-text .h5 {
+        font-size: 12px;
     }
   }
