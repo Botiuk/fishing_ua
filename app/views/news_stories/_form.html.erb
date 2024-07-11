@@ -9,10 +9,10 @@
 
         <div class="col-md-4">
             <%= form.label :published_at, t('.published_at'), style: "display: block" %>
-            <%= form.datetime_local_field :published_at, value: form.object.published_at, min: nil || form.object.published_at || DateTime.now, class: "form-control" %>
+            <%= form.datetime_local_field :published_at, value: form.object.published_at || nil, min: form.object.published_at || DateTime.now, class: "form-control" %>
         </div>
 
-        <div class="col-12 my-2"><%= t('.news_story_instruction') %></div>
+        <div class="col-12 my-2" style="text-align: justify;"><%= t('.news_story_instruction') %></div>
 
         <div class="col-12">
             <%= form.label :cover, t('.cover'), style: "display: block" %>

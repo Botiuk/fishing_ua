@@ -48,6 +48,7 @@ class FishingSessionsController < ApplicationController
         if @fishing_session.end_at.present?
             redirect_to fishing_session_url(@fishing_session), alert: t('alert.fishing_session_close')
         end
+        @catch_pick_up = Catch.where(fishing_session_id: @fishing_session.id, catch_result: "pick_up").take
     end
 
     def update

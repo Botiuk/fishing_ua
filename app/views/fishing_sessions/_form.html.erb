@@ -2,12 +2,14 @@
     <%= render 'shared/form_errors_messages', object: form.object %>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-7">
-                <%= form.label :fishing_place_id, t('.fishing_place'), style: "display: block" %>
-                <%= select(:fishing_session, :fishing_place_id, options_for_select(@fishing_places, :selected => form.object.fishing_place_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
+        <% unless @catch_pick_up.present? %>
+            <div class="row">
+                <div class="col-md-7">
+                    <%= form.label :fishing_place_id, t('.fishing_place'), style: "display: block" %>
+                    <%= select(:fishing_session, :fishing_place_id, options_for_select(@fishing_places, :selected => form.object.fishing_place_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
+                </div>
             </div>
-        </div>
+        <% end %>
 
         <div class="row justify-content-between">
             <div class="col-md-4">
@@ -15,11 +17,13 @@
                 <%= form.datetime_local_field :start_at, value: form.object.start_at || DateTime.now, max: form.object.start_at || DateTime.now, class: "form-control" %>
             </div>
 
-            <% if form.object.end_at.present? %>
+            <% if form.object.fishing_place_id.present? && form.object.start_at.present? %>
                 <div class="col-md-4">
                     <%= form.label :end_at, t('.end_at'), style: "display: block" %>
-                    <%= form.datetime_local_field :end_at, min: form.object.start_at, max: DateTime.now, class: "form-control" %>
+                    <%= form.datetime_local_field :end_at, value: form.object.end_at, max: DateTime.now, class: "form-control" %>
                 </div>
+
+                <div class="col-12 my-2 text-danger fw-semibold" style="text-align: justify;"><%= t('.fishing_session_instruction') %></div>
             <% end %>
         </div>
 
