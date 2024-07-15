@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :fishing_places, except: [:show, :destroy]
   resources :tools, except: :show
   resources :fishing_sessions, except: :destroy
-  resources :catches, except: [:edit, :destroy]
+  resources :catches, except: :edit
   resources :day_rates, except: :show
   resources :tool_catches, only: [:new, :create, :destroy]
   resources :news_stories

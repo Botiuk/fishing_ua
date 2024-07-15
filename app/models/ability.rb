@@ -18,7 +18,7 @@ class Ability
       can [:read, :create, :update, :statistic], FishingPlace, user_id: user.id
       can :manage, Tool, user_id: user.id
       can [:read, :create, :update], FishingSession, user_id: user.id      
-      can [:read, :create, :update], Catch do |catch|
+      can :manage, Catch do |catch|
         catch.user.id == user.id
       end
       can [:create, :destroy], ToolCatch do |tool_catch|

@@ -1,5 +1,5 @@
 class CatchesController < ApplicationController
-    before_action :set_catch, only: %i[ show update ]
+    before_action :set_catch, only: %i[ show update destroy ]
     before_action :water_bioresources_formhelper, only: %i[ new create update ]
     authorize_resource
 
@@ -130,6 +130,12 @@ class CatchesController < ApplicationController
         if @catch.update(catch_params)
             redirect_to catch_url(@catch), notice: t('notice.update.catch')
         end
+    end
+
+    def destroy
+        fishing_session = @catch.fishing_session
+        @catch.destroy
+        redirect_to fishing_session_url(fishing_session), notice: t('notice.destroy.catch')
     end
 
     private

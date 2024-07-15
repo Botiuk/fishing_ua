@@ -233,5 +233,13 @@ RSpec.describe "Catches", type: :request do
       expect(response).to redirect_to(catch_path(catch))
       expect(flash[:notice]).to include(I18n.t('notice.update.catch'))
     end
+
+    it "can DELETE destroy" do
+      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      catch = create(:catch, fishing_session_id: fishing_session.id)
+      delete catch_path(catch)
+      expect(response).to redirect_to(fishing_session_path(fishing_session))
+      expect(flash[:notice]).to include(I18n.t('notice.destroy.catch'))
+    end
   end
 end
