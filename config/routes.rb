@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'fishing_places/statistic', to: 'fishing_places#statistic'
   get 'tools/statistic', to: 'tools#statistic'
   get 'main/statistic', to: 'main#statistic'
+  get 'main/about', to: 'main#about'
 
   resources :water_bioresources, except: :destroy
   resources :rate_penalties, except: :show

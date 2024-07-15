@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     
-    can :read, :main
+    can [:read, :about], :main
     can :read, WaterBioresource
     can :read, CatchRate
     can :read, RatePenalty

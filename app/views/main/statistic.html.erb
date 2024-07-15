@@ -22,6 +22,8 @@
     <div class="my-2">
       <% if @catches_count != 0 %>
         <b><%= t('statistic.catch_all') %></b> <%= @catches_count %> <br>
+        <b><%= t('statistic.catch_all_set_free') %></b> <%= @catches_set_free_count %> <br>
+        <b><%= t('statistic.catch_all_pick_up') %></b> <%= @catches_count - @catches_set_free_count %> <br>
         <b><%= t('statistic.catch_max_weight') %></b> <%= @catches_max_weight %> <br>
         <b><%= t('statistic.catch_max_length') %></b> <%= @catches_max_length %> <br>
       <% else %>

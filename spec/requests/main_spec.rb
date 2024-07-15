@@ -7,6 +7,11 @@ RSpec.describe "main", type: :request do
       expect(response).to be_successful
     end
 
+    it "can GET about" do
+      get main_about_path
+      expect(response).to be_successful
+    end
+
     it "cannot GET statistic and redirects to the sign_in page" do
       get main_statistic_path
       expect(response).to redirect_to(new_user_session_path)
@@ -22,6 +27,11 @@ RSpec.describe "main", type: :request do
 
     it "can GET index" do
       get root_path
+      expect(response).to be_successful
+    end
+
+    it "can GET about" do
+      get main_about_path
       expect(response).to be_successful
     end
 

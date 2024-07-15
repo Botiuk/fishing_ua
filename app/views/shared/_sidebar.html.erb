@@ -69,6 +69,14 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
             <li>
+                <%= link_to main_about_path, class: "dropdown-item text-info" do %>
+                    <i class="bi bi-info-circle"></i> <%= t('navbar.about') %>
+                <% end %>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li>
                 <%= link_to main_statistic_path, class: "dropdown-item text-info" do %>
                     <i class="bi bi-pie-chart"></i> <%= t('sidebar.statistic_profile') %>
                 <% end %>

@@ -1,44 +1,68 @@
-<div class="row bg-primary-subtle">
-    <div class="col-8">
-        <div class="col-12 my-2">
-            <%= link_to @news_stories[0], class: "text-decoration-none" do %>
-                <div class="container-image-text">
-                    <% if @news_stories[0].cover.present? %>
-                        <img class="mw-100" src="<%= cloudinary_url(@news_stories[0].cover.key, height: 200, crop: :fill) %>" style="width:100%;">
-                    <% else %>
-                        <div class="text-center bg-secondary text-white"><br><br><br><%= t('.cover_absent') %><br><br><br><br></div>
-                    <% end %>
-                    <div class="header-image-text py-2">
-                        <h3>
-                            <%= @news_stories[0].title.truncate(200) %>
-                        </h3>
-                    </div>
-                </div>
-            <% end %>
-        </div>
+<% if user_signed_in? %>
+    <% if @active_fishing_session.present? %>
+        <h4><%= t('.active_fishing_session_present') %></h4>
+        <%= link_to t('button.show'), fishing_session_path(@active_fishing_session), class: "btn btn-info" %>
+        <%= link_to t('button.add.catch'), new_catch_path(fishing_session_id: @active_fishing_session.id), class: "btn btn-success" %>
+        <%= button_to t('button.close_fishing_session'), @active_fishing_session, method: :patch, params: { fishing_session: {end_at: DateTime.now} }, data: { turbo_confirm: t('button.close_fishing_session_confirm') }, class: "btn btn-danger", form: {style: 'display:inline-block;'} %>
+    <% else %>
+        <h4><%= t('.active_fishing_session_empty') %></h4>
+        <%= link_to t('button.add.fishing_session'), new_fishing_session_path, :method => :post, class: "btn btn-dark text-info" %>
+    <% end %>
+<% else %>
+    <h4><%= t('.welcome') %></h4>
+    <div style="text-align: justify; text-indent: 15px;">
+        <%= t('.small_about_html', signup_link: link_to(t('.signup_link'), new_user_registration_path), 
+        login_link: link_to(t('.login_link'), new_user_session_path),
+        about_link: link_to(t('.about_link'), main_about_path)) %>
     </div>
-    <div class="col-4">
-        <div class="row">
-            <% @news_stories.each do |news_story| %>
-                <% if @news_stories.index(news_story) != 0 %>
-                    <div class="col-12 my-2">
-                        <%= link_to news_story, class: "text-decoration-none" do %>
-                            <div class="container-image-text">
-                                <% if news_story.cover.present? %>
-                                    <img class="mw-100" src="<%= cloudinary_url(news_story.cover.key, height: 200, crop: :fill) %>" style="width:100%;">
-                                <% else %>
-                                    <div class="text-center bg-secondary text-white"><br><br><br><%= t('.cover_absent') %><br><br><br><br></div>
-                                <% end %>
-                                <div class="header-image-text py-2">
-                                    <h6>
-                                        <%= news_story.title.truncate(40) %>
-                                    </h6>
-                                </div>
-                            </div>
+<% end %>
+
+<% if @news_stories.present? && @news_stories.size == 3 %>
+    <div class="mt-2">
+        <h4><%= t('.last_news') %></h4>
+    </div>
+    <div class="row bg-primary-subtle">    
+        <div class="col-8">
+            <div class="my-2">
+                <%= link_to @news_stories[0], class: "text-decoration-none" do %>
+                    <div class="container-image-text">
+                        <% if @news_stories[0].cover.present? %>
+                            <img class="mw-100" src="<%= cloudinary_url(@news_stories[0].cover.key, height: 200, crop: :fill) %>" style="width:100%;">
+                        <% else %>
+                            <div class="text-center bg-secondary text-white"><br><br><br><%= t('.cover_absent') %><br><br><br><br></div>
                         <% end %>
+                        <div class="header-image-text py-2">
+                            <h3>
+                                <%= @news_stories[0].title.truncate(200) %>
+                            </h3>
+                        </div>
                     </div>
                 <% end %>
-            <% end %>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <% @news_stories.each do |news_story| %>
+                    <% if @news_stories.index(news_story) != 0 %>
+                        <div class="col-12 my-2">
+                            <%= link_to news_story, class: "text-decoration-none" do %>
+                                <div class="container-image-text">
+                                    <% if news_story.cover.present? %>
+                                        <img class="mw-100" src="<%= cloudinary_url(news_story.cover.key, height: 200, crop: :fill) %>" style="width:100%;">
+                                    <% else %>
+                                        <div class="text-center bg-secondary text-white"><br><br><br><%= t('.cover_absent') %><br><br><br><br></div>
+                                    <% end %>
+                                    <div class="header-image-text py-2">
+                                        <h6>
+                                            <%= news_story.title.truncate(40) %>
+                                        </h6>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
         </div>
     </div>
-</div>
+<% end %>
