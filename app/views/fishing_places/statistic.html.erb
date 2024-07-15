@@ -23,29 +23,7 @@
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-catches" role="tabpanel" aria-labelledby="nav-catches-tab" tabindex="0">
     <% if @catches.present? %>
-      <div class="my-2">
-        <b><%= t('statistic.catch_all') %></b> <%= @catches.count %> <br>
-        <b><%= t('statistic.catch_max_weight') %></b> <%= @catches_max_weight %> <br>
-        <b><%= t('statistic.catch_max_length') %></b> <%= @catches_max_length %> <br>
-      </div>
-
-      <div class="table-responsive">
-        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
-          <tr class="text-center">
-            <th style="width: 15%;"><%= t('statistic.catch_time') %></th>
-            <th style="width: 20%;"><%= t('statistic.water_bioresource') %></th>
-            <th style="width: 15%;"><%= t('statistic.catch_length') %></th>
-            <th style="width: 15%;"><%= t('statistic.catch_weight') %></th>
-            <th style="width: 15%;"><%= t('statistic.catch_result') %></th>
-            <th style="width: 10%;"></th>
-            <th style="width: 10%;"></th>
-          </tr>
-          <% @catches.each do |catch| %>
-            <%= render 'catches/catch', catch: catch %>
-          <% end %>
-        </table>
-      </div>
-      <%= render 'shared/pagy' %>
+      <%= render 'shared/statistic/catches' %>
     <% else %>
       <p class="fw-semibold text-danger text-center mt-2"><%= t('statistic.catches_empty') %></p>
     <% end %>
@@ -53,45 +31,13 @@
 
   <div class="tab-pane fade" id="nav-water_bioresources" role="tabpanel" aria-labelledby="nav-water_bioresources-tab" tabindex="0">
     <% if @water_bioresources.present? %>
-      <%= pie_chart @water_bioresources %>
-      <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
-          <tr class="text-center">
-            <th><%= t('statistic.water_bioresource_name') %></th>
-            <% @water_bioresources.each_key do |key| %>
-              <th><%= key %></th>
-            <% end %>
-          </tr>
-          <tr class="text-center">
-            <td><%= t('statistic.quantity') %></td>
-            <% @water_bioresources.each_value do |value| %>
-              <td><%= value %></td>
-            <% end %>
-            </tr>
-        </table>
-      </div>
+      <%= render 'shared/statistic/water_bioresources' %>
     <% end %>
   </div>
 
   <div class="tab-pane fade" id="nav-equipments" role="tabpanel" aria-labelledby="nav-equipments-tab" tabindex="0">
     <% if @equipments.present? %>
-      <%= pie_chart @equipments %>
-      <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
-          <tr class="text-center">
-            <th><%= t('statistic.equipment_name') %></th>
-            <% @equipments.each_key do |key| %>
-              <th><%= key %></th>
-            <% end %>
-          </tr>
-          <tr class="text-center">
-            <td><%= t('statistic.quantity_from') %> <%= @catches.count %>:</td>
-            <% @equipments.each_value do |value| %>
-              <td><%= value %></td>
-            <% end %>
-          </tr>
-        </table>
-      </div>
+      <%= render 'shared/statistic/equipments' %>
     <% else %>
       <p class="fw-semibold text-danger text-center mt-2"><%= t('statistic.equipments_empty') %></p>
     <% end %>
@@ -99,26 +45,9 @@
 
   <div class="tab-pane fade" id="nav-baits" role="tabpanel" aria-labelledby="nav-baits-tab" tabindex="0">
     <% if @baits.present? %>
-      <%= pie_chart @baits %>
-      <div class="table-responsive mt-2">
-        <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
-          <tr class="text-center">
-            <th><%= t('statistic.bait_name') %></th>
-            <% @baits.each_key do |key| %>
-              <th><%= key %></th>
-            <% end %>
-          </tr>
-          <tr class="text-center">
-            <td><%= t('statistic.quantity_from') %> <%= @catches.count %>:</td>
-            <% @baits.each_value do |value| %>
-              <td><%= value %></td>
-            <% end %>
-          </tr>
-        </table>
-      </div>
+      <%= render 'shared/statistic/baits' %>
     <% else %>
       <p class="fw-semibold text-danger text-center mt-2"><%= t('statistic.baits_empty') %></p>
     <% end %>
   </div>
 </div>
-

@@ -1,0 +1,24 @@
+<div class="my-2">
+    <b><%= t('statistic.catch_all') %></b> <%= @catches.count %> <br>
+    <b><%= t('statistic.catch_max_weight') %></b> <%= @catches_max_weight %> <br>
+    <b><%= t('statistic.catch_max_length') %></b> <%= @catches_max_length %> <br>
+</div>
+
+<div class="table-responsive">
+    <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
+        <tr class="text-center">
+            <th style="width: 15%;"><%= t('statistic.catch_time') %></th>
+            <th style="width: 20%;"><%= t('statistic.water_bioresource') %></th>
+            <th style="width: 15%;"><%= t('statistic.catch_length') %></th>
+            <th style="width: 15%;"><%= t('statistic.catch_weight') %></th>
+            <th style="width: 15%;"><%= t('statistic.catch_result') %></th>
+            <th style="width: 10%;"></th>
+            <th style="width: 10%;"></th>
+        </tr>
+        <% @catches.each do |catch| %>
+            <%= render 'catches/catch', catch: catch %>
+        <% end %>
+    </table>
+</div>
+
+<%= render 'shared/pagy' %>

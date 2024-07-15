@@ -1,0 +1,17 @@
+<%= pie_chart @water_bioresources %>
+<div class="table-responsive mt-2">
+    <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
+        <tr class="text-center">
+            <th><%= t('statistic.water_bioresource_name') %></th>
+            <% @water_bioresources.each_key do |key| %>
+                <th><%= key %></th>
+            <% end %>
+        </tr>
+        <tr class="text-center">
+            <td><%= t('statistic.quantity') %></td>
+            <% @water_bioresources.each_value do |value| %>
+                <td><%= value %></td>
+            <% end %>
+        </tr>
+    </table>
+</div>

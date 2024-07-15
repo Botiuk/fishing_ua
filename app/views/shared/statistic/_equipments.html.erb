@@ -1,0 +1,17 @@
+<%= pie_chart @equipments %>
+<div class="table-responsive mt-2">
+    <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
+        <tr class="text-center">
+            <th><%= t('statistic.equipment_name') %></th>
+            <% @equipments.each_key do |key| %>
+                <th><%= key %></th>
+            <% end %>
+        </tr>
+        <tr class="text-center">
+            <td><%= t('statistic.quantity_from') %> <%= @catches.count %>:</td>
+            <% @equipments.each_value do |value| %>
+                <td><%= value %></td>
+            <% end %>
+        </tr>
+    </table>
+</div>

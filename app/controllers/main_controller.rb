@@ -16,8 +16,8 @@ class MainController < ApplicationController
         @fishing_places_count = FishingPlace.where(user_id: current_user.id).count
         @equipments_count = Tool.where(user_id: current_user.id, tool_type: "equipment").count
         @baits_count = Tool.where(user_id: current_user.id, tool_type: "bait").count
-        @catches_count = Catch.statistic_all_records(current_user.id, "user", current_user.id)
-        if @catches_count != 0
+        @catches = Catch.statistic_all_records(current_user.id, "user", current_user.id)
+        if @catches.present?
             @catches_set_free_count = Catch.statistic_all_records(current_user.id, "catch_result", "set_free")
             @catches_max_weight = Catch.statistic_max_weight(current_user.id, "user", current_user.id)
             @catches_max_length = Catch.statistic_max_length(current_user.id, "user", current_user.id)

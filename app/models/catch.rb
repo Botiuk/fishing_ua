@@ -41,7 +41,7 @@ class Catch < ApplicationRecord
     when "fishing_session"
       Catch.where(fishing_session_id: search_params).order(:catch_time, :id).reverse_order
     when "user"
-      Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).count
+      Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).pluck(:id)
     when "catch_result"
       Catch.joins(:fishing_place).where(fishing_place: {user_id: user_id}).where(catch_result: search_params).count
     end

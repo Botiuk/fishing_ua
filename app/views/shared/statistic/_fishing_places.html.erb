@@ -1,0 +1,17 @@
+<%= pie_chart @fishing_places %>
+<div class="table-responsive mt-2">
+    <table class="table align-middle table-primary table-striped table-bordered border-dark-subtle">
+    <tr class="text-center">
+        <th><%= t('statistic.location_name') %></th>
+        <% @fishing_places.each_key do |key| %>
+            <th><%= key %></th>
+        <% end %>
+    </tr>
+    <tr class="text-center">
+        <td><%= t('statistic.quantity') %></td>
+        <% @fishing_places.each_value do |value| %>
+            <td><%= value %></td>
+        <% end %>
+    </tr>
+</table>
+</div>
