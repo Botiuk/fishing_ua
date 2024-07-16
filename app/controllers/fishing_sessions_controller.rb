@@ -14,9 +14,13 @@ class FishingSessionsController < ApplicationController
     def new
         last_fishing_session = FishingSession.where(user_id: current_user.id, end_at: nil).last
         if last_fishing_session.blank?
-            @fishing_session = FishingSession.new
+            if @fishing_places.present?
+                @fishing_session = FishingSession.new
+            else
+                redirect_to new_fishing_place_url, alert: t('alert.new.session_place')
+            end
         else
-            redirect_to fishing_sessions_url, alert: t('alert.new.fishing_session')
+            redirect_to fishing_session_url(last_fishing_session), alert: t('alert.new.fishing_session')
         end
     end
 
