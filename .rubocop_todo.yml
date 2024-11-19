@@ -1,0 +1,3 @@
+Layout/LineLength:
+  Exclude:
+    - 'config/initializers/devise.rb'
