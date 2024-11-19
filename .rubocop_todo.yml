@@ -1,3 +1,86 @@
 Layout/LineLength:
   Exclude:
     - 'config/initializers/devise.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/environments/development.rb'
+    - 'db/seeds.rb'
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'db/migrate/20240102111212_add_service_name_to_active_storage_blobs.active_storage.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/20240508065642_create_active_storage_tables.active_storage.rb'
+    - 'app/models/ability.rb'
+    - 'app/models/catch.rb'
+    - 'app/models/tool.rb'
+    - 'app/models/water_bioresource.rb'
+    - 'app/models/fishing_place.rb'
+    - 'app/controllers/tools_controller.rb'
+    - 'app/controllers/main_controller.rb'
+    - 'app/controllers/water_bioresources_controller.rb'
+    - 'app/controllers/fishing_places_controller.rb'
+    - 'app/controllers/fishing_sessions_controller.rb'
+    - 'app/controllers/catches_controller.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/20240508065642_create_active_storage_tables.active_storage.rb'
+    - 'app/models/ability.rb'
+    - 'app/models/catch.rb'
+    - 'app/models/tool.rb'
+    - 'app/models/water_bioresource.rb'
+    - 'app/models/fishing_place.rb'
+    - 'app/controllers/catches_controller.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'app/controllers/catches_controller.rb'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'app/controllers/catches_controller.rb'
+
+Metrics/BlockNesting:
+  Exclude:
+    - 'app/controllers/catches_controller.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'app/controllers/catches_controller.rb'
+
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - 'app/models/catch_rate.rb'
+    - 'app/models/day_rate.rb'
+    - 'app/models/fishing_place.rb'
+    - 'app/models/rate_penalty.rb'
+    - 'app/models/tool.rb'
+    - 'app/models/tool_catch.rb'
+    - 'app/models/water_bioresource.rb'
+
+Performance/CollectionLiteralInLoop:
+  Exclude:
+    - 'db/seeds.rb'
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/requests/tools_spec.rb'
+    - 'spec/requests/tool_catches_spec.rb'
+    - 'spec/requests/rate_penalties_spec.rb'
+    - 'spec/requests/fishing_sessions_spec.rb'
+    - 'spec/requests/catches_spec.rb'
+    - 'spec/requests/catch_rates_spec.rb'
+
+RSpec/InstanceVariable:
+  Exclude:
+    - 'spec/requests/tools_spec.rb'
+    - 'spec/requests/tool_catches_spec.rb'
+    - 'spec/requests/news_stories_spec.rb'
+    - 'spec/requests/main_spec.rb'
+    - 'spec/requests/fishing_sessions_spec.rb'
+    - 'spec/requests/fishing_places_spec.rb'
+    - 'spec/requests/catches_spec.rb'

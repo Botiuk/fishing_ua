@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :rate_penalty do
     water_bioresource { FactoryBot.create(:water_bioresource) }

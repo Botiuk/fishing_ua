@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCatches < ActiveRecord::Migration[7.1]
   def change
     create_table :catches do |t|

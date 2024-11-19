@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RatePenalty < ApplicationRecord
   belongs_to :water_bioresource
 

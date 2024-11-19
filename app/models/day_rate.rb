@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DayRate < ApplicationRecord
   belongs_to :water_bioresource
 

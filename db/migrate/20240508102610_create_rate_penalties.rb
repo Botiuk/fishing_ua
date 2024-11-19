@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRatePenalties < ActiveRecord::Migration[7.1]
   def change
     create_table :rate_penalties do |t|

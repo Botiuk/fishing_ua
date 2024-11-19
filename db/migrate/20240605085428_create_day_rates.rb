@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDayRates < ActiveRecord::Migration[7.1]
   def change
     create_table :day_rates do |t|

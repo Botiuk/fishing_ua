@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NewsStory < ApplicationRecord
   belongs_to :user
 
@@ -9,5 +11,4 @@ class NewsStory < ApplicationRecord
   validates_each :title do |record, attr, value|
     record.errors.add(attr, I18n.t('errors.messages.first_letter')) if /\A[[:lower:]]/.match?(value)
   end
-  
 end

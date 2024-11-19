@@ -2,9 +2,11 @@
 
 Fishing.ua is a Ukrainian fisherman's assistant. Directory and a personal office with records of fishing sessions, catches, locations, equipment, and baits for each registered fisherman.
 
-Built with: Rails 7.1.2, Ruby 3.2.2, postgres, Turbo, Stimulus, Bootstrap, Cloudinary, Trix editor, devise, cancancan.
+Built with: Rails 7.2.1.2, Ruby 3.3.5, postgres, Turbo, Stimulus, Bootstrap, Cloudinary, Trix editor, devise, cancancan.
 
 Test with: RSpec, factory_bot_rails and faker.
+
+Code style checking: RuboCop and his special cops.
 
 This app is written for my dad - the person who supported me in my desire to become a web developer from an electrical engineer. His favorite hobby is fishing. In 2022, a new law was accepted in Ukraine, regulating the rules for amateur fishermen and establishing size and weight restrictions on the catch of various water bioresources.
 

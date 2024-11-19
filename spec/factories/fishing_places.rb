@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :fishing_place do
     name { Faker::Lorem.unique.word.capitalize }

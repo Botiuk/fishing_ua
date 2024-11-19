@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCatchRates < ActiveRecord::Migration[7.1]
   def change
     create_table :catch_rates do |t|

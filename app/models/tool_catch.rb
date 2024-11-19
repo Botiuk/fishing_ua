@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ToolCatch < ApplicationRecord
   belongs_to :tool
   belongs_to :catch

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWaterBioresources < ActiveRecord::Migration[7.1]
   def change
     create_table :water_bioresources do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :catch_rate do
     water_bioresource { FactoryBot.create(:water_bioresource) }
