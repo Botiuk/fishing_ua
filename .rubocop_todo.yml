@@ -53,20 +53,6 @@ Metrics/ClassLength:
   Exclude:
     - 'app/controllers/catches_controller.rb'
 
-Rails/UniqueValidationWithoutIndex:
-  Exclude:
-    - 'app/models/catch_rate.rb'
-    - 'app/models/day_rate.rb'
-    - 'app/models/fishing_place.rb'
-    - 'app/models/rate_penalty.rb'
-    - 'app/models/tool.rb'
-    - 'app/models/tool_catch.rb'
-    - 'app/models/water_bioresource.rb'
-
-Performance/CollectionLiteralInLoop:
-  Exclude:
-    - 'db/seeds.rb'
-
 RSpec/ExampleLength:
   Exclude:
     - 'spec/requests/tools_spec.rb'

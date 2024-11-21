@@ -8,5 +8,6 @@ class CreateToolCatches < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
+    add_index :tool_catches, %i[tool_id catch_id], unique: true
   end
 end

@@ -3,7 +3,7 @@
 class CatchRate < ApplicationRecord
   belongs_to :water_bioresource
 
-  validates :water_bioresource, uniqueness: true
+  validates :water_bioresource_id, uniqueness: true
   validates :length_dnipro, :length_other, :length_black, :length_azov, numericality: { greater_than_or_equal_to: 0 },
                                                                         allow_nil: true
 

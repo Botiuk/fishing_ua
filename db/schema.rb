@@ -60,14 +60,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_08_043600) do
     t.decimal "length_other", precision: 3, scale: 1
     t.decimal "length_black", precision: 3, scale: 1
     t.decimal "length_azov", precision: 3, scale: 1
-    t.index ["water_bioresource_id"], name: "index_catch_rates_on_water_bioresource_id"
+    t.index ["water_bioresource_id"], name: "index_catch_rates_on_water_bioresource_id", unique: true
   end
 
   create_table "catches", force: :cascade do |t|
-    t.datetime "catch_time"
+    t.datetime "catch_time", null: false
     t.decimal "catch_length", precision: 4, scale: 1, default: "0.0"
     t.decimal "catch_weight", precision: 5, scale: 3, default: "0.0"
-    t.integer "catch_result"
+    t.integer "catch_result", null: false
     t.bigint "fishing_session_id", null: false
     t.bigint "water_bioresource_id", null: false
     t.datetime "created_at", null: false
@@ -78,25 +78,26 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_08_043600) do
 
   create_table "day_rates", force: :cascade do |t|
     t.decimal "catch_amount", precision: 3, scale: 1, default: "0.0"
-    t.integer "amount_type"
+    t.integer "amount_type", null: false
     t.bigint "water_bioresource_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["water_bioresource_id"], name: "index_day_rates_on_water_bioresource_id"
+    t.index ["water_bioresource_id"], name: "index_day_rates_on_water_bioresource_id", unique: true
   end
 
   create_table "fishing_places", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
-    t.integer "where_catch"
+    t.integer "where_catch", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((name)::text), user_id", name: "index_fishing_places_on_lower_name_user_id", unique: true
     t.index ["user_id"], name: "index_fishing_places_on_user_id"
   end
 
   create_table "fishing_sessions", force: :cascade do |t|
-    t.datetime "start_at"
+    t.datetime "start_at", null: false
     t.datetime "end_at"
     t.bigint "user_id", null: false
     t.bigint "fishing_place_id", null: false
@@ -107,7 +108,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_08_043600) do
   end
 
   create_table "news_stories", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -117,10 +118,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_08_043600) do
 
   create_table "rate_penalties", force: :cascade do |t|
     t.bigint "water_bioresource_id", null: false
-    t.integer "money"
+    t.integer "money", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["water_bioresource_id"], name: "index_rate_penalties_on_water_bioresource_id"
+    t.index ["water_bioresource_id"], name: "index_rate_penalties_on_water_bioresource_id", unique: true
   end
 
   create_table "tool_catches", force: :cascade do |t|
@@ -129,16 +130,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_08_043600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["catch_id"], name: "index_tool_catches_on_catch_id"
+    t.index ["tool_id", "catch_id"], name: "index_tool_catches_on_tool_id_and_catch_id", unique: true
     t.index ["tool_id"], name: "index_tool_catches_on_tool_id"
   end
 
   create_table "tools", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "tool_type"
+    t.integer "tool_type", null: false
+    t.index "lower((name)::text), user_id, tool_type", name: "index_tools_on_lower_name_user_id_tool_type", unique: true
     t.index ["user_id"], name: "index_tools_on_user_id"
   end
 
@@ -156,11 +159,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_08_043600) do
   end
 
   create_table "water_bioresources", force: :cascade do |t|
-    t.string "name"
-    t.string "latin_name"
+    t.string "name", null: false
+    t.string "latin_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "resource_type"
+    t.integer "resource_type", null: false
+    t.index "lower((latin_name)::text)", name: "index_water_bioresources_on_lower_latin_name", unique: true
+    t.index "lower((name)::text)", name: "index_water_bioresources_on_lower_name", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

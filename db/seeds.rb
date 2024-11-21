@@ -83,10 +83,11 @@ when 'development'
     )
   end
 
+  standart_length = [nil, 0.0, 5.5, 10.1]
   (1..15).each do |water_bioresource_id|
     CatchRate.create(
       water_bioresource_id: water_bioresource_id,
-      length_dnipro: [nil, 0.0, 5.5, 10.1].sample,
+      length_dnipro: standart_length.sample,
       length_other: Faker::Number.decimal(l_digits: 2, r_digits: 1),
       length_black: Faker::Number.decimal(l_digits: 2, r_digits: 1),
       length_azov: Faker::Number.decimal(l_digits: 2, r_digits: 1)
