@@ -55,19 +55,5 @@ Metrics/ClassLength:
 
 RSpec/ExampleLength:
   Exclude:
-    - 'spec/requests/tools_spec.rb'
-    - 'spec/requests/tool_catches_spec.rb'
-    - 'spec/requests/rate_penalties_spec.rb'
     - 'spec/requests/fishing_sessions_spec.rb'
-    - 'spec/requests/catches_spec.rb'
-    - 'spec/requests/catch_rates_spec.rb'
-
-RSpec/InstanceVariable:
-  Exclude:
-    - 'spec/requests/tools_spec.rb'
-    - 'spec/requests/tool_catches_spec.rb'
-    - 'spec/requests/news_stories_spec.rb'
-    - 'spec/requests/main_spec.rb'
-    - 'spec/requests/fishing_sessions_spec.rb'
-    - 'spec/requests/fishing_places_spec.rb'
     - 'spec/requests/catches_spec.rb'

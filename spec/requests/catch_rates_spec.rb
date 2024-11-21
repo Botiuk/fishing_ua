@@ -111,9 +111,8 @@ RSpec.describe 'CatchRates' do
     end
 
     it 'can POST create' do
-      water_bioresource = create(:water_bioresource)
-      post catch_rates_path,
-           params: { catch_rate: attributes_for(:catch_rate, water_bioresource_id: water_bioresource.id) }
+      w_bio = create(:water_bioresource)
+      post catch_rates_path, params: { catch_rate: attributes_for(:catch_rate, water_bioresource_id: w_bio.id) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.catch_rate'))

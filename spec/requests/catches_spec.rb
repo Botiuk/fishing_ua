@@ -18,9 +18,10 @@ RSpec.describe 'Catches' do
   end
 
   describe 'registered user management' do
+    let(:test_user) { create(:user) }
+
     before do
-      @user = create(:user)
-      login_as(@user, scope: :user)
+      login_as(test_user, scope: :user)
     end
 
     it 'can GET index' do
@@ -29,34 +30,34 @@ RSpec.describe 'Catches' do
     end
 
     it 'can GET new with params fishing_session_id, when session active' do
-      fishing_session = create(:fishing_session, user_id: @user.id, start_at: DateTime.now, end_at: nil)
+      fishing_session = create(:fishing_session, user_id: test_user.id, start_at: DateTime.now, end_at: nil)
       get new_catch_path(fishing_session_id: fishing_session.id)
       expect(response).to be_successful
     end
 
     it 'cannot GET new with params fishing_session_id, when session close, redirect_to fishing session' do
-      fishing_session = create(:fishing_session, user_id: @user.id)
+      fishing_session = create(:fishing_session, user_id: test_user.id)
       get new_catch_path(fishing_session_id: fishing_session.id)
       expect(response).to redirect_to(fishing_session_path(fishing_session))
       expect(flash[:alert]).to include I18n.t('alert.fishing_session_close')
     end
 
     it 'can GET new without params fishing_session_id, when session active' do
-      create(:fishing_session, user_id: @user.id, start_at: DateTime.now, end_at: nil)
+      create(:fishing_session, user_id: test_user.id, start_at: DateTime.now, end_at: nil)
       get new_catch_path
       expect(response).to be_successful
     end
 
     it 'cannot GET new without params fishing_session_id, when session close, redirect_to new fishing session' do
-      create(:fishing_session, user_id: @user.id)
+      create(:fishing_session, user_id: test_user.id)
       get new_catch_path
       expect(response).to redirect_to(new_fishing_session_path)
       expect(flash[:alert]).to include I18n.t('alert.new.session_catch')
     end
 
     it 'can POST create catch pick_up, length >= rate_length, day_rate present and == 0' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       create(:day_rate, catch_amount: 0, water_bioresource_id: water_bioresource.id)
@@ -71,8 +72,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'can POST create catch pick_up, length>=rate_length, is day_rate, all_day_resource+catch weight<=day_rate' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       create(:day_rate, catch_amount: 1.5, amount_type: 'weight', water_bioresource_id: water_bioresource.id)
@@ -89,8 +90,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'cannot POST create catch pick_up, length>=rate_length, is day_rate, all_day_resource+catch weight>day_rate' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       create(:day_rate, catch_amount: 1.5, amount_type: 'weight', water_bioresource_id: water_bioresource.id)
@@ -106,8 +107,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'cannot POST create catch pick_up, length>=rate_length, is day_rate, catch weight == 0' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       create(:day_rate, catch_amount: 1.5, amount_type: 'weight', water_bioresource_id: water_bioresource.id)
@@ -121,8 +122,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'can POST create catch pick_up, length>=rate_length, is day_rate, all_day_resource quantity>=day_rate' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       create(:day_rate, catch_amount: 1.0, amount_type: 'quantity',
@@ -138,8 +139,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'cannot POST create catch_pick_up, length>=rate_length, is day_rate, all_day_resource quantity < day_rate' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       create(:day_rate, catch_amount: 1.0, amount_type: 'quantity',
@@ -156,8 +157,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'can POST create pick_up, length>=rate, day_rate none, catch weight<=max, (day_weight-max+catch)<= 3' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       create(:catch, fishing_session_id: fishing_session.id, catch_result: 'pick_up', catch_weight: 5.0,
@@ -175,8 +176,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'can POST create catch_result pick_up, length >= rate_length, day_rate none, weight >= max, day_weight <= 3' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       create(:catch, fishing_session_id: fishing_session.id, catch_result: 'pick_up', catch_weight: 2.0,
@@ -194,8 +195,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'cannot POST create catch_result pick_up, catch_length >= rate_length, day_rate none, day weight > 3+max' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       create(:catch, fishing_session_id: fishing_session.id, catch_result: 'pick_up', catch_weight: 2.0,
                      catch_time: DateTime.now)
@@ -212,8 +213,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'can POST create when catch_result pick_up, catch_length >= rate_length, day_rate none, all_day_weight none' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       post catches_path,
@@ -226,8 +227,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'cannot POST create when catch_result pick_up, catch_length >= rate_length, day_rate none, catch weight == 0' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id, end_at: nil)
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
       post catches_path,
@@ -240,8 +241,8 @@ RSpec.describe 'Catches' do
     end
 
     it 'cannot POST create when catch_result pick_up and catch_length < rate_length' do
-      fishing_place = create(:fishing_place, user_id: @user.id, where_catch: 'other')
-      fishing_session = create(:fishing_session, user_id: @user.id, fishing_place_id: fishing_place.id,
+      fishing_place = create(:fishing_place, user_id: test_user.id, where_catch: 'other')
+      fishing_session = create(:fishing_session, user_id: test_user.id, fishing_place_id: fishing_place.id,
                                                  start_at: DateTime.now, end_at: nil)
       water_bioresource = create(:water_bioresource)
       catch_rate = create(:catch_rate, water_bioresource_id: water_bioresource.id, length_other: 5)
@@ -254,7 +255,7 @@ RSpec.describe 'Catches' do
     end
 
     it 'cannot POST create when catch_result pick_up and rate length not present' do
-      fishing_session = create(:fishing_session, user_id: @user.id, start_at: DateTime.now, end_at: nil)
+      fishing_session = create(:fishing_session, user_id: test_user.id, start_at: DateTime.now, end_at: nil)
       water_bioresource = create(:water_bioresource)
       post catches_path,
            params: { catch: attributes_for(:catch, catch_result: 'pick_up', fishing_session_id: fishing_session.id,
@@ -264,7 +265,7 @@ RSpec.describe 'Catches' do
     end
 
     it 'can POST create when catch_result set_free' do
-      fishing_session = create(:fishing_session, user_id: @user.id, start_at: DateTime.now, end_at: nil)
+      fishing_session = create(:fishing_session, user_id: test_user.id, start_at: DateTime.now, end_at: nil)
       water_bioresource = create(:water_bioresource)
       post catches_path,
            params: { catch: attributes_for(:catch, fishing_session_id: fishing_session.id,
@@ -275,7 +276,7 @@ RSpec.describe 'Catches' do
     end
 
     it 'can GET show' do
-      fishing_session = create(:fishing_session, user_id: @user.id)
+      fishing_session = create(:fishing_session, user_id: test_user.id)
       catch = create(:catch, fishing_session_id: fishing_session.id)
       get catch_path(catch)
       expect(response).to be_successful
@@ -290,7 +291,7 @@ RSpec.describe 'Catches' do
     end
 
     it 'can PUT update' do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_session = create(:fishing_session, user_id: test_user.id, end_at: nil)
       catch = create(:catch, fishing_session_id: fishing_session.id, catch_result: 'pick_up')
       put catch_path(catch), params: { catch: { catch_result: 'set_free' } }
       expect(catch.reload.catch_result).to eq('set_free')
@@ -299,7 +300,7 @@ RSpec.describe 'Catches' do
     end
 
     it 'can DELETE destroy' do
-      fishing_session = create(:fishing_session, user_id: @user.id, end_at: nil)
+      fishing_session = create(:fishing_session, user_id: test_user.id, end_at: nil)
       catch = create(:catch, fishing_session_id: fishing_session.id)
       delete catch_path(catch)
       expect(response).to redirect_to(fishing_session_path(fishing_session))

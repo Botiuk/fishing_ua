@@ -111,9 +111,8 @@ RSpec.describe 'RatePenalties' do
     end
 
     it 'can POST create' do
-      water_bioresource = create(:water_bioresource)
-      post rate_penalties_path,
-           params: { rate_penalty: attributes_for(:rate_penalty, water_bioresource_id: water_bioresource.id) }
+      w_bio = create(:water_bioresource)
+      post rate_penalties_path, params: { rate_penalty: attributes_for(:rate_penalty, water_bioresource_id: w_bio.id) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.rate_penalty'))

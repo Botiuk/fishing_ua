@@ -44,9 +44,10 @@ RSpec.describe 'NewsStories' do
   end
 
   describe 'user-user management' do
+    let(:test_user) { create(:user) }
+
     before do
-      @user = create(:user)
-      login_as(@user, scope: :user)
+      login_as(test_user, scope: :user)
     end
 
     it 'can GET index' do
@@ -89,9 +90,10 @@ RSpec.describe 'NewsStories' do
   end
 
   describe 'user-staff management' do
+    let(:test_user) { create(:user, role: 'staff') }
+
     before do
-      @user = create(:user, role: 'staff')
-      login_as(@user, scope: :user)
+      login_as(test_user, scope: :user)
     end
 
     it 'can GET index' do
@@ -123,14 +125,14 @@ RSpec.describe 'NewsStories' do
     end
 
     it 'can POST create' do
-      post news_stories_path, params: { news_story: attributes_for(:news_story, user_id: @user.id) }
+      post news_stories_path, params: { news_story: attributes_for(:news_story, user_id: test_user.id) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.news_story'))
     end
 
     it 'can GET edit news_story with his user_id' do
-      news_story = create(:news_story, user_id: @user.id)
+      news_story = create(:news_story, user_id: test_user.id)
       get edit_news_story_path(news_story)
       expect(response).to be_successful
     end
@@ -143,7 +145,7 @@ RSpec.describe 'NewsStories' do
     end
 
     it 'can PUT update news_story with his user_id' do
-      news_story = create(:news_story, title: 'Abcd', user_id: @user.id)
+      news_story = create(:news_story, title: 'Abcd', user_id: test_user.id)
       put news_story_path(news_story), params: { news_story: { title: 'Dbca' } }
       expect(news_story.reload.title).to eq('Dbca')
       expect(response).to redirect_to(news_story_path(news_story))
@@ -151,7 +153,7 @@ RSpec.describe 'NewsStories' do
     end
 
     it 'can DELETE destroy news_story with his user_id' do
-      news_story = create(:news_story, user_id: @user.id)
+      news_story = create(:news_story, user_id: test_user.id)
       delete news_story_path(news_story)
       expect(response).to redirect_to(news_stories_url)
       expect(flash[:notice]).to include(I18n.t('notice.destroy.news_story'))
@@ -159,9 +161,10 @@ RSpec.describe 'NewsStories' do
   end
 
   describe 'user-admin management' do
+    let(:test_user) { create(:user, role: 'admin') }
+
     before do
-      @user = create(:user, role: 'admin')
-      login_as(@user, scope: :user)
+      login_as(test_user, scope: :user)
     end
 
     it 'can GET index' do
@@ -175,7 +178,7 @@ RSpec.describe 'NewsStories' do
     end
 
     it 'can POST create' do
-      post news_stories_path, params: { news_story: attributes_for(:news_story, user_id: @user.id) }
+      post news_stories_path, params: { news_story: attributes_for(:news_story, user_id: test_user.id) }
       expect(response).to be_redirect
       follow_redirect!
       expect(flash[:notice]).to include(I18n.t('notice.create.news_story'))
@@ -200,7 +203,7 @@ RSpec.describe 'NewsStories' do
     end
 
     it 'can GET edit news_story with his user_id' do
-      news_story = create(:news_story, user_id: @user.id)
+      news_story = create(:news_story, user_id: test_user.id)
       get edit_news_story_path(news_story)
       expect(response).to be_successful
     end
@@ -212,7 +215,7 @@ RSpec.describe 'NewsStories' do
     end
 
     it 'can PUT update news_story with his user_id' do
-      news_story = create(:news_story, title: 'Abcd', user_id: @user.id)
+      news_story = create(:news_story, title: 'Abcd', user_id: test_user.id)
       put news_story_path(news_story), params: { news_story: { title: 'Dbca' } }
       expect(news_story.reload.title).to eq('Dbca')
       expect(response).to redirect_to(news_story_path(news_story))
@@ -228,7 +231,7 @@ RSpec.describe 'NewsStories' do
     end
 
     it 'can DELETE destroy news_story with his user_id' do
-      news_story = create(:news_story, user_id: @user.id)
+      news_story = create(:news_story, user_id: test_user.id)
       delete news_story_path(news_story)
       expect(response).to redirect_to(news_stories_url)
       expect(flash[:notice]).to include(I18n.t('notice.destroy.news_story'))

@@ -32,9 +32,10 @@ RSpec.describe 'Tools' do
   end
 
   describe 'registered user management' do
+    let(:test_user) { create(:user) }
+
     before do
-      @user = create(:user)
-      login_as(@user, scope: :user)
+      login_as(test_user, scope: :user)
     end
 
     it 'can GET index' do
@@ -62,7 +63,7 @@ RSpec.describe 'Tools' do
     end
 
     it 'can GET edit' do
-      tool = create(:tool, user_id: @user.id)
+      tool = create(:tool, user_id: test_user.id)
       get edit_tool_path(tool)
       expect(response).to be_successful
     end
@@ -75,7 +76,7 @@ RSpec.describe 'Tools' do
     end
 
     it 'can PUT update, tool_type equipment' do
-      tool = create(:tool, user_id: @user.id, name: 'My rod', tool_type: 'equipment')
+      tool = create(:tool, user_id: test_user.id, name: 'My rod', tool_type: 'equipment')
       put tool_path(tool), params: { tool: { name: 'My pod' } }
       expect(tool.reload.name).to eq('My pod')
       expect(response).to redirect_to(tools_url(tool_type: 'equipment'))
@@ -83,7 +84,7 @@ RSpec.describe 'Tools' do
     end
 
     it 'can PUT update, tool_type bait' do
-      tool = create(:tool, user_id: @user.id, name: 'My rod', tool_type: 'bait')
+      tool = create(:tool, user_id: test_user.id, name: 'My rod', tool_type: 'bait')
       put tool_path(tool), params: { tool: { name: 'My pod' } }
       expect(tool.reload.name).to eq('My pod')
       expect(response).to redirect_to(tools_url(tool_type: 'bait'))
@@ -91,14 +92,14 @@ RSpec.describe 'Tools' do
     end
 
     it 'can DELETE destroy, tool_type equipment' do
-      tool = create(:tool, user_id: @user.id, tool_type: 'equipment')
+      tool = create(:tool, user_id: test_user.id, tool_type: 'equipment')
       delete tool_path(tool)
       expect(response).to redirect_to(tools_url(tool_type: 'equipment'))
       expect(flash[:notice]).to include(I18n.t('notice.destroy.equipment'))
     end
 
     it 'can DELETE destroy, tool_type bait' do
-      tool = create(:tool, user_id: @user.id, tool_type: 'bait')
+      tool = create(:tool, user_id: test_user.id, tool_type: 'bait')
       delete tool_path(tool)
       expect(response).to redirect_to(tools_url(tool_type: 'bait'))
       expect(flash[:notice]).to include(I18n.t('notice.destroy.bait'))
@@ -112,7 +113,7 @@ RSpec.describe 'Tools' do
     end
 
     it 'can GET statistic' do
-      tool = create(:tool, user_id: @user.id)
+      tool = create(:tool, user_id: test_user.id)
       get tools_statistic_path(id: tool.id)
       expect(response).to be_successful
     end

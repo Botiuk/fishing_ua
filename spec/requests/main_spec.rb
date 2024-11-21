@@ -23,8 +23,8 @@ RSpec.describe 'main' do
 
   describe 'registered user management' do
     before do
-      @user = create(:user)
-      login_as(@user, scope: :user)
+      user = create(:user)
+      login_as(user, scope: :user)
     end
 
     it 'can GET index' do

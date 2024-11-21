@@ -32,9 +32,10 @@ RSpec.describe 'FishingPlaces' do
   end
 
   describe 'registered user management' do
+    let(:test_user) { create(:user) }
+
     before do
-      @user = create(:user)
-      login_as(@user, scope: :user)
+      login_as(test_user, scope: :user)
     end
 
     it 'can GET index' do
@@ -55,7 +56,7 @@ RSpec.describe 'FishingPlaces' do
     end
 
     it 'can GET edit' do
-      fishing_place = create(:fishing_place, user_id: @user.id)
+      fishing_place = create(:fishing_place, user_id: test_user.id)
       get edit_fishing_place_path(fishing_place)
       expect(response).to be_successful
     end
@@ -68,7 +69,7 @@ RSpec.describe 'FishingPlaces' do
     end
 
     it 'can PUT update' do
-      fishing_place = create(:fishing_place, user_id: @user.id, name: 'My lake')
+      fishing_place = create(:fishing_place, user_id: test_user.id, name: 'My lake')
       put fishing_place_path(fishing_place), params: { fishing_place: { name: 'My river' } }
       expect(fishing_place.reload.name).to eq('My river')
       expect(response).to redirect_to(fishing_places_url)
@@ -76,7 +77,7 @@ RSpec.describe 'FishingPlaces' do
     end
 
     it 'can GET statistic' do
-      fishing_place = create(:fishing_place, user_id: @user.id)
+      fishing_place = create(:fishing_place, user_id: test_user.id)
       get fishing_places_statistic_path(id: fishing_place.id)
       expect(response).to be_successful
     end
